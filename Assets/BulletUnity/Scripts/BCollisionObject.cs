@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using BulletSharp;
+using UnityEngine;
 
 namespace BulletUnity
 {
@@ -23,12 +23,15 @@ namespace BulletUnity
 		protected CollisionObject m_collisionObject;
 		protected BCollisionShape m_collisionShape;
 		internal bool isInWorld = false;
+
 		[SerializeField]
 		protected BulletSharp.CollisionFlags m_collisionFlags = BulletSharp.CollisionFlags.None;
+
 		[SerializeField]
-		protected BulletSharp.CollisionFilterGroups m_groupsIBelongTo = BulletSharp.CollisionFilterGroups.DefaultFilter; // A bitmask
+		protected CollisionFilterGroups m_groupsIBelongTo = CollisionFilterGroups.Nothing; // A bitmask
+
 		[SerializeField]
-		protected BulletSharp.CollisionFilterGroups m_collisionMask = CollisionFilterGroups.Everything; // A colliding object must match this mask in order to collide with me.
+		protected CollisionFilterGroups m_collisionMask = CollisionFilterGroups.Nothing; // A colliding object must match this mask in order to collide with me.
 
 		public virtual BulletSharp.CollisionFlags collisionFlags
 		{
@@ -48,7 +51,7 @@ namespace BulletUnity
 			}
 		}
 
-		public BulletSharp.CollisionFilterGroups groupsIBelongTo
+		public CollisionFilterGroups groupsIBelongTo
 		{
 			get { return m_groupsIBelongTo; }
 
@@ -65,7 +68,7 @@ namespace BulletUnity
 			}
 		}
 
-		public BulletSharp.CollisionFilterGroups collisionMask
+		public CollisionFilterGroups collisionMask
 		{
 			get { return m_collisionMask; }
 
@@ -82,7 +85,7 @@ namespace BulletUnity
 			}
 		}
 
-		BICollisionCallbackEventHandler m_onCollisionCallback;
+		private BICollisionCallbackEventHandler m_onCollisionCallback;
 		public virtual BICollisionCallbackEventHandler collisionCallbackEventHandler
 		{
 			get { return m_onCollisionCallback; }
@@ -114,8 +117,10 @@ namespace BulletUnity
 			m_onCollisionCallback = null;
 		}
 
-		//called by Physics World just before rigid body is added to world.
-		//the current rigid body properties are used to rebuild the rigid body.
+		/// <summary>
+		/// called by Physics World just before rigid body is added to world.
+		/// the current rigid body properties are used to rebuild the rigid body.
+		/// </summary>
 		internal virtual bool _BuildCollisionObject()
 		{
 			BPhysicsWorld world = BPhysicsWorld.Get();
@@ -270,8 +275,6 @@ namespace BulletUnity
 
 		public virtual void SetPosition(Vector3 position)
 		{
-			Debug.Log("SetPosition");
-
 			if (isInWorld)
 			{
 				BulletSharp.Math.Matrix newTrans = m_collisionObject.WorldTransform;
@@ -287,8 +290,6 @@ namespace BulletUnity
 
 		public virtual void SetPositionAndRotation(Vector3 position, Quaternion rotation)
 		{
-			Debug.Log("SetPositionAndRotation");
-
 			if (isInWorld)
 			{
 				BulletSharp.Math.Matrix newTrans = m_collisionObject.WorldTransform;
@@ -308,8 +309,6 @@ namespace BulletUnity
 
 		public virtual void SetRotation(Quaternion rotation)
 		{
-			Debug.Log("SetRotation");
-
 			if (isInWorld)
 			{
 				BulletSharp.Math.Matrix newTrans = m_collisionObject.WorldTransform;

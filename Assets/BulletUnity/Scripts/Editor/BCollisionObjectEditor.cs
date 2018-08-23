@@ -1,8 +1,8 @@
 ﻿using System;
-using UnityEditor;
-using UnityEngine;
-using UnityEditor.SceneManagement;
 using BulletUnity;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
 
 [CustomEditor(typeof(BCollisionObject))]
 public class BCollisionObjectEditor : Editor
@@ -27,16 +27,21 @@ public class BCollisionObjectEditor : Editor
 	public enum GUICollisionFilterGroups
 	{
 		Everything = -1,
-		DefaultFilter = 1,
-		StaticFilter = 2,
-		KinematicFilter = 4,
-		DebrisFilter = 8,
-		SensorTrigger = 16,
-		CharacterFilter = 32,
-		BallFilter = 64,
-		BallCollisionFilter = 128,
-		ItemBoxCollisionFilter = 256,
-		ObstacleCollisionFilter = 512,
+		Balls = 1,
+		TouchOnlyBalls = 2,
+		Walls = 4,
+		Robot = 8,
+		Layer_5 = 16,
+		Layer_6 = 32,
+		Layer_7 = 64,
+		Layer_8 = 128,
+		Layer_9 = 256,
+		Layer_10 = 512,
+		Layer_11 = 1024,
+		Layer_12 = 2048,
+		Layer_13 = 4096,
+		Layer_14 = 8192,
+		Layer_15 = 16384
 	}
 
 	static string PrintBits(int num)

@@ -8,9 +8,9 @@ namespace BulletUnity
 	{
 		public enum CapsuleAxis
 		{
-			x,
-			y,
-			z
+			x = 0,
+			y = 1,
+			z = 2
 		}
 
 		[SerializeField]
@@ -90,37 +90,25 @@ namespace BulletUnity
 
 		public override void OnDrawGizmosSelected()
 		{
-			/*if (upAxis == CapsuleAxis.x)
-			{
-				rotation = Quaternion.AngleAxis(90f, transform.forward) * rotation;
-			}
-			else if (upAxis == CapsuleAxis.z)
-			{
-				rotation = Quaternion.AngleAxis(90f, transform.right) * rotation;
-			}*/
-
-			BUtility.DebugDrawCapsule(transform.position, transform.rotation, m_localScaling, radius, height / 2f, 1, Color.green);
+			BUtility.DebugDrawCapsule(transform.position, transform.rotation, m_localScaling, radius, height / 2f, (int)upAxis, Color.green);
 		}
 
 		private CapsuleShape _CreateCapsuleShape()
 		{
 			CapsuleShape cs = null;
 
-			if (upAxis == CapsuleAxis.x)
+			switch (upAxis)
 			{
-				cs = new CapsuleShapeX(radius, height);
-			}
-			else if (upAxis == CapsuleAxis.y)
-			{
-				cs = new CapsuleShape(radius, height);
-			}
-			else if (upAxis == CapsuleAxis.z)
-			{
-				cs = new CapsuleShapeZ(radius, height);
-			}
-			else
-			{
-				Debug.LogError("invalid axis value");
+				default:
+				case CapsuleAxis.x:
+					cs = new CapsuleShapeX(radius, height);
+					break;
+				case CapsuleAxis.y:
+					cs = new CapsuleShape(radius, height);
+					break;
+				case CapsuleAxis.z:
+					cs = new CapsuleShapeZ(radius, height);
+					break;
 			}
 
 			cs.LocalScaling = m_localScaling.ToBullet();

@@ -33,7 +33,7 @@ namespace BulletUnity
 
 		protected static BPhysicsWorld singleton;
 		protected static bool _isDisposed = false;
-		private const int axis3SweepMaxProxies = 32766;
+		private const ushort axis3SweepMaxProxies = 32766;
 
 		public static BPhysicsWorld Get()
 		{
@@ -817,7 +817,7 @@ namespace BulletUnity
 
 	public class BDefaultCollisionHandler
 	{
-		HashSet<BCollisionObject.BICollisionCallbackEventHandler> collisionCallbackListeners = new HashSet<BCollisionObject.BICollisionCallbackEventHandler>();
+		private HashSet<BCollisionObject.BICollisionCallbackEventHandler> collisionCallbackListeners = new HashSet<BCollisionObject.BICollisionCallbackEventHandler>();
 
 		public void RegisterCollisionCallbackListener(BCollisionObject.BICollisionCallbackEventHandler toBeAdded)
 		{
@@ -829,15 +829,21 @@ namespace BulletUnity
 			collisionCallbackListeners.Remove(toBeRemoved);
 		}
 
+		private static PersistentManifold contactManifold;
+		private static CollisionObject a;
+		private static CollisionObject b;
+		private static int numManifolds;
+
 		public void OnPhysicsStep(CollisionWorld world)
 		{
 			Dispatcher dispatcher = world.Dispatcher;
-			int numManifolds = dispatcher.NumManifolds;
+			numManifolds = dispatcher.NumManifolds;
 			for (int i = 0; i < numManifolds; i++)
 			{
-				PersistentManifold contactManifold = dispatcher.GetManifoldByIndexInternal(i);
-				CollisionObject a = contactManifold.Body0;
-				CollisionObject b = contactManifold.Body1;
+				contactManifold = dispatcher.GetManifoldByIndexInternal(i);
+				a = contactManifold.Body0;
+				b = contactManifold.Body1;
+
 				if (a is CollisionObject && a.UserObject is BCollisionObject && ((BCollisionObject)a.UserObject).collisionCallbackEventHandler != null)
 				{
 					((BCollisionObject)a.UserObject).collisionCallbackEventHandler.OnVisitPersistentManifold(contactManifold);
@@ -851,8 +857,14 @@ namespace BulletUnity
 
 			foreach (BCollisionObject.BICollisionCallbackEventHandler coeh in collisionCallbackListeners)
 			{
-				if (coeh != null) coeh.OnFinishedVisitingManifolds();
+				if (coeh != null)
+				{
+					coeh.OnFinishedVisitingManifolds();
+				}
 			}
+
+			contactManifold = null;
+			a = b = null;
 		}
 	}
 }

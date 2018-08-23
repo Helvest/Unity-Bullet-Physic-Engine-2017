@@ -7,124 +7,131 @@ namespace BulletSharp
 {
 	public enum BroadphaseNativeType
 	{
-        BoxShape,
-        TriangleShape,
-        TetrahedralShape,
-        ConvexTriangleMeshShape,
-        ConvexHullShape,
-        CONVEX_POINT_CLOUD_SHAPE_PROXYTYPE,
-        CUSTOM_POLYHEDRAL_SHAPE_TYPE,
-        IMPLICIT_CONVEX_SHAPES_START_HERE,
-        SphereShape,
-        MultiSphereShape,
-        CapsuleShape,
-        ConeShape,
-        ConvexShape,
-        CylinderShape,
-        UniformScalingShape,
-        MinkowskiSumShape,
-        MinkowskiDifferenceShape,
-        Box2DShape,
-        Convex2DShape,
-        CUSTOM_CONVEX_SHAPE_TYPE,
-        CONCAVE_SHAPES_START_HERE,
-        TriangleMeshShape,
-        SCALED_TRIANGLE_MESH_SHAPE_PROXYTYPE,
-        FAST_CONCAVE_MESH_PROXYTYPE,
-        TerrainShape,
-        GImpactShape,
-        MultiMaterialTriangleMesh,
-        EmptyShape,
-        StaticPlaneShape,
-        CUSTOM_CONCAVE_SHAPE_TYPE,
-        CONCAVE_SHAPES_END_HERE,
-        CompoundShape,
-        SoftBodyShape,
-        HFFLUID_SHAPE_PROXYTYPE,
-        HFFLUID_BUOYANT_CONVEX_SHAPE_PROXYTYPE,
-        INVALID_SHAPE_PROXYTYPE,
-        MAX_BROADPHASE_COLLISION_TYPES
+		BoxShape,
+		TriangleShape,
+		TetrahedralShape,
+		ConvexTriangleMeshShape,
+		ConvexHullShape,
+		CONVEX_POINT_CLOUD_SHAPE_PROXYTYPE,
+		CUSTOM_POLYHEDRAL_SHAPE_TYPE,
+		IMPLICIT_CONVEX_SHAPES_START_HERE,
+		SphereShape,
+		MultiSphereShape,
+		CapsuleShape,
+		ConeShape,
+		ConvexShape,
+		CylinderShape,
+		UniformScalingShape,
+		MinkowskiSumShape,
+		MinkowskiDifferenceShape,
+		Box2DShape,
+		Convex2DShape,
+		CUSTOM_CONVEX_SHAPE_TYPE,
+		CONCAVE_SHAPES_START_HERE,
+		TriangleMeshShape,
+		SCALED_TRIANGLE_MESH_SHAPE_PROXYTYPE,
+		FAST_CONCAVE_MESH_PROXYTYPE,
+		TerrainShape,
+		GImpactShape,
+		MultiMaterialTriangleMesh,
+		EmptyShape,
+		StaticPlaneShape,
+		CUSTOM_CONCAVE_SHAPE_TYPE,
+		CONCAVE_SHAPES_END_HERE,
+		CompoundShape,
+		SoftBodyShape,
+		HFFLUID_SHAPE_PROXYTYPE,
+		HFFLUID_BUOYANT_CONVEX_SHAPE_PROXYTYPE,
+		INVALID_SHAPE_PROXYTYPE,
+		MAX_BROADPHASE_COLLISION_TYPES
 	}
 
 	[Flags]
 	public enum CollisionFilterGroups
 	{
-        Everything = -1,
-		DefaultFilter = 1,
-		StaticFilter = 2,
-		KinematicFilter = 4,
-		DebrisFilter = 8,
-		SensorTrigger = 16,
-		CharacterFilter = 32,
-        BallFilter = 64,
-        BallCollisionFilter = 128,
-        ItemBoxCollisionFilter = 256,
-        ObstacleCollisionFilter = 512,
-    }
+		Everything = -1,
+		Nothing = 0,
+		Balls = 1,
+		TouchOnlyBalls = 2,
+		Walls = 4,
+		Robot = 8,
+		Layer_5 = 16,
+		Layer_6 = 32,
+		Layer_7 = 64,
+		Layer_8 = 128,
+		Layer_9 = 256,
+		Layer_10 = 512,
+		Layer_11 = 1024,
+		Layer_12 = 2048,
+		Layer_13 = 4096,
+		Layer_14 = 8192,
+		Layer_15 = 16384
+	}
 
 	public class BroadphaseProxy
 	{
 		internal IntPtr _native;
-        private Object _clientObject;
+		private Object _clientObject;
 
 		internal BroadphaseProxy(IntPtr native)
 		{
 			_native = native;
 		}
 
-        internal static BroadphaseProxy GetManaged(IntPtr native)
-        {
-            if (native == IntPtr.Zero)
-            {
-                return null;
-            }
+		internal static BroadphaseProxy GetManaged(IntPtr native)
+		{
+			if (native == IntPtr.Zero)
+			{
+				return null;
+			}
 
-            IntPtr clientObjectPtr = btBroadphaseProxy_getClientObject(native);
-            if (clientObjectPtr != IntPtr.Zero) {
-                CollisionObject clientObject = CollisionObject.GetManaged(clientObjectPtr);
-                return clientObject.BroadphaseHandle;
-            }
+			IntPtr clientObjectPtr = btBroadphaseProxy_getClientObject(native);
+			if (clientObjectPtr != IntPtr.Zero)
+			{
+				CollisionObject clientObject = CollisionObject.GetManaged(clientObjectPtr);
+				return clientObject.BroadphaseHandle;
+			}
 
-            throw new InvalidOperationException("Unknown broadphase proxy!");
-            //return new BroadphaseProxy(native);
-        }
+			throw new InvalidOperationException("Unknown broadphase proxy!");
+			//return new BroadphaseProxy(native);
+		}
 
-        public static bool IsCompound(BroadphaseNativeType proxyType)
+		public static bool IsCompound(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isCompound(proxyType);
 		}
 
-        public static bool IsConcave(BroadphaseNativeType proxyType)
+		public static bool IsConcave(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isConcave(proxyType);
 		}
 
-        public static bool IsConvex(BroadphaseNativeType proxyType)
+		public static bool IsConvex(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isConvex(proxyType);
 		}
 
-        public static bool IsConvex2D(BroadphaseNativeType proxyType)
+		public static bool IsConvex2D(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isConvex2d(proxyType);
 		}
 
-        public static bool IsInfinite(BroadphaseNativeType proxyType)
+		public static bool IsInfinite(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isInfinite(proxyType);
 		}
 
-        public static bool IsNonMoving(BroadphaseNativeType proxyType)
+		public static bool IsNonMoving(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isNonMoving(proxyType);
 		}
 
-        public static bool IsPolyhedral(BroadphaseNativeType proxyType)
+		public static bool IsPolyhedral(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isPolyhedral(proxyType);
 		}
 
-        public static bool IsSoftBody(BroadphaseNativeType proxyType)
+		public static bool IsSoftBody(BroadphaseNativeType proxyType)
 		{
 			return btBroadphaseProxy_isSoftBody(proxyType);
 		}
@@ -151,30 +158,30 @@ namespace BulletSharp
 			set { btBroadphaseProxy_setAabbMin(_native, ref value); }
 		}
 
-        public Object ClientObject
+		public Object ClientObject
 		{
-            get
-            {
-                IntPtr clientObjectPtr = btBroadphaseProxy_getClientObject(_native);
-                if (clientObjectPtr != IntPtr.Zero)
-                {
-                    _clientObject = CollisionObject.GetManaged(clientObjectPtr);
-                }
-                return _clientObject;
-            }
-            set
-            {
-                CollisionObject collisionObject = value as CollisionObject;
-                if (collisionObject != null)
-                {
-                    btBroadphaseProxy_setClientObject(_native, collisionObject._native);
-                }
-                else if (value == null)
-                {
-                    btBroadphaseProxy_setClientObject(_native, IntPtr.Zero);
-                }
-                _clientObject = value;
-            }
+			get
+			{
+				IntPtr clientObjectPtr = btBroadphaseProxy_getClientObject(_native);
+				if (clientObjectPtr != IntPtr.Zero)
+				{
+					_clientObject = CollisionObject.GetManaged(clientObjectPtr);
+				}
+				return _clientObject;
+			}
+			set
+			{
+				CollisionObject collisionObject = value as CollisionObject;
+				if (collisionObject != null)
+				{
+					btBroadphaseProxy_setClientObject(_native, collisionObject._native);
+				}
+				else if (value == null)
+				{
+					btBroadphaseProxy_setClientObject(_native, IntPtr.Zero);
+				}
+				_clientObject = value;
+			}
 		}
 
 		public short CollisionFilterGroup
@@ -224,28 +231,28 @@ namespace BulletSharp
 		static extern int btBroadphaseProxy_getUniqueId(IntPtr obj);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isCompound(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isCompound(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isConcave(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isConcave(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isConvex(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isConvex(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isConvex2d(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isConvex2d(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isInfinite(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isInfinite(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isNonMoving(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isNonMoving(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isPolyhedral(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isPolyhedral(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		[return: MarshalAs(UnmanagedType.I1)]
-        static extern bool btBroadphaseProxy_isSoftBody(BroadphaseNativeType proxyType);
+		static extern bool btBroadphaseProxy_isSoftBody(BroadphaseNativeType proxyType);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
 		static extern void btBroadphaseProxy_setAabbMax(IntPtr obj, [In] ref Vector3 value);
 		[DllImport(Native.Dll, CallingConvention = Native.Conv), SuppressUnmanagedCodeSecurity]
@@ -275,21 +282,21 @@ namespace BulletSharp
 
 		public CollisionAlgorithm Algorithm
 		{
-            get
-            {
-                IntPtr valuePtr = btBroadphasePair_getAlgorithm(_native);
-                return (valuePtr == IntPtr.Zero) ? null : new CollisionAlgorithm(valuePtr, true);
-            }
-            set { btBroadphasePair_setAlgorithm(_native, (value._native == IntPtr.Zero) ? IntPtr.Zero : value._native); }
+			get
+			{
+				IntPtr valuePtr = btBroadphasePair_getAlgorithm(_native);
+				return (valuePtr == IntPtr.Zero) ? null : new CollisionAlgorithm(valuePtr, true);
+			}
+			set { btBroadphasePair_setAlgorithm(_native, (value._native == IntPtr.Zero) ? IntPtr.Zero : value._native); }
 		}
 
-        public BroadphaseProxy Proxy0
+		public BroadphaseProxy Proxy0
 		{
 			get { return BroadphaseProxy.GetManaged(btBroadphasePair_getPProxy0(_native)); }
 			set { btBroadphasePair_setPProxy0(_native, value._native); }
 		}
 
-        public BroadphaseProxy Proxy1
+		public BroadphaseProxy Proxy1
 		{
 			get { return BroadphaseProxy.GetManaged(btBroadphasePair_getPProxy1(_native)); }
 			set { btBroadphasePair_setPProxy1(_native, value._native); }

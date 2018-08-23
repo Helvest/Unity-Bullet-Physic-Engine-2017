@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47674f969a3e6d64689bdc62b7194b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 1
   radius: 0.15
   height: 0.6
   upAxis: 0
@@ -300,7 +299,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!108 &629763930
 Light:
@@ -404,7 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47674f969a3e6d64689bdc62b7194b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 0
   radius: 0.16
   height: 0.6
   upAxis: 1
@@ -486,7 +484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47674f969a3e6d64689bdc62b7194b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 0
   radius: 0.16
   height: 0.6
   upAxis: 1
@@ -1008,7 +1005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9cd30469054c64e87ceada6b748043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 0
   radius: 0.15
   m_localScaling: {x: 1, y: 1, z: 1}
 --- !u!114 &1304421611
@@ -2162,7 +2158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9cd30469054c64e87ceada6b748043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 0
   radius: 0.15
   m_localScaling: {x: 1, y: 1, z: 1}
 --- !u!114 &1968631766

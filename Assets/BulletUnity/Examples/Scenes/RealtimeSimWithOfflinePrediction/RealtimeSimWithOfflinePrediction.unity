@@ -680,8 +680,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0
@@ -813,8 +813,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0
@@ -1428,8 +1428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0
@@ -1561,8 +1561,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0
@@ -1759,8 +1759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0
@@ -1892,8 +1892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0
@@ -2026,7 +2026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
-  m_collisionMask: 55
+  m_collisionMask: -1
   _friction: 1
   _rollingFriction: 1
   _linearDamping: 0
@@ -2290,8 +2290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0
@@ -2469,8 +2469,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collisionFlags: 1
-  m_groupsIBelongTo: 1
-  m_collisionMask: 63
+  m_groupsIBelongTo: 4
+  m_collisionMask: -1
   _friction: 0.5
   _rollingFriction: 0
   _linearDamping: 0

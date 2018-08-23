@@ -1,328 +1,525 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using BulletSharp;
-using BulletSharp.Math;
 using BulletSharp.SoftBody;
 using BulletUnity;
 using UnityEngine;
-using Vector3B = BulletSharp.Math.Vector3;
 
-public class WorldController
+[System.Serializable]
+public class WorldController : IDisposable
 {
-	// Physics
-	public DynamicsWorld World { get; private set; }
-	public SoftRigidDynamicsWorld SoftWorld
+	#region Variables
+
+	public PhysicWorldParameters physicWorldParameters { get; private set; }
+	public CollisionConfiguration collisionConf { get; private set; }
+	public CollisionDispatcher dispatcher { get; private set; }
+	public BroadphaseInterface broadphase { get; private set; }
+	public ConstraintSolver constraintSolver { get; private set; }
+	public GhostPairCallback ghostPairCallback { get; private set; }
+
+	private CollisionWorld _world;
+	public CollisionWorld World
 	{
-		get { return World as SoftRigidDynamicsWorld; }
+		get { return _world; }
+		private set
+		{
+			_world = value;
+
+			DWorld = _world is DynamicsWorld ? (DynamicsWorld)_world : null;
+
+			DDWorld = _world is DiscreteDynamicsWorld ? (DiscreteDynamicsWorld)_world : null;
+
+			SoftWorld = _world is SoftRigidDynamicsWorld ? (SoftRigidDynamicsWorld)_world : null;
+		}
 	}
 
-	public List<CollisionShape> CollisionShapes { get; private set; }
+	// convenience variable so we arn't typecasting all the time.
+	public DynamicsWorld DWorld { get; private set; }
+	public DiscreteDynamicsWorld DDWorld { get; private set; }
+	public SoftRigidDynamicsWorld SoftWorld { get; private set; }
 
-	private CollisionConfiguration CollisionConf;
-	private CollisionDispatcher Dispatcher;
-	private BroadphaseInterface Broadphase;
-	private ConstraintSolver Solver;
+	#endregion Variables
 
-	private TypedConstraint pickConstraint;
+	#region Init
 
-	public bool isSoftWold { get; private set; }
-
-	// Debug drawing
-	private bool _isDebugDrawEnabled;
-	private DebugDrawModes _debugDrawMode = DebugDrawModes.DrawWireframe;
-	private IDebugDraw _debugDrawer;
-
-	public DebugDrawModes DebugDrawMode
+	public WorldController()
 	{
-		get
-		{
-			return _debugDrawMode;
-		}
-		set
-		{
-			_debugDrawMode = value;
+		physicWorldParameters = WorldsManager.PhysicWorldParameters;
+		CreateWorld();
+	}
 
-			if (_debugDrawer != null)
+	public WorldController(PhysicWorldParameters physicWorldParameters)
+	{
+		this.physicWorldParameters = physicWorldParameters;
+		CreateWorld();
+	}
+
+	private void CreateWorld()
+	{
+		switch (WorldsManager.PhysicWorldParameters.collisionType)
+		{
+			case PhysicWorldEnums.CollisionConfType.DefaultDynamicsWorldCollisionConf:
+				collisionConf = new DefaultCollisionConfiguration();
+				break;
+
+			case PhysicWorldEnums.CollisionConfType.SoftBodyRigidBodyCollisionConf:
+				collisionConf = new SoftBodyRigidBodyCollisionConfiguration();
+				break;
+		}
+
+		dispatcher = new CollisionDispatcher(collisionConf);
+
+		switch (WorldsManager.PhysicWorldParameters.broadphaseType)
+		{
+			default:
+			case PhysicWorldEnums.BroadphaseType.DynamicAABBBroadphase:
+				broadphase = new DbvtBroadphase();
+				break;
+
+			case PhysicWorldEnums.BroadphaseType.Axis3SweepBroadphase:
+				broadphase = new AxisSweep3(WorldsManager.PhysicWorldParameters.axis3SweepBroadphaseMin, WorldsManager.PhysicWorldParameters.axis3SweepBroadphaseMax, WorldsManager.PhysicWorldParameters.axis3SweepMaxProxies);
+				break;
+
+			case PhysicWorldEnums.BroadphaseType.Axis3SweepBroadphase_32bit:
+				broadphase = new AxisSweep3_32Bit(WorldsManager.PhysicWorldParameters.axis3SweepBroadphaseMin, WorldsManager.PhysicWorldParameters.axis3SweepBroadphaseMax, WorldsManager.PhysicWorldParameters.axis3SweepMaxProxies);
+				break;
+		}
+
+		switch (WorldsManager.PhysicWorldParameters.worldType)
+		{
+			case PhysicWorldEnums.WorldType.CollisionOnly:
+				World = new CollisionWorld(dispatcher, broadphase, collisionConf);
+				break;
+
+			case PhysicWorldEnums.WorldType.RigidBodyDynamics:
+				World = new DiscreteDynamicsWorld(dispatcher, broadphase, null, collisionConf);
+				break;
+
+			case PhysicWorldEnums.WorldType.MultiBodyWorld:
+				MultiBodyConstraintSolver mbConstraintSolver = new MultiBodyConstraintSolver();
+				constraintSolver = mbConstraintSolver;
+				World = new MultiBodyDynamicsWorld(dispatcher, broadphase, mbConstraintSolver, collisionConf);
+				break;
+
+			case PhysicWorldEnums.WorldType.SoftBodyAndRigidBody:
+				SequentialImpulseConstraintSolver siConstraintSolver = new SequentialImpulseConstraintSolver();
+				constraintSolver = siConstraintSolver;
+				siConstraintSolver.RandSeed = WorldsManager.PhysicWorldParameters.sequentialImpulseConstraintSolverRandomSeed;
+
+				World = new SoftRigidDynamicsWorld(dispatcher, broadphase, siConstraintSolver, collisionConf);
+				_world.DispatchInfo.EnableSpu = true;
+
+				SoftWorld.WorldInfo.SparseSdf.Initialize();
+				SoftWorld.WorldInfo.SparseSdf.Reset();
+				SoftWorld.WorldInfo.AirDensity = 1.2f;
+				SoftWorld.WorldInfo.WaterDensity = 0;
+				SoftWorld.WorldInfo.WaterOffset = 0;
+				SoftWorld.WorldInfo.WaterNormal = BulletSharp.Math.Vector3.Zero;
+				SoftWorld.WorldInfo.Gravity = WorldsManager.PhysicWorldParameters.gravity;
+				break;
+		}
+
+		if (_world is DiscreteDynamicsWorld)
+		{
+			((DiscreteDynamicsWorld)_world).Gravity = WorldsManager.PhysicWorldParameters.gravity;
+		}
+
+		/*if (_doDebugDraw)
+		{
+			DebugDrawUnity db = new DebugDrawUnity();
+			db.DebugMode = _debugDrawMode;
+			_world.DebugDrawer = db;
+		}*/
+	}
+
+	#endregion Init
+
+	#region StepSimulation
+
+	public void StepSimulation(float timeStep)
+	{
+		if (timeStep > 0f)
+		{
+			if (DWorld != null)
 			{
-				_debugDrawer.DebugMode = value;
+				//StepSimulation proceeds the simulation over 'timeStep', units in preferably in seconds.
+				//By default, Bullet will subdivide the timestep in constant substeps of each 'fixedTimeStep'.
+				//In order to keep the simulation real-time, the maximum number of substeps can be clamped to 'maxSubSteps'.
+				//You can disable subdividing the timestep/substepping by passing maxSubSteps=0 as second argument to stepSimulation, 
+				//but in that case you have to keep the timeStep constant.
+				DWorld.StepSimulation(timeStep, WorldsManager.PhysicWorldParameters.maxSubsteps, WorldsManager.PhysicWorldParameters.fixedTimeStep);
+			}
+
+			//Collisions
+			OnPhysicsStep();
+		}
+	}
+
+	#endregion StepSimulation
+
+	#region CallbackListeners
+
+	private HashSet<BCollisionObject.BICollisionCallbackEventHandler> collisionCallbackListeners = new HashSet<BCollisionObject.BICollisionCallbackEventHandler>();
+
+	public void RegisterCollisionCallbackListener(BCollisionObject.BICollisionCallbackEventHandler toBeAdded)
+	{
+		collisionCallbackListeners.Add(toBeAdded);
+	}
+
+	public void DeregisterCollisionCallbackListener(BCollisionObject.BICollisionCallbackEventHandler toBeRemoved)
+	{
+		collisionCallbackListeners.Remove(toBeRemoved);
+	}
+
+	private static PersistentManifold contactManifold;
+	private static CollisionObject a;
+	private static CollisionObject b;
+	private static int numManifolds;
+
+	//Check Collisions
+	public void OnPhysicsStep()
+	{
+		numManifolds = dispatcher.NumManifolds;
+
+		for (int i = 0; i < numManifolds; i++)
+		{
+			contactManifold = dispatcher.GetManifoldByIndexInternal(i);
+
+			a = contactManifold.Body0;
+			b = contactManifold.Body1;
+
+			if (a is CollisionObject && a.UserObject is BCollisionObject && ((BCollisionObject)a.UserObject).collisionCallbackEventHandler != null)
+			{
+				((BCollisionObject)a.UserObject).collisionCallbackEventHandler.OnVisitPersistentManifold(contactManifold);
+			}
+
+			if (b is CollisionObject && b.UserObject is BCollisionObject && ((BCollisionObject)b.UserObject).collisionCallbackEventHandler != null)
+			{
+				((BCollisionObject)b.UserObject).collisionCallbackEventHandler.OnVisitPersistentManifold(contactManifold);
 			}
 		}
-	}
 
-	public bool IsDebugDrawEnabled
-	{
-		get
+		foreach (BCollisionObject.BICollisionCallbackEventHandler coeh in collisionCallbackListeners)
 		{
-			return _isDebugDrawEnabled;
-		}
-
-		set
-		{
-			if (value)
+			if (coeh != null)
 			{
-				if (_debugDrawer == null)
-				{
-					_debugDrawer = new DebugDrawUnity();
-					_debugDrawer.DebugMode = _debugDrawMode;
-					if (World != null)
-					{
-						World.DebugDrawer = _debugDrawer;
-					}
-				}
+				coeh.OnFinishedVisitingManifolds();
 			}
-			else
-			{
-				if (_debugDrawer != null)
-				{
-					if (World != null)
-					{
-						World.DebugDrawer = null;
-					}
-
-					if (_debugDrawer is IDisposable)
-					{
-						(_debugDrawer as IDisposable).Dispose();
-					}
-
-					_debugDrawer = null;
-				}
-			}
-
-			_isDebugDrawEnabled = value;
-		}
-	}
-
-	public WorldController(bool softWold)
-	{
-		CollisionShapes = new List<CollisionShape>();
-
-		Initialise(softWold);
-	}
-
-	public void Initialise(bool softWold)
-	{
-		if (World != null)
-		{
-			ExitPhysics();
 		}
 
-		if (softWold)
+		contactManifold = null;
+		a = b = null;
+	}
+
+	#endregion CallbackListeners
+
+	#region Add & Remove
+
+	public void AddAction(IAction action)
+	{
+		if (WorldsManager.PhysicWorldParameters.worldType < PhysicWorldEnums.WorldType.RigidBodyDynamics)
 		{
-			OnInitializeSoftPhysics();
+			Debug.LogError("World type must not be collision only");
 		}
 		else
 		{
-			OnInitializePhysics();
+			DWorld.AddAction(action);
+		}
+	}
+
+	public void RemoveAction(IAction action)
+	{
+		if (WorldsManager.PhysicWorldParameters.worldType < PhysicWorldEnums.WorldType.RigidBodyDynamics)
+		{
+			Debug.LogError("World type must not be collision only");
 		}
 
-		if (_isDebugDrawEnabled)
+		DDWorld.RemoveAction(action);
+	}
+
+	public void AddCollisionObject(BCollisionObject co)
+	{
+		if (co is BRigidBody)
 		{
-			if (_debugDrawer == null)
+			AddRigidBody((BRigidBody)co);
+		}
+		else if (co is BSoftBody)
+		{
+			AddSoftBody((BSoftBody)co);
+		}
+		else if (co._BuildCollisionObject())
+		{
+			_world.AddCollisionObject(co.GetCollisionObject(), co.groupsIBelongTo, co.collisionMask);
+			co.isInWorld = true;
+
+			if (ghostPairCallback == null && co is BGhostObject && DWorld != null)
 			{
-				_debugDrawer = new DebugDrawUnity
-				{
-					DebugMode = DebugDrawMode
-				};
+				ghostPairCallback = new GhostPairCallback();
+				DWorld.PairCache.SetInternalGhostPairCallback(ghostPairCallback);
 			}
 
-			if (World != null)
+			if (co is BCharacterController && DWorld != null)
 			{
-				World.DebugDrawer = _debugDrawer;
+				AddAction(((BCharacterController)co).GetKinematicCharacterController());
 			}
 		}
 	}
 
-	private void OnInitializePhysics()
+	public void RemoveCollisionObject(BCollisionObject co)
 	{
-		//Collision configuration contains default setup for memory, collision setup
-		CollisionConf = new DefaultCollisionConfiguration();
-		Dispatcher = new CollisionDispatcher(CollisionConf);
-
-		Broadphase = new DbvtBroadphase();
-
-		World = new DiscreteDynamicsWorld(Dispatcher, Broadphase, null, CollisionConf)
+		if (co is BRigidBody)
 		{
-			Gravity = Physics.gravity.ToBullet()
-		};
-	}
-
-	public SoftBodyWorldInfo softBodyWorldInfo { get; private set; }
-	private const int maxProxies = 32766;
-	private void OnInitializeSoftPhysics()
-	{
-		// collision configuration contains default setup for memory, collision setup
-		CollisionConf = new SoftBodyRigidBodyCollisionConfiguration();
-		Dispatcher = new CollisionDispatcher(CollisionConf);
-
-		Broadphase = new AxisSweep3(new Vector3B(-1000, -1000, -1000), new Vector3B(1000, 1000, 1000), maxProxies);
-
-		// the default constraint solver.
-		Solver = new SequentialImpulseConstraintSolver();
-
-		softBodyWorldInfo = new SoftBodyWorldInfo
-		{
-			AirDensity = 1.2f,
-			WaterDensity = 0,
-			WaterOffset = 0,
-			WaterNormal = Vector3B.Zero,
-			Gravity = Physics.gravity.ToBullet(),
-			Dispatcher = Dispatcher,
-			Broadphase = Broadphase
-		};
-
-		softBodyWorldInfo.SparseSdf.Initialize();
-
-		World = new SoftRigidDynamicsWorld(Dispatcher, Broadphase, Solver, CollisionConf)
-		{
-			Gravity = Physics.gravity.ToBullet()
-		};
-
-		World.DispatchInfo.EnableSpu = true;
-	}
-
-	/*public void ClientResetScene()
-	{
-		RemovePickingConstraint();
-
-		ExitPhysics();
-
-		OnInitializePhysics();
-
-		WorldsManager.Instance.PostOnInitializePhysics();
-
-		if (World != null && _debugDrawer != null)
-		{
-			World.DebugDrawer = _debugDrawer;
+			RemoveRigidBody((RigidBody)co.GetCollisionObject());
 		}
-	}*/
+		else if (co is BSoftBody)
+		{
+			RemoveSoftBody((SoftBody)co.GetCollisionObject());
+		}
+		else
+		{
+			if (co is BCharacterController && DWorld != null)
+			{
+				RemoveAction(((BCharacterController)co).GetKinematicCharacterController());
+			}
 
-	public void ExitPhysics()
+			//if (debugType >= BDebug.DebugType.Debug) Debug.LogFormat("Removing collisionObject {0} from world", co);
+
+			_world.RemoveCollisionObject(co.GetCollisionObject());
+			co.isInWorld = false;
+		}
+	}
+
+	public void AddRigidBody(BRigidBody rb)
 	{
-		if (World != null)
+		if (WorldsManager.PhysicWorldParameters.worldType < PhysicWorldEnums.WorldType.RigidBodyDynamics)
+		{
+			Debug.LogError("World type must not be collision only");
+			return;
+		}
+
+		/*if (debugType >= BDebug.DebugType.Debug)
+		{
+			Debug.LogFormat("Adding rigidbody {0} to world", rb);
+		}*/
+
+		if (rb._BuildCollisionObject())
+		{
+			DWorld.AddRigidBody((RigidBody)rb.GetCollisionObject(), rb.groupsIBelongTo, rb.collisionMask);
+			rb.isInWorld = true;
+		}
+	}
+
+	public void RemoveRigidBody(BulletSharp.RigidBody rb)
+	{
+		if (WorldsManager.PhysicWorldParameters.worldType < PhysicWorldEnums.WorldType.RigidBodyDynamics)
+		{
+			Debug.LogError("World type must not be collision only");
+		}
+
+		/*if (debugType >= BDebug.DebugType.Debug)
+		{
+			Debug.LogFormat("Removing rigidbody {0} from world", rb.UserObject);
+		}*/
+
+		DWorld.RemoveRigidBody(rb);
+
+		if (rb.UserObject is BCollisionObject)
+		{
+			((BCollisionObject)rb.UserObject).isInWorld = false;
+		}
+	}
+
+	public void AddConstraint(BTypedConstraint c)
+	{
+		if (WorldsManager.PhysicWorldParameters.worldType < PhysicWorldEnums.WorldType.RigidBodyDynamics)
+		{
+			Debug.LogError("World type must not be collision only");
+			return;
+		}
+
+		/*if (debugType >= BDebug.DebugType.Debug)
+		{
+			Debug.LogFormat("Adding constraint {0} to world", c);
+		}*/
+
+		if (c._BuildConstraint())
+		{
+			DWorld.AddConstraint(c.GetConstraint(), c.disableCollisionsBetweenConstrainedBodies);
+			c.m_isInWorld = true;
+		}
+	}
+
+	public void RemoveConstraint(BulletSharp.TypedConstraint c)
+	{
+		if (WorldsManager.PhysicWorldParameters.worldType < PhysicWorldEnums.WorldType.RigidBodyDynamics)
+		{
+			Debug.LogError("World type must not be collision only");
+		}
+
+		/*if (debugType >= BDebug.DebugType.Debug)
+		{
+			Debug.LogFormat("Removing constraint {0} from world", c.Userobject);
+		}*/
+
+		DWorld.RemoveConstraint(c);
+
+		if (c.Userobject is BTypedConstraint)
+		{
+			((BTypedConstraint)c.Userobject).m_isInWorld = false;
+		}
+	}
+
+	public void AddSoftBody(BSoftBody softBody)
+	{
+		if (_world is SoftRigidDynamicsWorld)
+		{
+			/*if (debugType >= BDebug.DebugType.Debug)
+			{
+				Debug.LogFormat("Adding softbody {0} to world", softBody);
+			}*/
+
+			if (softBody._BuildCollisionObject())
+			{
+				SoftWorld.AddSoftBody((SoftBody)softBody.GetCollisionObject());
+				softBody.isInWorld = true;
+			}
+		}
+		else
+		{
+			/*if (debugType <= BDebug.DebugType.Trace)
+			{
+				Debug.LogErrorFormat("The Physics World must be a BSoftBodyWorld for adding soft bodies");
+			}*/
+		}
+	}
+
+	public void RemoveSoftBody(SoftBody softBody)
+	{
+		if (_world is SoftRigidDynamicsWorld)
+		{
+			/*if (debugType >= BDebug.DebugType.Debug)
+			{
+				Debug.LogFormat("Removing softbody {0} from world", softBody.UserObject);
+			}*/
+
+			SoftWorld.RemoveSoftBody(softBody);
+
+			if (softBody.UserObject is BCollisionObject)
+			{
+				((BCollisionObject)softBody.UserObject).isInWorld = false;
+			}
+		}
+	}
+
+	#endregion Add & Remove
+
+	#region Destroy & Dispose
+
+	public void Dispose()
+	{
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
+
+	private void Dispose(bool disposing)
+	{
+		if (_world != null)
 		{
 			//remove/dispose constraints
 			int i;
-			for (i = World.NumConstraints - 1; i >= 0; i--)
+			if (DDWorld != null)
 			{
-				TypedConstraint constraint = World.GetConstraint(i);
-				World.RemoveConstraint(constraint);
-				constraint.Dispose();
+				//if (debugType >= BDebug.DebugType.Debug) Debug.LogFormat("Removing Constraints {0}", DDWorld.NumConstraints);
+
+				for (i = DDWorld.NumConstraints - 1; i >= 0; i--)
+				{
+					TypedConstraint constraint = DDWorld.GetConstraint(i);
+					DDWorld.RemoveConstraint(constraint);
+
+					if (constraint.Userobject is BTypedConstraint)
+					{
+						((BTypedConstraint)constraint.Userobject).m_isInWorld = false;
+					}
+
+					//if (debugType >= BDebug.DebugType.Debug) Debug.LogFormat("Removed Constaint {0}", constraint.Userobject);
+
+					constraint.Dispose();
+				}
 			}
 
-			CollisionObject obj;
-			RigidBody body;
+			//if (debugType >= BDebug.DebugType.Debug) Debug.LogFormat("Removing Collision Objects {0}", DDWorld.NumCollisionObjects);
+
 			//remove the rigidbodies from the dynamics world and delete them
-			for (i = World.NumCollisionObjects - 1; i >= 0; i--)
+			for (i = _world.NumCollisionObjects - 1; i >= 0; i--)
 			{
-				obj = World.CollisionObjectArray[i];
-				body = obj as RigidBody;
+				CollisionObject obj = _world.CollisionObjectArray[i];
+				RigidBody body = obj as RigidBody;
 
 				if (body != null && body.MotionState != null)
 				{
+					Debug.Assert(body.NumConstraintRefs == 0, "Rigid body still had constraints");
 					body.MotionState.Dispose();
 				}
 
-				World.RemoveCollisionObject(obj);
+				_world.RemoveCollisionObject(obj);
+
+				if (obj.UserObject is BCollisionObject)
+				{
+					((BCollisionObject)obj.UserObject).isInWorld = false;
+				}
+
+				/*if (debugType >= BDebug.DebugType.Debug)
+				{
+					Debug.LogFormat("Removed CollisionObject {0}", obj.UserObject);
+				}*/
 
 				obj.Dispose();
 			}
 
-			//delete collision shapes
-			for (i = CollisionShapes.Count - 1; i >= 0; i--)
+			if (_world.DebugDrawer != null && _world.DebugDrawer is IDisposable)
 			{
-				CollisionShapes[i].Dispose();
+				((IDisposable)_world.DebugDrawer).Dispose();
 			}
 
-			CollisionShapes.Clear();
-
-			World.Dispose();
-			Debug.Log("World: " + World);
+			_world.Dispose();
+			World = null;
 		}
 
-		if (Broadphase != null)
+		if (broadphase != null)
 		{
-			Broadphase.Dispose();
+			broadphase.Dispose();
+			broadphase = null;
 		}
 
-		if (Dispatcher != null)
+		if (dispatcher != null)
 		{
-			Dispatcher.Dispose();
+			dispatcher.Dispose();
+			dispatcher = null;
 		}
 
-		if (CollisionConf != null)
+		if (collisionConf != null)
 		{
-			CollisionConf.Dispose();
+			collisionConf.Dispose();
+			collisionConf = null;
 		}
 
-		if (Solver != null)
+		if (constraintSolver != null)
 		{
-			Solver.Dispose();
+			constraintSolver.Dispose();
+			constraintSolver = null;
+		}
+
+		if (ghostPairCallback != null)
+		{
+			ghostPairCallback.Dispose();
+			ghostPairCallback = null;
 		}
 	}
 
-	public void FixeUpdate(float deltaTime)
+	protected virtual void OnDestroy()
 	{
-		World.StepSimulation(deltaTime);
+		Dispose();
 	}
 
-	public void Dispose()
-	{
-		ExitPhysics();
-		GC.SuppressFinalize(this);
-	}
-
-	private RigidBody pickedBody;
-	private void RemovePickingConstraint()
-	{
-		if (pickConstraint != null && World != null)
-		{
-			World.RemoveConstraint(pickConstraint);
-			pickConstraint.Dispose();
-			pickConstraint = null;
-			pickedBody.ForceActivationState(ActivationState.ActiveTag);
-			pickedBody.DeactivationTime = 0;
-			pickedBody = null;
-		}
-	}
-
-	public virtual RigidBody LocalCreateRigidBody(float mass, Vector3B startPosition, CollisionShape shape, bool isKinematic = false)
-	{
-		return LocalCreateRigidBody(mass, Matrix.Translation(startPosition), shape, isKinematic);
-	}
-
-	public virtual RigidBody LocalCreateRigidBody(float mass, Matrix startPosition, CollisionShape shape, bool isKinematic = false)
-	{
-		CollisionShapes.Add(shape);
-
-		Vector3B localInertia = Vector3B.Zero;
-
-		//rigidbody is dynamic if and only if mass is non zero, otherwise static
-		if (mass != 0.0f)
-		{
-			shape.CalculateLocalInertia(mass, out localInertia);
-		}
-
-		//using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-		DefaultMotionState myMotionState = new DefaultMotionState(startPosition);
-
-		RigidBodyConstructionInfo rbInfo = new RigidBodyConstructionInfo(mass, myMotionState, shape, localInertia);
-		RigidBody body = new RigidBody(rbInfo);
-
-		if (isKinematic)
-		{
-			body.CollisionFlags = body.CollisionFlags | BulletSharp.CollisionFlags.KinematicObject;
-			body.ActivationState = ActivationState.DisableDeactivation;
-		}
-
-		rbInfo.Dispose();
-
-		World.AddRigidBody(body);
-
-		return body;
-	}
-
-	[DllImport("kernel32.dll", SetLastError = true)]
-	[return: MarshalAs(UnmanagedType.Bool)]
-	public static extern bool AllocConsole();
+	#endregion Destroy & Dispose
 }

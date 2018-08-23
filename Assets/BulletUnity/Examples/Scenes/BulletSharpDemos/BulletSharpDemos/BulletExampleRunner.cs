@@ -86,10 +86,10 @@ public class BulletExampleRunner : MonoBehaviour
 		{
 			demo = new DistanceDemo.DistanceDemo();
 		}
-		if (nm.Equals("FeatherStoneDemo"))
+		/*if (nm.Equals("FeatherStoneDemo"))
 		{
 			demo = new FeatherStoneDemo.FeatherStoneDemo();
-		}
+		}*/
 		if (nm.Equals("GImpactTestDemo"))
 		{
 			demo = new GImpactTestDemo.GImpactTestDemo();

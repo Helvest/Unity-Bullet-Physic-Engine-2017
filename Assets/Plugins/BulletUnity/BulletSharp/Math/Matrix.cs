@@ -2679,6 +2679,41 @@ namespace BulletSharp.Math
 			return result;
 		}
 
+		public static Matrix AffineTransformationCustom(ref Vector3 translation, ref Quaternion rotation)
+		{
+			Matrix result = new Matrix();
+
+			_xx = rotation.X * rotation.X;
+			_yy = rotation.Y * rotation.Y;
+			_zz = rotation.Z * rotation.Z;
+			_xy = rotation.X * rotation.Y;
+			_zw = rotation.Z * rotation.W;
+			_zx = rotation.Z * rotation.X;
+			_yw = rotation.Y * rotation.W;
+			_yz = rotation.Y * rotation.Z;
+			_xw = rotation.X * rotation.W;
+
+			//ROTATION
+			result.M11 = 1.0f - (2.0f * (_yy + _zz));
+			result.M12 = 2.0f * (_xy + _zw);
+			result.M13 = 2.0f * (_zx - _yw);
+
+			result.M21 = 2.0f * (_xy - _zw);
+			result.M22 = 1.0f - (2.0f * (_zz + _xx));
+			result.M23 = 2.0f * (_yz + _xw);
+
+			result.M31 = 2.0f * (_zx + _yw);
+			result.M32 = 2.0f * (_yz - _xw);
+			result.M33 = 1.0f - (2.0f * (_yy + _xx));
+
+			//POSITION
+			result.M41 = translation.X;
+			result.M42 = translation.Y;
+			result.M43 = translation.Z;
+
+			return result;
+		}
+
 		/// <summary>
 		/// Creates a 3D affine transformation matrix.
 		/// </summary>

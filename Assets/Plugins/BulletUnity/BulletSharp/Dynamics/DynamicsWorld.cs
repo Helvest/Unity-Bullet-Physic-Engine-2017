@@ -299,6 +299,7 @@ namespace BulletSharp
 					wrapper.Dispose();
 				}
 			}
+
 			if (_native != IntPtr.Zero)
 			{
 				if (_native2ManagedMap.ContainsKey(_native))
@@ -306,6 +307,7 @@ namespace BulletSharp
 					_native2ManagedMap.Remove(_native);
 				}
 			}
+
 			base.Dispose(disposing);
 		}
 

@@ -128,7 +128,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &466590881
 MonoBehaviour:
@@ -208,7 +208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216146beeda1df24da58898e0a9aa2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 1
   extents: {x: 20, y: 5, z: 20}
   m_localScaling: {x: 1, y: 1, z: 1}
 --- !u!4 &717987722
@@ -369,7 +368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216146beeda1df24da58898e0a9aa2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 1
   extents: {x: 0.5, y: 0.5, z: 0.5}
   m_localScaling: {x: 1, y: 1, z: 1}
 --- !u!114 &1026775547
@@ -689,7 +687,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!108 &1813643751
 Light:
@@ -812,7 +810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216146beeda1df24da58898e0a9aa2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmo: 1
   extents: {x: 0.5, y: 0.5, z: 0.5}
   m_localScaling: {x: 1, y: 1, z: 1}
 --- !u!114 &1817788541

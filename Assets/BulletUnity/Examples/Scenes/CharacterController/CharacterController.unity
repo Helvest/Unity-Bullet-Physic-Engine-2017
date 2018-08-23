@@ -974,7 +974,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!108 &1903787659
 Light:
@@ -1034,8 +1034,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2010110869}
   - component: {fileID: 2010110868}
-  - component: {fileID: 2010110867}
-  - component: {fileID: 2010110866}
   - component: {fileID: 2010110865}
   m_Layer: 0
   m_Name: Main Camera
@@ -1046,20 +1044,6 @@ GameObject:
   m_IsActive: 1
 --- !u!81 &2010110865
 AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2010110864}
-  m_Enabled: 1
---- !u!124 &2010110866
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2010110864}
-  m_Enabled: 1
---- !u!92 &2010110867
-Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1094,9 +1078,9 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10

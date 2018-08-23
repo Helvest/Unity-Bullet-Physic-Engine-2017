@@ -164,6 +164,27 @@ namespace BulletUnity
 
 		public static void DebugDrawCapsule(Vector3 position, Quaternion rotation, Vector3 scale, float radius, float halfHeight, int upAxis, Color color)
 		{
+			switch (upAxis)
+			{
+				default:
+				case 0:
+					halfHeight *= scale.x;
+					scale = Vector3.one * scale.z;
+					break;
+
+				case 1:
+					halfHeight *= scale.y;
+					scale = Vector3.one * scale.x;
+					break;
+
+				case 2:
+					halfHeight *= scale.z;
+					scale = Vector3.one * scale.y;
+					break;
+			}
+
+			halfHeight /= scale.x;
+
 			Gizmos.color = color;
 			Gizmos.matrix = Matrix4x4.TRS(position, rotation, scale);
 
@@ -180,22 +201,22 @@ namespace BulletUnity
 
 			capStart[(upAxis + 1) % 3] = radius;
 			capEnd[(upAxis + 1) % 3] = radius;
-			Gizmos.DrawLine(rotation * capStart, rotation * capEnd);
+			Gizmos.DrawLine(capStart, capEnd);
 
 			capStart[(upAxis + 1) % 3] = -radius;
 			capEnd[(upAxis + 1) % 3] = -radius;
-			Gizmos.DrawLine(rotation * capStart, rotation * capEnd);
+			Gizmos.DrawLine(capStart, capEnd);
 
-			capStart[(upAxis + 1) % 3] = 0.0f;
-			capEnd[(upAxis + 1) % 3] = 0.0f;
+			capStart[(upAxis + 1) % 3] = 0f;
+			capEnd[(upAxis + 1) % 3] = 0f;
 
 			capStart[(upAxis + 2) % 3] = radius;
 			capEnd[(upAxis + 2) % 3] = radius;
-			Gizmos.DrawLine(rotation * capStart, rotation * capEnd);
+			Gizmos.DrawLine(capStart, capEnd);
 
 			capStart[(upAxis + 2) % 3] = -radius;
 			capEnd[(upAxis + 2) % 3] = -radius;
-			Gizmos.DrawLine(rotation * capStart, rotation * capEnd);
+			Gizmos.DrawLine(capStart, capEnd);
 		}
 
 		public static void DebugDrawCylinder(Vector3 position, Quaternion rotation, Vector3 scale, float radius, float halfHeight, int upAxis, Color color)

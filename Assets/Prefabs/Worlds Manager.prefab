@@ -20,13 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4529829383230472}
   - component: {fileID: 114105366755532198}
-  - component: {fileID: 114380471685690710}
   m_Layer: 0
-  m_Name: ControlTest
+  m_Name: Worlds Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4529829383230472
 Transform:
@@ -35,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783186453161414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.596111, y: -4.222096, z: 6.7858295}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,28 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501ca1b9420a0ad498f19316ac063a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  softWorld: 1
-  objectMat: {fileID: 2100000, guid: 55eb42d37a648e643b5c20bfeede1d23, type: 2}
-  groundMat: {fileID: 2100000, guid: 9dac98b843b81dc4b891d965146803c9, type: 2}
-  cubePrefab: {fileID: 136008, guid: 1ff737ccceb7ac142ac80acb2812254f, type: 2}
-  ropePrefab: {fileID: 130762, guid: af52e21ec4947434c94d9f850a07b571, type: 2}
-  softBodyPrefab: {fileID: 197868, guid: 2736f39d7e2232f448b634b648a68649, type: 2}
-  createdObjs: []
-  timeSpeed: 1
---- !u!114 &114380471685690710
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1783186453161414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 842258ea5a9c75f42bceb6cc1700d4aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabSphere: {fileID: 1056042249139696, guid: bb22fb58098208f43b340580cc9c1085,
+  _physicWorldParameters: {fileID: 11400000, guid: 569141bc7bd5e0147872c9b42437f335,
     type: 2}
-  MeshPrefab: {fileID: 33492996207064314, guid: 8c8c52726d7fa78468969c55ae9a28a5,
-    type: 2}
-  Stiffness: 0.5
-  BendingConstraintsDistance: 2
