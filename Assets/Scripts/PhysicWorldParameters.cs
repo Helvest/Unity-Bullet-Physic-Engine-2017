@@ -33,7 +33,7 @@ public class PhysicWorldParameters : ScriptableObject
 	[Header("Debug")]
 	public bool debug = false;
 
-	public DebugDrawModes _debugDrawMode = DebugDrawModes.DrawWireframe;
+	public DebugDrawModes debugDrawMode = DebugDrawModes.DrawWireframe;
 
 	public BDebug.DebugType debugType;
 }

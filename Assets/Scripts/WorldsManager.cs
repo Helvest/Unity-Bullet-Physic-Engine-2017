@@ -46,7 +46,7 @@ public class WorldsManager : MonoBehaviour
 
 	public void OnDrawGizmos()
 	{
-		if (_physicWorldParameters && _physicWorldParameters.debug && WorldController != null && WorldController.World != null)
+		if (WorldController != null && WorldController.physicWorldParameters.debug)
 		{
 			WorldController.World.DebugDrawWorld();
 		}

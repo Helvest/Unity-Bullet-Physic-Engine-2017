@@ -11,8 +11,6 @@ expecting. Some are stubs, some are wrappers for Unity classes. This allows the 
 */
 namespace BulletSharpExamples
 {
-
-
 	public enum Keys
 	{
 		Escape,
@@ -63,35 +61,45 @@ namespace BulletSharpExamples
     I have no idea how that will work since they are called from the demo code not from inside OnDrawGizmos
     */
 	/*
-    public class DebugDrawStub : IDebugDraw {
-        public void DrawLine(ref Vector3 from, ref Vector3 to, ref Vector3 fromColor) { }
-        public void DrawLine(ref Vector3 from, ref Vector3 to, ref Vector3 fromColor, ref Vector3 toColor) { }
-        public void DrawBox(ref Vector3 bbMin, ref Vector3 bbMax, ref Vector3 color) { }
-        public void DrawBox(ref Vector3 bbMin, ref Vector3 bbMax, ref Matrix trans, ref Vector3 color) { }
-        public void DrawSphere(ref Vector3 p, float radius, ref Vector3 color) { }
-        public void DrawSphere(float radius, ref Matrix transform, ref Vector3 color) { }
-        public void DrawTriangle(ref Vector3 v0, ref Vector3 v1, ref Vector3 v2, ref Vector3 n0, ref Vector3 n1, ref Vector3 n2, ref Vector3 color, float alpha) { }
-        public void DrawTriangle(ref Vector3 v0, ref Vector3 v1, ref Vector3 v2, ref Vector3 color, float alpha) { }
-        public void DrawContactPoint(ref Vector3 pointOnB, ref Vector3 normalOnB, float distance, int lifeTime, ref Vector3 color) { }
-        public void ReportErrorWarning(String warningString) { }
-        public void Draw3dText(ref Vector3 location, String textString) { }
-        public DebugDrawModes DebugMode { get; set; }
-        public void DrawAabb(ref Vector3 from, ref Vector3 to, ref Vector3 color) { }
-        public void DrawTransform(ref Matrix transform, float orthoLen) { }
-        public void DrawArc(ref Vector3 center, ref Vector3 normal, ref Vector3 axis, float radiusA, float radiusB, float minAngle, float maxAngle,
-            ref Vector3 color, bool drawSect) { }
-        public void DrawArc(ref Vector3 center, ref Vector3 normal, ref Vector3 axis, float radiusA, float radiusB, float minAngle, float maxAngle,
-            ref Vector3 color, bool drawSect, float stepDegrees) { }
-        public void DrawSpherePatch(ref Vector3 center, ref Vector3 up, ref Vector3 axis, float radius,
-            float minTh, float maxTh, float minPs, float maxPs, ref Vector3 color) { }
-        public void DrawSpherePatch(ref Vector3 center, ref Vector3 up, ref Vector3 axis, float radius,
-            float minTh, float maxTh, float minPs, float maxPs, ref Vector3 color, float stepDegrees) { }
-        public void DrawCapsule(float radius, float halfHeight, int upAxis, ref Matrix transform, ref Vector3 color) { }
-        public void DrawCylinder(float radius, float halfHeight, int upAxis, ref Matrix transform, ref Vector3 color) { }
-        public void DrawCone(float radius, float height, int upAxis, ref Matrix transform, ref Vector3 color) { }
-        public void DrawPlane(ref Vector3 planeNormal, float planeConst, ref Matrix transform, ref Vector3 color) { }
-    }
-    */
+	public class DebugDrawStub : IDebugDraw
+	{
+		public void DrawLine(ref Vector3 from, ref Vector3 to, ref Vector3 fromColor) { }
+		public void DrawLine(ref Vector3 from, ref Vector3 to, ref Vector3 fromColor, ref Vector3 toColor) { }
+		public void DrawBox(ref Vector3 bbMin, ref Vector3 bbMax, ref Vector3 color) { }
+		public void DrawBox(ref Vector3 bbMin, ref Vector3 bbMax, ref Matrix trans, ref Vector3 color) { }
+		public void DrawSphere(ref Vector3 p, float radius, ref Vector3 color) { }
+		public void DrawSphere(float radius, ref Matrix transform, ref Vector3 color) { }
+		public void DrawTriangle(ref Vector3 v0, ref Vector3 v1, ref Vector3 v2, ref Vector3 n0, ref Vector3 n1, ref Vector3 n2, ref Vector3 color, float alpha) { }
+		public void DrawTriangle(ref Vector3 v0, ref Vector3 v1, ref Vector3 v2, ref Vector3 color, float alpha) { }
+		public void DrawContactPoint(ref Vector3 pointOnB, ref Vector3 normalOnB, float distance, int lifeTime, ref Vector3 color) { }
+		public void ReportErrorWarning(String warningString) { }
+		public void Draw3dText(ref Vector3 location, String textString) { }
+		public DebugDrawModes DebugMode { get; set; }
+		public void DrawAabb(ref Vector3 from, ref Vector3 to, ref Vector3 color) { }
+		public void DrawTransform(ref Matrix transform, float orthoLen) { }
+
+		public void DrawArc(ref Vector3 center, ref Vector3 normal, ref Vector3 axis, float radiusA, float radiusB, float minAngle, float maxAngle,
+			ref Vector3 color, bool drawSect)
+		{ }
+
+		public void DrawArc(ref Vector3 center, ref Vector3 normal, ref Vector3 axis, float radiusA, float radiusB, float minAngle, float maxAngle,
+			ref Vector3 color, bool drawSect, float stepDegrees)
+		{ }
+
+		public void DrawSpherePatch(ref Vector3 center, ref Vector3 up, ref Vector3 axis, float radius,
+			float minTh, float maxTh, float minPs, float maxPs, ref Vector3 color)
+		{ }
+
+		public void DrawSpherePatch(ref Vector3 center, ref Vector3 up, ref Vector3 axis, float radius,
+			float minTh, float maxTh, float minPs, float maxPs, ref Vector3 color, float stepDegrees)
+		{ }
+
+		public void DrawCapsule(float radius, float halfHeight, int upAxis, ref Matrix transform, ref Vector3 color) { }
+		public void DrawCylinder(float radius, float halfHeight, int upAxis, ref Matrix transform, ref Vector3 color) { }
+		public void DrawCone(float radius, float height, int upAxis, ref Matrix transform, ref Vector3 color) { }
+		public void DrawPlane(ref Vector3 planeNormal, float planeConst, ref Matrix transform, ref Vector3 color) { }
+	}
+	*/
 
 	public class GraphicsLibraryManager
 	{
@@ -104,7 +112,6 @@ namespace BulletSharpExamples
 
 		public static void Run(DemoFramework.Demo demo)
 		{
-
 		}
 	}
 
@@ -112,7 +119,6 @@ namespace BulletSharpExamples
 	{
 		public void Close()
 		{
-
 		}
 
 		public Size ClientSize;
@@ -141,32 +147,26 @@ namespace BulletSharpExamples
 
 		public void Initialize()
 		{
-
 		}
 
 		public void UpdateView()
 		{
-
 		}
 
 		public void Run()
 		{
-
 		}
 
 		public void Dispose()
 		{
-
 		}
 
 		public void SetFormText(string text)
 		{
-
 		}
 
 		public void SetInfoText(string text)
 		{
-
 		}
 	}
 
@@ -175,7 +175,6 @@ namespace BulletSharpExamples
 	{
 		public FreeLook(Input i)
 		{
-
 		}
 
 		public bool Update(float frameDelta)
@@ -188,7 +187,6 @@ namespace BulletSharpExamples
 			UnityEngine.Transform t = UnityEngine.Camera.main.transform;
 			t.position = eye.ToUnity();
 			t.rotation = UnityEngine.Quaternion.LookRotation((targ - eye).ToUnity().normalized, UnityEngine.Vector3.up);
-
 		}
 
 		public Vector3 Up;
@@ -199,8 +197,8 @@ namespace BulletSharpExamples
 	//TODO this should be a wrapper for the Input class
 	public class Input
 	{
-
-		public static UnityEngine.KeyCode[] UnityKeys = new UnityEngine.KeyCode[]{
+		public static UnityEngine.KeyCode[] UnityKeys = new UnityEngine.KeyCode[]
+		{
 			UnityEngine.KeyCode.Escape,
 			UnityEngine.KeyCode.B,
 			UnityEngine.KeyCode.N,
@@ -225,7 +223,8 @@ namespace BulletSharpExamples
 			UnityEngine.KeyCode.Period,
 		};
 
-		public static Keys[] BSKeys = new Keys[]{
+		public static Keys[] BSKeys = new Keys[]
+		{
 			Keys.Escape,
 			Keys.B,
 			Keys.N,
@@ -261,7 +260,6 @@ namespace BulletSharpExamples
 
 		public Input(GraphicsForm f)
 		{
-
 		}
 
 		public void ClearKeyCache()
@@ -276,7 +274,6 @@ namespace BulletSharpExamples
 	{
 		public void Start()
 		{
-
 		}
 
 		public float Update()

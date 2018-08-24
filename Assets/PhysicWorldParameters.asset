@@ -30,6 +30,6 @@ MonoBehaviour:
     Y: 1.55
     Z: 1.55
   sequentialImpulseConstraintSolverRandomSeed: 12345
-  debug: 0
-  _debugDrawMode: 1
-  debugType: 1
+  debug: 1
+  debugDrawMode: 6223
+  debugType: 8
