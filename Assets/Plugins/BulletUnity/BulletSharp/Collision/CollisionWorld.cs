@@ -972,10 +972,10 @@ namespace BulletSharp
 					}
 
 					// Clear IDebugDraw wrapper
-					if (!(_debugDrawer is DebugDraw))
+					/*if (!(_debugDrawer is DebugDraw))
 					{
-						//btIDebugDrawer_delete(btCollisionWorld_getDebugDrawer(_native));
-					}
+						btIDebugDrawer_delete(btCollisionWorld_getDebugDrawer(_native));
+					}*/
 				}
 
 				_debugDrawer = value;
