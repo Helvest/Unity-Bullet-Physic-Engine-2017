@@ -310,7 +310,7 @@ public class WorldController : IDisposable
 
 	public bool RemoveCollisionObject(BCollisionObject co)
 	{
-		if (isDisposed)
+		if (!isDisposed)
 		{
 			if (co is BRigidBody)
 			{
