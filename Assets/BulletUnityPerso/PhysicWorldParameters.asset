@@ -18,7 +18,8 @@ MonoBehaviour:
   worldType: 1
   collisionType: 0
   broadphaseType: 0
-  fixedTimeStep: 0.008333334
+  fixedTimeStep: 0.5
+  framerate: 2
   maxSubsteps: 3
   axis3SweepMaxProxies: 32766
   axis3SweepBroadphaseMin:

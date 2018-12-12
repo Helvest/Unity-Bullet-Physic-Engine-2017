@@ -2,11 +2,12 @@
 using PhysicWorldEnums;
 using UnityEngine;
 
+//is a singleton
 public class WorldsManager : MonoBehaviour
 {
 	public static WorldsManager Instance { get; private set; }
 
-	public static int actualWorldID;
+	public static int ActualWorldID = 0;
 
 	[SerializeField]
 	private PhysicWorldParameters _physicWorldParameters;
@@ -20,9 +21,9 @@ public class WorldsManager : MonoBehaviour
 	{
 		get
 		{
-			if (worldControllerList.Count > 0)
+			if(worldControllerList.Count > 0)
 			{
-				return worldControllerList[actualWorldID];
+				return worldControllerList[ActualWorldID];
 			}
 
 			return null;
@@ -36,7 +37,7 @@ public class WorldsManager : MonoBehaviour
 
 	public WorldController GetOrCreateWorldController(int ID)
 	{
-		if (!worldControllerList.ContainsKey(ID))
+		if(!worldControllerList.ContainsKey(ID))
 		{
 			worldControllerList.Add(ID, new WorldController());
 		}
@@ -46,7 +47,7 @@ public class WorldsManager : MonoBehaviour
 
 	public void OnDrawGizmos()
 	{
-		if (WorldController != null && WorldController.physicWorldParameters.debug)
+		if(WorldController != null && WorldController.physicWorldParameters.debug)
 		{
 			WorldController.World.DebugDrawWorld();
 		}
@@ -56,7 +57,7 @@ public class WorldsManager : MonoBehaviour
 	{
 		Instance = this;
 
-		if (_physicWorldParameters.worldType == WorldType.SoftBodyAndRigidBody
+		if(_physicWorldParameters.worldType == WorldType.SoftBodyAndRigidBody
 			&& _physicWorldParameters.collisionType == CollisionConfType.DefaultDynamicsWorldCollisionConf)
 		{
 			Debug.LogError("For World Type = SoftBodyAndRigidBody collisionType must be collisionType=SoftBodyRigidBodyCollisionConf. Switching");
@@ -64,14 +65,16 @@ public class WorldsManager : MonoBehaviour
 			return;
 		}
 
+		Time.fixedDeltaTime = _physicWorldParameters.fixedTimeStep;
+
 		//Create default Physic World
-		actualWorldID = 0;
-		worldControllerList.Add(actualWorldID, new WorldController());
+		ActualWorldID = 0;
+		worldControllerList.Add(ActualWorldID, new WorldController());
 	}
 
 	private void OnDestroy()
 	{
-		for (int i = 0; i < worldControllerList.Count; i++)
+		for(int i = 0; i < worldControllerList.Count; i++)
 		{
 			worldControllerList[i].Dispose();
 		}
@@ -81,6 +84,6 @@ public class WorldsManager : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		worldControllerList[0].StepSimulation(Time.fixedDeltaTime);
+		//worldControllerList[0].StepSimulation(_physicWorldParameters.fixedTimeStep);
 	}
 }

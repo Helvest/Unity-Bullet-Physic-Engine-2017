@@ -18,6 +18,8 @@ public class PhysicWorldParameters : ScriptableObject
 	[Header("Time")]
 	public float fixedTimeStep = 1f / 60f;
 
+	public float framerate = 60;
+
 	public int maxSubsteps = 3;
 
 	[Header("3Sweep")]
@@ -36,4 +38,5 @@ public class PhysicWorldParameters : ScriptableObject
 	public DebugDrawModes debugDrawMode = DebugDrawModes.DrawWireframe;
 
 	public BDebug.DebugType debugType;
+
 }
