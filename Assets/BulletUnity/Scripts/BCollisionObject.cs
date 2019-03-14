@@ -42,10 +42,10 @@ namespace BulletUnity
 		protected BulletSharp.CollisionFlags m_collisionFlags = BulletSharp.CollisionFlags.None;
 
 		[SerializeField]
-		protected CollisionFilterGroups m_groupsIBelongTo = CollisionFilterGroups.Nothing; // A bitmask
+		protected CollisionFilterGroups m_groupsIBelongTo = CollisionFilterGroups.Everything; // A bitmask
 
 		[SerializeField]
-		protected CollisionFilterGroups m_collisionMask = CollisionFilterGroups.Nothing; // A colliding object must match this mask in order to collide with me.
+		protected CollisionFilterGroups m_collisionMask = CollisionFilterGroups.Everything; // A colliding object must match this mask in order to collide with me.
 
 		public virtual BulletSharp.CollisionFlags collisionFlags
 		{

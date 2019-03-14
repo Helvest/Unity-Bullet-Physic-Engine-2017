@@ -20,19 +20,12 @@ namespace BulletUnity
         public float lifetime = 10f;
       
         public bool enableRain = true;
-        
-       // SelectMesh ProcedurealMesh = SelectMesh.Sphere;
-        
-       float lastBunnyTime = 0f;
 
-        void Start()
-        {
+		// SelectMesh ProcedurealMesh = SelectMesh.Sphere;
 
+		private float lastBunnyTime = 0f;
 
-        }
-
-
-        void Update()
+		private void Update()
         {
                       
             if (!enableRain)
@@ -65,8 +58,7 @@ namespace BulletUnity
             }
         }
 
-
-        enum SelectMesh
+		private enum SelectMesh
         {
             //Random,
             Box,
