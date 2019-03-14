@@ -85,9 +85,13 @@ public class BCollisionObjectEditor : Editor
 	public static GUIContent gcCollisionMask = new GUIContent("Collision Mask", "Another object will only collide with this object if a group of the other object matches this mask AND a group on this object " +
 												  " matches the mask on the other object.");
 
+	public static GUIContent gcActivationState = new GUIContent("Activation State");
+
 	public override void OnInspectorGUI()
 	{
 		BCollisionObject obj = (BCollisionObject)target;
+
+		//obj.tickPriority = (byte)EditorGUILayout.IntField("Tick Priority", obj.tickPriority);
 
 		obj.collisionFlags = BCollisionObjectEditor.RenderEnumMaskCollisionFlagsField(gcCollisionFlags, obj.collisionFlags);
 		obj.groupsIBelongTo = BCollisionObjectEditor.RenderEnumMaskCollisionFilterGroupsField(gcGroupsIBelongTo, obj.groupsIBelongTo);

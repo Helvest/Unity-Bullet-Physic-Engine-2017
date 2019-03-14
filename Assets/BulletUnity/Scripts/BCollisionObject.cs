@@ -21,8 +21,22 @@ namespace BulletUnity
 		protected bool m_startHasBeenCalled = false;
 
 		protected CollisionObject m_collisionObject;
-		protected BCollisionShape m_collisionShape;
+
 		internal bool isInWorld = false;
+
+		[SerializeField]
+		protected BCollisionShape m_collisionShape;
+		public BCollisionShape collisionShape
+		{
+			get
+			{
+				return m_collisionShape;
+			}
+			set
+			{
+				m_collisionShape = value;
+			}
+		}
 
 		[SerializeField]
 		protected BulletSharp.CollisionFlags m_collisionFlags = BulletSharp.CollisionFlags.None;
@@ -59,7 +73,7 @@ namespace BulletUnity
 			{
 				if (m_collisionObject != null && value != m_groupsIBelongTo)
 				{
-					Debug.LogError("Cannot change the collision group once a collision object has been created");
+					Debug.LogError("Cannot change the collision group once a collision object has been created", transform);
 				}
 				else
 				{
@@ -76,7 +90,7 @@ namespace BulletUnity
 			{
 				if (m_collisionObject != null && value != m_collisionMask)
 				{
-					Debug.LogError("Cannot change the collision mask once a collision object has been created");
+					Debug.LogError("Cannot change the collision mask once a collision object has been created", transform);
 				}
 				else
 				{
@@ -135,14 +149,14 @@ namespace BulletUnity
 
 			if (transform.localScale != UnityEngine.Vector3.one)
 			{
-				Debug.LogError("The local scale on this collision shape is not one. Bullet physics does not support scaling on a rigid body world transform. Instead alter the dimensions of the CollisionShape.");
+				Debug.LogError("The local scale on this collision shape is not one. Bullet physics does not support scaling on a rigid body world transform. Instead alter the dimensions of the CollisionShape.", transform);
 			}
 
 			m_collisionShape = GetComponent<BCollisionShape>();
 
 			if (m_collisionShape == null)
 			{
-				Debug.LogError("There was no collision shape component attached to this BRigidBody. " + name);
+				Debug.LogError("There was no collision shape component attached to this BRigidBody. " + name, transform);
 				return false;
 			}
 

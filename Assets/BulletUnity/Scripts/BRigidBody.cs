@@ -365,6 +365,22 @@ namespace BulletUnity
 			}
 		}
 
+		[SerializeField]
+		private ActivationState _activationState = ActivationState.Undefined;
+		public ActivationState activationState
+		{
+			get { return _activationState; }
+			set
+			{
+				if (m_collisionObject != null && _activationState != value)
+				{
+					m_collisionObject.ActivationState = _activationState;
+				}
+
+				_activationState = value;
+			}
+		}
+
 		public BDebug.DebugType debugType;
 
 		#endregion Variables

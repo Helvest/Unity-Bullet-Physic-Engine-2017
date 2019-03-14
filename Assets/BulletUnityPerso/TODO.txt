@@ -1,4 +1,3 @@
 TODO
 
-- Permetre aux shapes d'être mient en enfant des BRigibody
 - Verifier les DebugDraw des colliders

@@ -1,7 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-
 namespace BulletUnity
 {
 
@@ -46,8 +45,6 @@ namespace BulletUnity
 			}
 		}
 
-
-
 		public override void OnInspectorGUI()
 		{
 			serializedObject.Update();
@@ -56,17 +53,29 @@ namespace BulletUnity
 
 			EditorHelpers.DrawLogoAndVersion();
 
-			//BSoftBody sb = (BSoftBody)target;
-			//sb.m_collisionFlags = BCollisionObjectEditor.RenderEnumMaskCollisionFlagsField(BCollisionObjectEditor.gcCollisionFlags, sb.m_collisionFlags);
-			//sb.m_groupsIBelongTo = BCollisionObjectEditor.RenderEnumMaskCollisionFilterGroupsField(BCollisionObjectEditor.gcGroupsIBelongTo, sb.m_groupsIBelongTo);
-			//sb.m_collisionMask = BCollisionObjectEditor.RenderEnumMaskCollisionFilterGroupsField(BCollisionObjectEditor.gcCollisionMask, sb.m_collisionMask);
-
 			if (bSoftBodyTarget is BSoftBodyWMesh)
 			{
 				DrawCustomMeshSettingsOptions();
 			}
 
-			DrawPropertiesExcluding(serializedObject, hideMe); //Draw settings after the default inspector
+			//DrawPropertiesExcluding(serializedObject, hideMe); //Draw settings after the default inspector
+
+			EditorGUILayout.LabelField("Collision", EditorStyles.boldLabel);
+
+			//bSoftBodyTarget.tickPriority = (byte)EditorGUILayout.IntField("Tick Priority", bSoftBodyTarget.tickPriority);
+
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.LabelField("Collision Shape");
+			bSoftBodyTarget.collisionShape = (BCollisionShape)EditorGUILayout.ObjectField(bSoftBodyTarget.collisionShape, typeof(BCollisionShape), true);
+			EditorGUILayout.EndHorizontal();
+
+			bSoftBodyTarget.collisionFlags = BCollisionObjectEditor.RenderEnumMaskCollisionFlagsField(BCollisionObjectEditor.gcCollisionFlags, bSoftBodyTarget.collisionFlags);
+			bSoftBodyTarget.groupsIBelongTo = BCollisionObjectEditor.RenderEnumMaskCollisionFilterGroupsField(BCollisionObjectEditor.gcGroupsIBelongTo, bSoftBodyTarget.groupsIBelongTo);
+			bSoftBodyTarget.collisionMask = BCollisionObjectEditor.RenderEnumMaskCollisionFilterGroupsField(BCollisionObjectEditor.gcCollisionMask, bSoftBodyTarget.collisionMask);
+
+			//bSoftBodyTarget.activationState = (BulletSharp.ActivationState)EditorGUILayout.EnumPopup(BCollisionObjectEditor.gcActivationState, bSoftBodyTarget.activationState);
+
+			EditorGUILayout.Separator();
 
 			if (target is BSoftBodyPartOnSkinnedMesh)
 			{
@@ -96,7 +105,8 @@ namespace BulletUnity
 			EditorGUILayout.Space();
 
 			//bitmask field for collisions
-			bSoftBodyTarget.SoftBodySettings.config.Collisions = (BulletSharp.SoftBody.CollisionFlags)EditorGUILayout.EnumFlagsField(gcCollisionTooltip, bSoftBodyTarget.SoftBodySettings.config.Collisions);
+			bSoftBodyTarget.SoftBodySettings.config.Collisions =
+				(BulletSharp.SoftBody.CollisionFlags)EditorGUILayout.EnumFlagsField(gcCollisionTooltip, bSoftBodyTarget.SoftBodySettings.config.Collisions);
 
 			EditorGUILayout.PropertyField(softBodySettings, gcSoftBodySettings, true);
 

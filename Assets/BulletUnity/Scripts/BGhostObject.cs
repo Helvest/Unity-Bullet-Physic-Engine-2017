@@ -98,7 +98,7 @@ namespace BulletUnity
 
 		public virtual void BOnTriggerEnter(CollisionObject other, AlignedManifoldArray details)
 		{
-			Debug.LogWarning("BOnTriggerEnter: " + ((BRigidBody)other.UserObject).name);
+			//Debug.LogWarning("BOnTriggerEnter: " + ((BRigidBody)other.UserObject).name);
 		}
 
 		public virtual void BOnTriggerStay(CollisionObject other, AlignedManifoldArray details)

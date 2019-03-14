@@ -22,7 +22,7 @@ namespace BulletUnity
 
 			if (mesh == null)
 			{
-				Debug.LogError("Could not build mesh from meshSettings for " + this);
+				Debug.LogError("Could not build mesh from meshSettings for " + this, transform);
 				return false;
 			}
 
