@@ -99,6 +99,9 @@ namespace BulletUnity
 				mesh.RecalculateBounds();
 				transform.SetTransformationFromBulletMatrix(m_collisionObject.WorldTransform);  //Set SoftBody position, No motionstate    
 			}
-		}
+
+            
+
+        }
 	}
 }

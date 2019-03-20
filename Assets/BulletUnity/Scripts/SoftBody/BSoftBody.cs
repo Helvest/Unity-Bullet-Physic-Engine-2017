@@ -1,124 +1,124 @@
-﻿using System;
-using BulletSharp.SoftBody;
+﻿using BulletSharp.SoftBody;
+using System;
 using UnityEngine;
 
 namespace BulletUnity
 {
-	public class BSoftBody : BCollisionObject, IDisposable
-	{
-		//common Soft body settings class used for all softbodies, parameters set based on type of soft body
-		[SerializeField]
-		private SBSettings _softBodySettings = new SBSettings();      //SoftBodyEditor will display this when needed
-		public SBSettings SoftBodySettings
-		{
-			get { return _softBodySettings; }
-			set { _softBodySettings = value; }
-		}
+    public class BSoftBody : BCollisionObject, IDisposable
+    {
+        //common Soft body settings class used for all softbodies, parameters set based on type of soft body
+        [SerializeField]
+        private SBSettings _softBodySettings = new SBSettings();      //SoftBodyEditor will display this when needed
+        public SBSettings SoftBodySettings
+        {
+            get { return _softBodySettings; }
+            set { _softBodySettings = value; }
+        }
 
-		private SoftRigidDynamicsWorld _world;
-		protected SoftRigidDynamicsWorld World
-		{
-			get
-			{
-				if (_world != null)
-				{
-					return _world;
-				}
-				else
-				{
-					BPhysicsWorld w = BPhysicsWorld.Get();
-					if (w != null && w.world is SoftRigidDynamicsWorld)
-					{
-						_world = (SoftRigidDynamicsWorld)w.world;
-						return _world;
-					}
-					else
-					{
-						return null;
-					}
-				}
-			}
-		}
+        private SoftRigidDynamicsWorld _world;
+        protected SoftRigidDynamicsWorld World
+        {
+            get
+            {
+                if (_world != null)
+                {
+                    return _world;
+                }
+                else
+                {
+                    BPhysicsWorld w = BPhysicsWorld.Get();
+                    if (w != null && w.world is SoftRigidDynamicsWorld)
+                    {
+                        _world = (SoftRigidDynamicsWorld)w.world;
+                        return _world;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
 
-		//for converting to/from unity mesh
-		protected UnityEngine.Vector3[] verts = new UnityEngine.Vector3[0];
-		protected UnityEngine.Vector3[] norms = new UnityEngine.Vector3[0];
-		protected int[] tris = new int[1];
+        //for converting to/from unity mesh
+        public Vector3[] verts { get; protected set; } = new Vector3[0];
+        public Vector3[] norms { get; protected set; } = new Vector3[0];
+        protected int[] tris = new int[1];
 
-		protected override void Awake()
-		{
-			//disable warning
-		}
+        protected override void Awake()
+        {
+            //disable warning
+        }
 
-		protected override void AddObjectToBulletWorld()
-		{
-			BPhysicsWorld.Get().AddSoftBody(this);
-		}
+        protected override void AddObjectToBulletWorld()
+        {
+            BPhysicsWorld.Get().AddSoftBody(this);
+        }
 
-		protected override void RemoveObjectFromBulletWorld()
-		{
-			BPhysicsWorld world = BPhysicsWorld.Get();
-			if (world && isInWorld)
-			{
-				world.RemoveSoftBody((SoftBody)m_collisionObject);
-			}
-		}
+        protected override void RemoveObjectFromBulletWorld()
+        {
+            BPhysicsWorld world = BPhysicsWorld.Get();
+            if (world && isInWorld)
+            {
+                world.RemoveSoftBody((SoftBody)m_collisionObject);
+            }
+        }
 
-		public void BuildSoftBody()
-		{
-			_BuildCollisionObject();
-		}
+        public void BuildSoftBody()
+        {
+            _BuildCollisionObject();
+        }
 
-		protected override void Dispose(bool isdisposing)
-		{
-			SoftBody m_BSoftBody = (SoftBody)m_collisionObject;
-			
-			if (m_BSoftBody != null)
-			{
-				if (isInWorld && isdisposing)
-				{
-					World.RemoveSoftBody(m_BSoftBody);
-				}
+        protected override void Dispose(bool isdisposing)
+        {
+            SoftBody m_BSoftBody = (SoftBody)m_collisionObject;
 
-				m_BSoftBody.Dispose();
-				m_BSoftBody = null;
-			}
-		}
+            if (m_BSoftBody != null)
+            {
+                if (isInWorld && isdisposing)
+                {
+                    World.RemoveSoftBody(m_BSoftBody);
+                }
 
-		public void DumpDataFromBullet()
-		{
-			if (isInWorld)
-			{
-				SoftBody m_BSoftBody = (SoftBody)m_collisionObject;
-				if (verts.Length != m_BSoftBody.Nodes.Count)
-				{
-					verts = new Vector3[m_BSoftBody.Nodes.Count];
-				}
+                m_BSoftBody.Dispose();
+                m_BSoftBody = null;
+            }
+        }
 
-				if (norms.Length != verts.Length)
-				{
-					norms = new Vector3[m_BSoftBody.Nodes.Count];
-				}
+        public void DumpDataFromBullet()
+        {
+            if (isInWorld)
+            {
+                SoftBody m_BSoftBody = (SoftBody)m_collisionObject;
+                if (verts.Length != m_BSoftBody.Nodes.Count)
+                {
+                    verts = new Vector3[m_BSoftBody.Nodes.Count];
+                }
 
-				for (int i = 0; i < m_BSoftBody.Nodes.Count; i++)
-				{
-					verts[i] = m_BSoftBody.Nodes[i].Position.ToUnity();
-					norms[i] = m_BSoftBody.Nodes[i].Normal.ToUnity();
-				}
-			}
-		}
+                if (norms.Length != verts.Length)
+                {
+                    norms = new Vector3[m_BSoftBody.Nodes.Count];
+                }
 
-		public virtual void Update()
-		{
-			DumpDataFromBullet();  //Get Bullet data
-			UpdateMesh(); //Update mesh based on bullet data
-		}
+                for (int i = 0; i < m_BSoftBody.Nodes.Count; i++)
+                {
+                    verts[i] = m_BSoftBody.Nodes[i].Position.ToUnity();
+                    norms[i] = m_BSoftBody.Nodes[i].Normal.ToUnity();
+                }
+            }
+        }
 
-		/// <summary>
-		/// Update Mesh (or line renderer) at runtime, call from Update 
-		/// </summary>
-		public virtual void UpdateMesh()
-		{
-		}
-	}
+        public virtual void Update()
+        {
+            DumpDataFromBullet();  //Get Bullet data
+            UpdateMesh(); //Update mesh based on bullet data
+        }
+
+        /// <summary>
+        /// Update Mesh (or line renderer) at runtime, call from Update 
+        /// </summary>
+        public virtual void UpdateMesh()
+        {
+        }
+    }
 }

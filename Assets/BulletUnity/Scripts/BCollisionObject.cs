@@ -20,7 +20,7 @@ namespace BulletUnity
 		//Solution is not to add object to the world until after Start has been called. Start will do the first add to world. 
 		protected bool m_startHasBeenCalled = false;
 
-		protected CollisionObject m_collisionObject;
+		public CollisionObject m_collisionObject { get; protected set; }
 
 		internal bool isInWorld = false;
 
