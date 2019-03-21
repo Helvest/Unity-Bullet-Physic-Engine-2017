@@ -149,7 +149,7 @@ namespace BulletUnity
 
                 case SBSettingsPresets.Volume:
                     sBMaterial.LinearStiffness = 0.45f;
-                    config.VolumeConversation = 20;
+                    config.VolumeConversation = 0.2f;
                     totalMass = 50f;
                     fromFaces = true;
                     bvolume = true;
@@ -247,7 +247,7 @@ namespace BulletUnity
         public float Damping = 0f;
 
         [Tooltip("Volume conservation coefficient; Volume conservation. Also, when setPose(true, ...)*** has been called, defines magnitude of the force used to conserve volume. (?)")]
-        [Range(0f, float.PositiveInfinity)]
+        [Range(0f, 1f)]
         public float VolumeConversation = 0f;
 
         [Tooltip("Pressure coefficient; Affects aerodynamics computations. Also, when setPose(true, ...)*** has been called, defines pressure used to conserve volume.")]
@@ -273,7 +273,7 @@ namespace BulletUnity
         public BulletSharp.SoftBody.CollisionFlags Collisions = BulletSharp.SoftBody.CollisionFlags.Default;
 
         [Tooltip("Maximum volume ratio for pose.")]
-        [Range(0f, float.PositiveInfinity)]
+        [Range(0f, 100f)]
         public float MaxVolume = 1.0f;
 
         [Tooltip("Pose matching coefficient; When setPose(..., true)*** has been called, defines the factor used for pose matching. (enforcing relative vertex positions)")]
@@ -285,7 +285,7 @@ namespace BulletUnity
         public float VelocityCorrectionFactor = 1.0f;
 
         [Tooltip("Time scale; Factor of time step. Can be used to speed up or slow down simulation of a specific soft body.")]
-        [Range(0f, float.PositiveInfinity)]
+        [Range(0f, 100f)]
         public float Timescale = 1.0f;
 
         [Header("Contact Hardness Settings")]
@@ -305,7 +305,7 @@ namespace BulletUnity
         [Header("Solver Settings")]
 
         [Tooltip("Positions solver iterations")]
-        [Range(0, 1000)] //int.MaxValue)]
+        [Range(0, 1000)]
         public int PositionIterations = 1;
 
         [Tooltip("Drift solver iterations; Number of iterations for drift solvers (if any, can be 0).")]

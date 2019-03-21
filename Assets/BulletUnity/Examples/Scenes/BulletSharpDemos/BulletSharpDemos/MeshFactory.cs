@@ -525,7 +525,7 @@ namespace DemoFramework
                     int indexOffset = vertexCount / 2;
                     for (int j = 0; j < sphereIndices.Length; j++)
                     {
-                        sphereIndices[j] += (int)indexOffset;
+                        sphereIndices[j] += indexOffset;
                     }
                 }
 

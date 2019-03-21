@@ -494,18 +494,18 @@ namespace DemoFramework
 			Size clientSize = Graphics.Form.ClientSize;
 			if (clientSize.Width > clientSize.Height)
 			{
-				aspect = (float)clientSize.Width / (float)clientSize.Height;
+				aspect = clientSize.Width / (float)clientSize.Height;
 				hor *= aspect;
 			}
 			else
 			{
-				aspect = (float)clientSize.Height / (float)clientSize.Width;
+				aspect = clientSize.Height / (float)clientSize.Width;
 				vertical *= aspect;
 			}
 
 			Vector3 rayToCenter = eye + rayForward;
-			Vector3 dHor = hor / (float)clientSize.Width;
-			Vector3 dVert = vertical / (float)clientSize.Height;
+			Vector3 dHor = hor / clientSize.Width;
+			Vector3 dVert = vertical / clientSize.Height;
 
 			Vector3 rayTo = rayToCenter - 0.5f * hor + 0.5f * vertical;
 			rayTo += (clientSize.Width - point.X) * dHor;

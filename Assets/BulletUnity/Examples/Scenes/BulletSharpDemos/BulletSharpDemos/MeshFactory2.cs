@@ -522,13 +522,13 @@ namespace DemoFramework
 			vertices[0] = UnityEngine.Vector3.up * radius;
 			for (int lat = 0; lat < nbLat; lat++)
 			{
-				float a1 = _pi * (float)(lat + 1) / (nbLat + 1);
+				float a1 = _pi * (lat + 1) / (nbLat + 1);
 				float sin1 = Mathf.Sin(a1);
 				float cos1 = Mathf.Cos(a1);
 
 				for (int lon = 0; lon <= nbLong; lon++)
 				{
-					float a2 = _2pi * (float)(lon == nbLong ? 0 : lon) / nbLong;
+					float a2 = _2pi * (lon == nbLong ? 0 : lon) / nbLong;
 					float sin2 = Mathf.Sin(a2);
 					float cos2 = Mathf.Cos(a2);
 

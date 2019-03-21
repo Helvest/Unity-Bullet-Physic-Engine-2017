@@ -58,7 +58,7 @@ namespace ConcaveRaycastDemo
             sign = 1.0f;
             for (int i = 0; i < NUMRAYS_IN_BAR; i++)
             {
-                float z = (max_z - min_z) / NUMRAYS_IN_BAR * (float)i + min_z;
+                float z = (max_z - min_z) / NUMRAYS_IN_BAR * i + min_z;
                 source[i] = new Vector3(min_x, this.max_y, z);
                 dest[i] = new Vector3(min_x + ray_length, this.min_y, z);
                 normal[i] = new Vector3(1.0f, 0.0f, 0.0f);
@@ -157,7 +157,7 @@ namespace ConcaveRaycastDemo
                 max_ms = ms > max_ms ? ms : max_ms;
                 sum_ms += ms;
                 sum_ms_samples++;
-                float mean_ms = (float)sum_ms / (float)sum_ms_samples;
+                float mean_ms = sum_ms / (float)sum_ms_samples;
                 Console.WriteLine("{0} rays in {1} ms {2} {3} {4}", NUMRAYS_IN_BAR * frame_counter, ms, min_ms, max_ms, mean_ms);
                 ms = 0;
                 frame_counter = 0;
@@ -227,7 +227,7 @@ namespace ConcaveRaycastDemo
                     for (int j = 0; j < NumVertsY; j++)
                     {
                         vertexWriter.Write((i - NumVertsX * 0.5f) * TriangleSize);
-                        vertexWriter.Write(waveheight * (float)Math.Sin((float)i + offset) * (float)Math.Cos((float)j + offset));
+                        vertexWriter.Write(waveheight * (float)Math.Sin(i + offset) * (float)Math.Cos(j + offset));
                         vertexWriter.Write((j - NumVertsY * 0.5f) * TriangleSize);
                     }
                 }

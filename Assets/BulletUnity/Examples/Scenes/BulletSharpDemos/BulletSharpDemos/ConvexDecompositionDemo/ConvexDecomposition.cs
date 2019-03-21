@@ -48,7 +48,7 @@ namespace ConvexDecompositionDemo
             {
                 centroid += vertex * LocalScaling;
             }
-            centroid /= (float)hullVertices.Length;
+            centroid /= hullVertices.Length;
 
             List<Vector3> outVertices = new List<Vector3>();
             foreach (Vector3 vertex in hullVertices)

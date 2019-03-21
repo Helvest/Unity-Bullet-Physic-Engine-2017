@@ -53,7 +53,7 @@ namespace BulletUnity
 				float[,] row = td.GetHeights(0, i, width, 1);
 				for (int j = 0; j < width; j++)
 				{
-					writer.Write((float)row[0, j] * maxHeight);
+					writer.Write(row[0, j] * maxHeight);
 				}
 			}
 

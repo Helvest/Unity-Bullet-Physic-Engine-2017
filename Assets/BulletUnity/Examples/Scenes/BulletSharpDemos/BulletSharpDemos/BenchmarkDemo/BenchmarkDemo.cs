@@ -81,10 +81,10 @@ namespace BenchmarkDemo
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            pos[2] = offset + (float)j * (cubeSize * 2.0f + spacing);
+                            pos[2] = offset + j * (cubeSize * 2.0f + spacing);
                             for (int i = 0; i < size; i++)
                             {
-                                pos[0] = offset + (float)i * (cubeSize * 2.0f + spacing);
+                                pos[0] = offset + i * (cubeSize * 2.0f + spacing);
                                 /*RigidBody cmbody =*/ LocalCreateRigidBody(mass, Matrix.Translation(pos), blockShape);
                             }
                         }
@@ -128,10 +128,10 @@ namespace BenchmarkDemo
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            pos[2] = offset + (float)j * (cubeSize * 2.0f + spacing);
+                            pos[2] = offset + j * (cubeSize * 2.0f + spacing);
                             for (int i = 0; i < size; i++)
                             {
-                                pos[0] = offset + (float)i * (cubeSize * 2.0f + spacing);
+                                pos[0] = offset + i * (cubeSize * 2.0f + spacing);
                                 LocalCreateRigidBody(mass, Matrix.Translation(pos), convexHullShape);
                             }
                         }
@@ -166,10 +166,10 @@ namespace BenchmarkDemo
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            pos[2] = offset + (float)j * (cubeSize * 2.0f + spacing);
+                            pos[2] = offset + j * (cubeSize * 2.0f + spacing);
                             for (int i = 0; i < size; i++)
                             {
-                                pos[0] = offset + (float)i * (cubeSize * 2.0f + spacing);
+                                pos[0] = offset + i * (cubeSize * 2.0f + spacing);
                                 Vector3 bpos = new Vector3(0, 25, 0) + new Vector3(5.0f * pos.X, pos.Y, 5.0f * pos.Z);
                                 int idx = random.Next(10);
                                 Matrix trans = Matrix.Translation(bpos);
@@ -243,10 +243,10 @@ namespace BenchmarkDemo
                     {
                         for (int j = 0; j < size; j++)
                         {
-                            pos[2] = offset + (float)j * (cubeSize * 2.0f + spacing);
+                            pos[2] = offset + j * (cubeSize * 2.0f + spacing);
                             for (int i = 0; i < size; i++)
                             {
-                                pos[0] = offset + (float)i * (cubeSize * 2.0f + spacing);
+                                pos[0] = offset + i * (cubeSize * 2.0f + spacing);
                                 Vector3 bpos = new Vector3(0, 25, 0) + new Vector3(5.0f * pos.X, pos.Y, 5.0f * pos.Z);
 
                                 LocalCreateRigidBody(mass, Matrix.Translation(bpos), convexHullShape);
@@ -288,10 +288,10 @@ namespace BenchmarkDemo
             {
                 for (int j = 0; j < stackSize; j++)
                 {
-                    pos[2] = offsetZ + (float)j * (diffZ * 2.0f + space);
+                    pos[2] = offsetZ + j * (diffZ * 2.0f + space);
                     for (int i = 0; i < stackSize; i++)
                     {
-                        pos[0] = offsetX + (float)i * (diffX * 2.0f + space);
+                        pos[0] = offsetX + i * (diffX * 2.0f + space);
                         /*RigidBody body =*/ LocalCreateRigidBody(mass, Matrix.Translation(offsetPosition + pos), blockShape);
                     }
                 }
@@ -319,7 +319,7 @@ namespace BenchmarkDemo
             {
                 for (int i = 0; i < stackSize; i++)
                 {
-                    pos[2] = offset + (float)i * (diffZ * 2.0f);
+                    pos[2] = offset + i * (diffZ * 2.0f);
                     LocalCreateRigidBody(mass, Matrix.Translation(offsetPosition + pos), blockShape);
                 }
                 offset += diffZ;
@@ -352,7 +352,7 @@ namespace BenchmarkDemo
                 }
 
                 posY += boxSize[1] * 2.0f;
-                rot += (float)Math.PI / (float)rotSize;
+                rot += (float)Math.PI / rotSize;
             }
         }
 
