@@ -240,7 +240,7 @@ namespace BulletUnity
 
         [Tooltip("Dynamic friction coefficient; Same as rigid body friction. 0 = slides, 1 = sticks. ")]
         [Range(0f, 1f)]
-        public float DynamicFriction = 0.2f;
+        public float DynamicFriction = 0.9f;
 
         [Tooltip("Damping coefficient; (Velocity?) damping.")]
         [Range(0f, 1f)]
@@ -256,7 +256,7 @@ namespace BulletUnity
 
         [Tooltip("Anchors hardness; Defines how “soft” anchor constraints (joints) are. 0 = no drift correction, 1 = full correction.")]
         [Range(0f, 1f)]
-        public float AnchorHardness = 0.7f;
+        public float AnchorHardness = 1f;
 
 
         private const string collisionTooltip = "Collisions flags\n\n" +
@@ -367,7 +367,7 @@ namespace BulletUnity
         [Range(0f, 1f)]
         public float SoftSoftImpulseSplit = 0.5f;
 
-        public void CopyToBulletSBConfig(BulletSharp.SoftBody.Config sBConfig)
+        public void CopyToBulletSBConfig(Config sBConfig)
         {
             sBConfig.DynamicFriction = DynamicFriction;
             sBConfig.Damping = Damping;
@@ -420,7 +420,7 @@ namespace BulletUnity
         public float VolumeStiffness = 1f;
 
         [Tooltip("See: fMaterial::Default")]
-        public BulletSharp.SoftBody.MaterialFlags Flags = MaterialFlags.Default;
+        public MaterialFlags Flags = MaterialFlags.Default;
 
         /// <summary>
         /// Set SoftBody material properties
