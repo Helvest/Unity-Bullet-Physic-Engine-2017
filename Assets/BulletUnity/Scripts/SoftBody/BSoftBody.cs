@@ -6,6 +6,14 @@ namespace BulletUnity
 {
     public class BSoftBody : BCollisionObject, IDisposable
     {
+        public SoftBody softBody
+        {
+            get
+            {
+                return (SoftBody)collisionObject;
+            }
+        }
+
         //common Soft body settings class used for all softbodies, parameters set based on type of soft body
         [SerializeField]
         private SBSettings _softBodySettings = new SBSettings();      //SoftBodyEditor will display this when needed
@@ -43,6 +51,9 @@ namespace BulletUnity
         //for converting to/from unity mesh
         public Vector3[] verts { get; protected set; } = new Vector3[0];
         public Vector3[] norms { get; protected set; } = new Vector3[0];
+
+        
+
         protected int[] tris = new int[1];
 
         protected override void Awake()
@@ -60,7 +71,7 @@ namespace BulletUnity
             BPhysicsWorld world = BPhysicsWorld.Get();
             if (world && isInWorld)
             {
-                world.RemoveSoftBody((SoftBody)m_collisionObject);
+                world.RemoveSoftBody((SoftBody)collisionObject);
             }
         }
 
@@ -71,7 +82,7 @@ namespace BulletUnity
 
         protected override void Dispose(bool isdisposing)
         {
-            SoftBody m_BSoftBody = (SoftBody)m_collisionObject;
+            SoftBody m_BSoftBody = (SoftBody)collisionObject;
 
             if (m_BSoftBody != null)
             {
@@ -89,7 +100,7 @@ namespace BulletUnity
         {
             if (isInWorld)
             {
-                SoftBody m_BSoftBody = (SoftBody)m_collisionObject;
+                SoftBody m_BSoftBody = (SoftBody)collisionObject;
                 if (verts.Length != m_BSoftBody.Nodes.Count)
                 {
                     verts = new Vector3[m_BSoftBody.Nodes.Count];

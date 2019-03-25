@@ -246,9 +246,9 @@ namespace SoftDemo
 			SoftBody psb = SoftBodyHelpers.CreateEllipsoid(softBodyWorldInfo, new Vector3(35, 25, 0),
 				new Vector3(3, 3, 3), 512);
 			psb.Materials[0].LinearStiffness = 0.1f;
-			psb.Cfg.DynamicFriction = 1;
-			psb.Cfg.Damping = 0.001f; // fun factor...
-			psb.Cfg.Pressure = 2500;
+			psb.config.DynamicFriction = 1;
+			psb.config.Damping = 0.001f; // fun factor...
+			psb.config.Pressure = 2500;
 			psb.SetTotalMass(30, true);
 			SoftWorld.AddSoftBody(psb);
 
@@ -264,7 +264,7 @@ namespace SoftDemo
 				SoftBody psb = SoftBodyHelpers.CreateRope(softBodyWorldInfo,
 					new Vector3(-10, 0, i * 0.25f),
 					new Vector3(10, 0, i * 0.25f), 16, 1 + 2);
-				psb.Cfg.PositionIterations = 4;
+				psb.config.PositionIterations = 4;
 				psb.Materials[0].LinearStiffness = 0.1f + (i / (float)(n - 1)) * 0.9f;
 				psb.TotalMass = 20;
 				SoftWorld.AddSoftBody(psb);
@@ -325,7 +325,7 @@ namespace SoftDemo
 			SoftBody psb = SoftBodyHelpers.CreateRope(softBodyWorldInfo,
 				Vector3.Zero, new Vector3(0, -1, 0), 0, 1);
 			SoftWorld.AddSoftBody(psb);
-			psb.Cfg.RigidContactHardness = 0.5f;
+			psb.config.RigidContactHardness = 0.5f;
 			LocalCreateRigidBody(10, Matrix.Translation(0, 20, 0), new BoxShape(2));
 		}
 
@@ -353,9 +353,9 @@ namespace SoftDemo
 			SoftWorld.AddSoftBody(psb);
 			psb.TotalMass = 0.1f;
 
-			psb.Cfg.PositionIterations = 10;
-			psb.Cfg.ClusterIterations = 10;
-			psb.Cfg.DriftIterations = 10;
+			psb.config.PositionIterations = 10;
+			psb.config.ClusterIterations = 10;
+			psb.config.DriftIterations = 10;
 			//psb.Cfg.VelocityIterations = 10;
 
 
@@ -372,8 +372,8 @@ namespace SoftDemo
 			{
 				SoftBody psb = SoftBodyHelpers.CreateFromTriMesh(softBodyWorldInfo, TorusMesh.Vertices, TorusMesh.Indices);
 				psb.GenerateBendingConstraints(2);
-				psb.Cfg.PositionIterations = 2;
-				psb.Cfg.Collisions |= CollisionFlags.VertexFaceSoftSoft;
+				psb.config.PositionIterations = 2;
+				psb.config.Collisions |= CollisionFlags.VertexFaceSoftSoft;
 				psb.RandomizeConstraints();
 				Matrix m = Matrix.RotationYawPitchRoll((float)Math.PI / 2 * (i & 1), (float)Math.PI / 2 * (1 - (i & 1)), 0) *
 					Matrix.Translation(3 * i, 2, 0);
@@ -394,9 +394,9 @@ namespace SoftDemo
 				pm.LinearStiffness = 0.5f;
 				pm.Flags -= MaterialFlags.DebugDraw;
 				psb.GenerateBendingConstraints(2, pm);
-				psb.Cfg.PositionIterations = 2;
-				psb.Cfg.DynamicFriction = 0.5f;
-				psb.Cfg.Collisions |= CollisionFlags.VertexFaceSoftSoft;
+				psb.config.PositionIterations = 2;
+				psb.config.DynamicFriction = 0.5f;
+				psb.config.Collisions |= CollisionFlags.VertexFaceSoftSoft;
 				psb.RandomizeConstraints();
 				Matrix m = Matrix.RotationYawPitchRoll((float)Math.PI / 2 * (i & 1), 0, 0) *
 					Matrix.Translation(0, -1 + 5 * i, 0);
@@ -417,7 +417,7 @@ namespace SoftDemo
 				new Vector3(+s, 0, +s),
 				15, 15, 1 + 2 + 4 + 8, true);
 			psb.Materials[0].LinearStiffness = 0.4f;
-			psb.Cfg.Collisions |= CollisionFlags.VertexFaceSoftSoft;
+			psb.config.Collisions |= CollisionFlags.VertexFaceSoftSoft;
 			psb.TotalMass = 150;
 			SoftWorld.AddSoftBody(psb);
 
@@ -434,7 +434,7 @@ namespace SoftDemo
 			pm.Flags -= MaterialFlags.DebugDraw;
 			psb.GenerateBendingConstraints(2, pm);
 			psb.Materials[0].LinearStiffness = 0.5f;
-			psb.Cfg.Collisions |= CollisionFlags.VertexFaceSoftSoft;
+			psb.config.Collisions |= CollisionFlags.VertexFaceSoftSoft;
 			psb.TotalMass = 150;
 			SoftWorld.AddSoftBody(psb);
 			cutting = true;
@@ -458,9 +458,9 @@ namespace SoftDemo
 				Material pm = psb.AppendMaterial();
 				pm.Flags -= MaterialFlags.DebugDraw;
 				psb.GenerateBendingConstraints(2, pm);
-				psb.Cfg.Lift = 0.004f;
-				psb.Cfg.Drag = 0.0003f;
-				psb.Cfg.AeroModel = AeroModel.VertexTwoSided;
+				psb.config.Lift = 0.004f;
+				psb.config.Drag = 0.0003f;
+				psb.config.AeroModel = AeroModel.VertexTwoSided;
 				Matrix trans = Matrix.Identity;
 				Vector3 ra = 0.1f * GetRandomVector(random);
 				Vector3 rp = 75 * GetRandomVector(random) + new Vector3(-50, 15, 0);
@@ -500,14 +500,14 @@ namespace SoftDemo
 				pm.Flags -= MaterialFlags.DebugDraw;
 				psb.GenerateBendingConstraints(2, pm);
 
-				psb.Cfg.Lift = 0.05f;
-				psb.Cfg.Drag = 0.01f;
+				psb.config.Lift = 0.05f;
+				psb.config.Drag = 0.01f;
 
 				//psb.Cfg.LF = 0.004f;
 				//psb.Cfg.DG = 0.0003f;
 
-				psb.Cfg.PositionIterations = 2;
-				psb.Cfg.AeroModel = AeroModel.VertexTwoSidedLiftDrag;
+				psb.config.PositionIterations = 2;
+				psb.config.AeroModel = AeroModel.VertexTwoSidedLiftDrag;
 
 
 				psb.WindVelocity = new Vector3(4, -12.0f, -25.0f);
@@ -533,7 +533,7 @@ namespace SoftDemo
 			{
 				Vector3 p = new Vector3(-ni * ts / 2 + i * ts, bs, 40);
 				SoftBody psb = Create_SoftBox(p, new Vector3(bs, bs, bs));
-				psb.Cfg.DynamicFriction = 0.1f * ((i + 1) / (float)ni);
+				psb.config.DynamicFriction = 0.1f * ((i + 1) / (float)ni);
 				psb.AddVelocity(new Vector3(0, 0, -10));
 			}
 		}
@@ -545,16 +545,16 @@ namespace SoftDemo
 			SoftWorld.AddSoftBody(psb);
 			psb.Rotate(Quaternion.RotationYawPitchRoll((float)Math.PI / 2, 0, 0));
 			psb.SetVolumeMass(150);
-			psb.Cfg.PositionIterations = 2;
+			psb.config.PositionIterations = 2;
 			//psb.Cfg.PIterations = 1;
 			cutting = false;
 			//psb.CollisionShape.Margin = 0.01f;
-			psb.Cfg.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft; //| CollisionFlags.ClusterSelf;
+			psb.config.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft; //| CollisionFlags.ClusterSelf;
 
 			///pass zero in generateClusters to create  cluster for each tetrahedron or triangle
 			psb.GenerateClusters(0);
 			//psb.Materials[0].Lst = 0.2f;
-			psb.Cfg.DynamicFriction = 10;
+			psb.config.DynamicFriction = 10;
 
 			Graphics.CullingEnabled = false;
 		}
@@ -575,13 +575,13 @@ namespace SoftDemo
 			//psb.SetMass(0,0);
 			//psb.SetMass(10,0);
 			//psb.SetMass(20,0);
-			psb.Cfg.PositionIterations = 1;
+			psb.config.PositionIterations = 1;
 			//psb.GenerateClusters(128);
 			psb.GenerateClusters(16);
 			//psb.CollisionShape.Margin = 0.5f;
 
 			psb.CollisionShape.Margin = 0.01f;
-			psb.Cfg.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
+			psb.config.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
 			// | Collision.ClusterSelf;
 			psb.Materials[0].LinearStiffness = 0.8f;
 			cutting = false;
@@ -594,7 +594,7 @@ namespace SoftDemo
 			SoftBody psb = SoftBodyHelpers.CreateEllipsoid(softBodyWorldInfo, new Vector3(35, 25, 0),
 				new Vector3(1, 1, 1) * 3, 512);
 			psb.Materials[0].LinearStiffness = 0.45f;
-			psb.Cfg.VolumeConversation = 20;
+			psb.config.VolumeConversation = 20;
 			psb.SetTotalMass(50, true);
 			psb.SetPose(true, false);
 			SoftWorld.AddSoftBody(psb);
@@ -620,8 +620,8 @@ namespace SoftDemo
 					SoftBody psb = SoftBodyHelpers.CreateRope(softBodyWorldInfo, org,
 						org + new Vector3(hg * 0.001f, hg, 0), sg, 1);
 
-					psb.Cfg.Damping = 0.005f;
-					psb.Cfg.RigidContactHardness = 0.1f;
+					psb.config.Damping = 0.005f;
+					psb.config.RigidContactHardness = 0.1f;
 					for (int i = 0; i < 3; ++i)
 					{
 						psb.GenerateBendingConstraints(2 + i);
@@ -683,8 +683,8 @@ namespace SoftDemo
 			pm.LinearStiffness = 0.5f;
 			pm.Flags -= MaterialFlags.DebugDraw;
 			psb.GenerateBendingConstraints(2, pm);
-			psb.Cfg.PositionIterations = 2;
-			psb.Cfg.DynamicFriction = 0.5f;
+			psb.config.PositionIterations = 2;
+			psb.config.DynamicFriction = 0.5f;
 			psb.RandomizeConstraints();
 			Matrix m = Matrix.RotationYawPitchRoll(0, (float)Math.PI / 2, 0) *
 				Matrix.Translation(0, 4, 0);
@@ -698,9 +698,9 @@ namespace SoftDemo
 		void Init_BunnyMatch()
 		{
 			SoftBody psb = SoftBodyHelpers.CreateFromTriMesh(softBodyWorldInfo, BunnyMesh.Vertices, BunnyMesh.Indices);
-			psb.Cfg.DynamicFriction = 0.5f;
-			psb.Cfg.PoseMatching = 0.05f;
-			psb.Cfg.PositionIterations = 5;
+			psb.config.DynamicFriction = 0.5f;
+			psb.config.PoseMatching = 0.05f;
+			psb.config.PositionIterations = 5;
 			psb.RandomizeConstraints();
 			psb.Scale(new Vector3(6, 6, 6));
 			psb.SetTotalMass(100, true);
@@ -712,7 +712,7 @@ namespace SoftDemo
 		{
 			SoftBody psb = SoftBodyHelpers.CreateFromTriMesh(softBodyWorldInfo, TorusMesh.Vertices, TorusMesh.Indices);
 			psb.GenerateBendingConstraints(2);
-			psb.Cfg.PositionIterations = 2;
+			psb.config.PositionIterations = 2;
 			psb.RandomizeConstraints();
 			Matrix m = Matrix.RotationYawPitchRoll(0, (float)Math.PI / 2, 0) *
 				Matrix.Translation(0, 4, 0);
@@ -727,7 +727,7 @@ namespace SoftDemo
 		{
 			SoftBody psb = SoftBodyHelpers.CreateFromTriMesh(softBodyWorldInfo, TorusMesh.Vertices, TorusMesh.Indices);
 			psb.Materials[0].LinearStiffness = 0.1f;
-			psb.Cfg.PoseMatching = 0.05f;
+			psb.config.PoseMatching = 0.05f;
 			psb.RandomizeConstraints();
 			Matrix m = Matrix.RotationYawPitchRoll(0, (float)Math.PI / 2, 0) *
 				Matrix.Translation(0, 4, 0);
@@ -749,7 +749,7 @@ namespace SoftDemo
 				new Vector3(-s,h,+s)};
 			SoftBody psb = SoftBodyHelpers.CreatePatch(softBodyWorldInfo, p[0], p[1], p[2], p[3], r, r, 1 + 2 + 4 + 8, true);
 			SoftWorld.AddSoftBody(psb);
-			psb.Cfg.PositionIterations = 1;
+			psb.config.PositionIterations = 1;
 			cutting = true;
 
 			Graphics.CullingEnabled = false;
@@ -780,9 +780,9 @@ namespace SoftDemo
 			pm.LinearStiffness = 1;
 			pm.Flags -= MaterialFlags.DebugDraw;
 			psb.GenerateBendingConstraints(2, pm);
-			psb.Cfg.PositionIterations = 2;
-			psb.Cfg.DynamicFriction = 1;
-			psb.Cfg.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
+			psb.config.PositionIterations = 2;
+			psb.config.DynamicFriction = 1;
+			psb.config.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
 			psb.RandomizeConstraints();
 			Matrix m = Matrix.RotationYawPitchRoll(a.X, a.Y, a.Z) * Matrix.Translation(x);
 			psb.Transform(m);
@@ -800,8 +800,8 @@ namespace SoftDemo
 			pm.LinearStiffness = 1;
 			pm.Flags -= MaterialFlags.DebugDraw;
 			psb.GenerateBendingConstraints(2, pm);
-			psb.Cfg.PositionIterations = 2;
-			psb.Cfg.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
+			psb.config.PositionIterations = 2;
+			psb.config.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
 			psb.RandomizeConstraints();
 			psb.Scale(s);
 			Matrix m = Matrix.RotationYawPitchRoll(a.X, a.Y, a.Z) * Matrix.Translation(x);
@@ -821,7 +821,7 @@ namespace SoftDemo
 		{
 			SoftBody psb = Create_ClusterTorus(Vector3.Zero, new Vector3((float)Math.PI / 2, 0, (float)Math.PI / 2));
 			psb.GenerateClusters(8);
-			psb.Cfg.DynamicFriction = 1;
+			psb.config.DynamicFriction = 1;
 		}
 
 		void Init_ClusterCollide1()
@@ -837,10 +837,10 @@ namespace SoftDemo
 			Material pm = psb.AppendMaterial();
 			pm.LinearStiffness = 0.4f;
 			pm.Flags -= MaterialFlags.DebugDraw;
-			psb.Cfg.DynamicFriction = 1;
-			psb.Cfg.SoftRigidHardness = 1;
-			psb.Cfg.SoftRigidImpulseSplit = 0;
-			psb.Cfg.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
+			psb.config.DynamicFriction = 1;
+			psb.config.SoftRigidHardness = 1;
+			psb.config.SoftRigidImpulseSplit = 0;
+			psb.config.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
 			psb.GenerateBendingConstraints(2, pm);
 
 			psb.CollisionShape.Margin = 0.05f;
@@ -865,13 +865,13 @@ namespace SoftDemo
 				Material pm = psb.AppendMaterial();
 				pm.Flags -= MaterialFlags.DebugDraw;
 				psb.GenerateBendingConstraints(2, pm);
-				psb.Cfg.PositionIterations = 2;
-				psb.Cfg.DynamicFriction = 1;
-				psb.Cfg.SoftSoftHardness = 1;
-				psb.Cfg.SoftSoftImpulseSplit = 0;
-				psb.Cfg.SoftKineticHardness = 0.1f;
-				psb.Cfg.SoftKineticImpulseSplit = 1;
-				psb.Cfg.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
+				psb.config.PositionIterations = 2;
+				psb.config.DynamicFriction = 1;
+				psb.config.SoftSoftHardness = 1;
+				psb.config.SoftSoftImpulseSplit = 0;
+				psb.config.SoftKineticHardness = 0.1f;
+				psb.config.SoftKineticImpulseSplit = 1;
+				psb.config.Collisions = CollisionFlags.ClusterClusterSoftSoft | CollisionFlags.ClusterConvexRigidSoft;
 				psb.RandomizeConstraints();
 				Matrix m = Matrix.RotationYawPitchRoll((float)Math.PI / 2 * (i & 1), (float)Math.PI / 2 * (1 - (i & 1)), 0)
 					* Matrix.Translation(3 * i, 2, 0);
@@ -887,7 +887,7 @@ namespace SoftDemo
 		{
 			SoftBody psb = Create_ClusterTorus(Vector3.Zero, new Vector3((float)Math.PI / 2, 0, (float)Math.PI / 2));
 			RigidBody prb = Create_BigPlate(50, 8);
-			psb.Cfg.DynamicFriction = 1;
+			psb.config.DynamicFriction = 1;
 			LinearJoint.Specs lj = new LinearJoint.Specs();
 			lj.Position = new Vector3(0, 5, 0);
 			psb.AppendLinearJoint(lj, new Body(prb));
@@ -897,7 +897,7 @@ namespace SoftDemo
 		{
 			SoftBody psb = Create_ClusterTorus(Vector3.Zero, new Vector3((float)Math.PI / 2, 0, (float)Math.PI / 2));
 			RigidBody prb = Create_BigPlate(50, 8);
-			psb.Cfg.DynamicFriction = 1;
+			psb.config.DynamicFriction = 1;
 			AngularJoint.Specs aj = new AngularJoint.Specs();
 			aj.Axis = new Vector3(0, 0, 1);
 			psb.AppendAngularJoint(aj, new Body(prb));
@@ -911,9 +911,9 @@ namespace SoftDemo
 			SoftBody[] psbs = new SoftBody[] { psb0, psb1 };
 			for (int j = 0; j < 2; ++j)
 			{
-				psbs[j].Cfg.DynamicFriction = 1;
-				psbs[j].Cfg.DynamicFriction = 0;
-				psbs[j].Cfg.PositionIterations = 1;
+				psbs[j].config.DynamicFriction = 1;
+				psbs[j].config.DynamicFriction = 0;
+				psbs[j].config.PositionIterations = 1;
 				psbs[j].Clusters[0].Matching = 0.05f;
 				psbs[j].Clusters[0].NodeDamping = 0.05f;
 			}
@@ -948,10 +948,10 @@ namespace SoftDemo
 			SoftBody prl = Create_ClusterTorus(wheels[2], new Vector3(0, 0, (float)Math.PI / 2), new Vector3(2, 5, 2));
 			SoftBody prr = Create_ClusterTorus(wheels[3], new Vector3(0, 0, (float)Math.PI / 2), new Vector3(2, 5, 2));
 
-			pfl.Cfg.DynamicFriction =
-				pfr.Cfg.DynamicFriction =
-				prl.Cfg.DynamicFriction =
-				prr.Cfg.DynamicFriction = 1;
+			pfl.config.DynamicFriction =
+				pfr.config.DynamicFriction =
+				prl.config.DynamicFriction =
+				prr.config.DynamicFriction = 1;
 
 			LinearJoint.Specs lspecs = new LinearJoint.Specs();
 			lspecs.ConstraintForceMixing = 1;
@@ -986,10 +986,10 @@ namespace SoftDemo
 			pfr.Translate(origin);
 			prl.Translate(origin);
 			prr.Translate(origin);
-			pfl.Cfg.PositionIterations =
-				pfr.Cfg.PositionIterations =
-				prl.Cfg.PositionIterations =
-				prr.Cfg.PositionIterations = 1;
+			pfl.config.PositionIterations =
+				pfr.config.PositionIterations =
+				prl.config.PositionIterations =
+				prr.config.PositionIterations = 1;
 			pfl.Clusters[0].Matching =
 				pfr.Clusters[0].Matching =
 				prl.Clusters[0].Matching =
@@ -1008,7 +1008,7 @@ namespace SoftDemo
 		{
 			SoftBody psb = SoftBodyHelpers.CreateEllipsoid(softBodyWorldInfo, pos, new Vector3(1, 1, 1) * 3, 512);
 			psb.Materials[0].LinearStiffness = 0.45f;
-			psb.Cfg.VolumeConversation = 20;
+			psb.config.VolumeConversation = 20;
 			psb.SetTotalMass(50, true);
 			psb.SetPose(true, false);
 			psb.GenerateClusters(1);
@@ -1041,7 +1041,7 @@ namespace SoftDemo
 			for (int i = 0; i < 10; ++i)
 			{
 				SoftBody psb = Create_ClusterTorus(new Vector3(0, -9 + 8.25f * i, 0), Vector3.Zero);
-				psb.Cfg.DynamicFriction = 1;
+				psb.config.DynamicFriction = 1;
 			}
 		}
 
@@ -1057,7 +1057,7 @@ namespace SoftDemo
 				else
 				{
 					SoftBody psb = Create_ClusterTorus(new Vector3(0, -9 + 4.25f * i, 0), Vector3.Zero);
-					psb.Cfg.DynamicFriction = 1;
+					psb.config.DynamicFriction = 1;
 				}
 			}
 		}

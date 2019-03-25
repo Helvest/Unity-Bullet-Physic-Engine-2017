@@ -391,7 +391,7 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 		}
 
 		SoftBody m_BSoftBody = SoftBodyHelpers.CreateFromTriMesh(World.WorldInfo, bVerts, mesh.triangles);
-		m_collisionObject = m_BSoftBody;
+		collisionObject = m_BSoftBody;
 		SoftBodySettings.ConfigureSoftBody(m_BSoftBody);         //Set SB settings
 
 		//Set SB position to GO position
@@ -452,7 +452,7 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
     */
 	public void ResetNodesAfterTeleportJump(Vector3 jumpOffset)
 	{
-		if (m_collisionObject != null)
+		if (collisionObject != null)
 		{
 			if (physicsSimMesh == null)
 			{
@@ -460,7 +460,7 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 				return;
 			}
 
-			SoftBody sb = (SoftBody)m_collisionObject;
+			SoftBody sb = (SoftBody)collisionObject;
 			for (int i = 0; i < sb.Nodes.Count; i++)
 			{
 				sb.Nodes[i].Position += jumpOffset.ToBullet(); //verts[i].ToBullet();

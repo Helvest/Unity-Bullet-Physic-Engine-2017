@@ -21,7 +21,7 @@ public class FollowSoftBody : MonoBehaviour
 
         //Debug.Log(new Vector3(matrix.M41, matrix.M42, matrix.M43));
 
-        SoftBody m_BSoftBody = (SoftBody)bSoftBodyWMesh.m_collisionObject;
+        SoftBody m_BSoftBody = (SoftBody)bSoftBodyWMesh.collisionObject;
 
        
 

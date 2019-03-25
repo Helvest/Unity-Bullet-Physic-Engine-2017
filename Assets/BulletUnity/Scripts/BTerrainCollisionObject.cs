@@ -33,7 +33,7 @@ namespace BulletUnity
 			}
 
 			BPhysicsWorld world = BPhysicsWorld.Get();
-			if (m_collisionObject != null)
+			if (collisionObject != null)
 			{
 				if (isInWorld && world != null)
 				{
@@ -63,26 +63,26 @@ namespace BulletUnity
 			CollisionShape cs = m_collisionShape.GetCollisionShape();
 			//rigidbody is dynamic if and only if mass is non zero, otherwise static
 
-			if (m_collisionObject == null)
+			if (collisionObject == null)
 			{
-				m_collisionObject = new CollisionObject();
-				m_collisionObject.CollisionShape = cs;
-				m_collisionObject.UserObject = this;
+				collisionObject = new CollisionObject();
+				collisionObject.CollisionShape = cs;
+				collisionObject.UserObject = this;
 
 				BulletSharp.Math.Matrix worldTrans = BulletSharp.Math.Matrix.Identity;
 				Vector3 pos = transform.position + new Vector3(td.size.x * .5f, td.size.y * .5f, td.size.z * .5f);
 				worldTrans.Origin = pos.ToBullet();
-				m_collisionObject.WorldTransform = worldTrans;
-				m_collisionObject.CollisionFlags = m_collisionFlags;
+				collisionObject.WorldTransform = worldTrans;
+				collisionObject.CollisionFlags = m_collisionFlags;
 			}
 			else
 			{
-				m_collisionObject.CollisionShape = cs;
+				collisionObject.CollisionShape = cs;
 				BulletSharp.Math.Matrix worldTrans = BulletSharp.Math.Matrix.Identity;
 				Vector3 pos = transform.position + new Vector3(td.size.x * .5f, td.size.y * .5f, td.size.z * .5f);
 				worldTrans.Origin = pos.ToBullet();
-				m_collisionObject.WorldTransform = worldTrans;
-				m_collisionObject.CollisionFlags = m_collisionFlags;
+				collisionObject.WorldTransform = worldTrans;
+				collisionObject.CollisionFlags = m_collisionFlags;
 			}
 
 			return true;
@@ -92,9 +92,9 @@ namespace BulletUnity
 		{
 			if (isInWorld)
 			{
-				BulletSharp.Math.Matrix newTrans = m_collisionObject.WorldTransform;
+				BulletSharp.Math.Matrix newTrans = collisionObject.WorldTransform;
 				newTrans.Origin = transform.position.ToBullet();
-				m_collisionObject.WorldTransform = newTrans;
+				collisionObject.WorldTransform = newTrans;
 				transform.position = position;
 				transform.rotation = rotation;
 			}

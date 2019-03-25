@@ -62,7 +62,7 @@ namespace BulletUnity
 				0
 			);
 
-			m_collisionObject = m_BSoftBody;
+			collisionObject = m_BSoftBody;
 
 			verts = new Vector3[m_BSoftBody.Nodes.Count];
 			norms = new Vector3[m_BSoftBody.Nodes.Count];

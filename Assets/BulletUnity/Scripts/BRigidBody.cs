@@ -17,15 +17,15 @@ namespace BulletUnity
 
 		private RigidBody m_rigidBody
 		{
-			get { return (RigidBody)m_collisionObject; }
-			set { m_collisionObject = value; }
+			get { return (RigidBody)collisionObject; }
+			set { collisionObject = value; }
 		}
 
 		public RigidBody RigidBody
 		{
 			get
 			{
-				return (RigidBody)m_collisionObject;
+				return (RigidBody)collisionObject;
 			}
 		}
 
@@ -43,11 +43,11 @@ namespace BulletUnity
 			get { return m_collisionFlags; }
 			set
 			{
-				if (m_collisionObject != null && value != m_collisionFlags)
+				if (collisionObject != null && value != m_collisionFlags)
 				{
 					bool wasDynamic = isDynamic();
 
-					m_collisionObject.CollisionFlags = value;
+					collisionObject.CollisionFlags = value;
 					m_collisionFlags = value;
 
 					if (wasDynamic && !isDynamic())
@@ -75,9 +75,9 @@ namespace BulletUnity
 			get { return _friction; }
 			set
 			{
-				if (m_collisionObject != null && _friction != value)
+				if (collisionObject != null && _friction != value)
 				{
-					m_collisionObject.Friction = value;
+					collisionObject.Friction = value;
 				}
 
 				_friction = value;
@@ -91,9 +91,9 @@ namespace BulletUnity
 			get { return _rollingFriction; }
 			set
 			{
-				if (m_collisionObject != null && _rollingFriction != value)
+				if (collisionObject != null && _rollingFriction != value)
 				{
-					m_collisionObject.RollingFriction = value;
+					collisionObject.RollingFriction = value;
 				}
 
 				_rollingFriction = value;
@@ -107,7 +107,7 @@ namespace BulletUnity
 			get { return _linearDamping; }
 			set
 			{
-				if (m_collisionObject != null && _linearDamping != value)
+				if (collisionObject != null && _linearDamping != value)
 				{
 					m_rigidBody.SetDamping(value, _angularDamping);
 				}
@@ -123,7 +123,7 @@ namespace BulletUnity
 			get { return _angularDamping; }
 			set
 			{
-				if (m_collisionObject != null && _angularDamping != value)
+				if (collisionObject != null && _angularDamping != value)
 				{
 					m_rigidBody.SetDamping(_linearDamping, value);
 				}
@@ -139,9 +139,9 @@ namespace BulletUnity
 			get { return _restitution; }
 			set
 			{
-				if (m_collisionObject != null && _restitution != value)
+				if (collisionObject != null && _restitution != value)
 				{
-					m_collisionObject.Restitution = value;
+					collisionObject.Restitution = value;
 				}
 
 				_restitution = value;
@@ -155,7 +155,7 @@ namespace BulletUnity
 			get { return _linearSleepingThreshold; }
 			set
 			{
-				if (m_collisionObject != null && _linearSleepingThreshold != value)
+				if (collisionObject != null && _linearSleepingThreshold != value)
 				{
 					m_rigidBody.SetSleepingThresholds(value, _angularSleepingThreshold);
 				}
@@ -171,7 +171,7 @@ namespace BulletUnity
 			get { return _angularSleepingThreshold; }
 			set
 			{
-				if (m_collisionObject != null && _angularSleepingThreshold != value)
+				if (collisionObject != null && _angularSleepingThreshold != value)
 				{
 					m_rigidBody.SetSleepingThresholds(_linearSleepingThreshold, value);
 				}
@@ -204,7 +204,7 @@ namespace BulletUnity
 			get { return _additionalDampingFactor; }
 			set
 			{
-				if (m_collisionObject != null && _additionalDampingFactor != value)
+				if (collisionObject != null && _additionalDampingFactor != value)
 				{
 					Debug.LogError("Additional Damping settings cannot be changed once the Rigid Body has been created");
 					return;
@@ -221,7 +221,7 @@ namespace BulletUnity
 			get { return _additionalLinearDampingThresholdSqr; }
 			set
 			{
-				if (m_collisionObject != null && _additionalLinearDampingThresholdSqr != value)
+				if (collisionObject != null && _additionalLinearDampingThresholdSqr != value)
 				{
 					Debug.LogError("Additional Damping settings cannot be changed once the Rigid Body has been created");
 					return;
@@ -238,7 +238,7 @@ namespace BulletUnity
 			get { return _additionalAngularDampingThresholdSqr; }
 			set
 			{
-				if (m_collisionObject != null && _additionalAngularDampingThresholdSqr != value)
+				if (collisionObject != null && _additionalAngularDampingThresholdSqr != value)
 				{
 					Debug.LogError("Additional Damping settings cannot be changed once the Rigid Body has been created");
 					return;
@@ -255,7 +255,7 @@ namespace BulletUnity
 			get { return _additionalAngularDampingFactor; }
 			set
 			{
-				if (m_collisionObject != null && _additionalAngularDampingFactor != value)
+				if (collisionObject != null && _additionalAngularDampingFactor != value)
 				{
 					Debug.LogError("Additional Damping settings cannot be changed once the Rigid Body has been created");
 					return;
@@ -273,7 +273,7 @@ namespace BulletUnity
 			get { return _linearFactor; }
 			set
 			{
-				if (m_collisionObject != null && _linearFactor != value)
+				if (collisionObject != null && _linearFactor != value)
 				{
 					m_rigidBody.LinearFactor = value.ToBullet();
 				}
@@ -372,9 +372,9 @@ namespace BulletUnity
 			get { return _activationState; }
 			set
 			{
-				if (m_collisionObject != null && _activationState != value)
+				if (collisionObject != null && _activationState != value)
 				{
-					m_collisionObject.ActivationState = _activationState;
+					collisionObject.ActivationState = _activationState;
 				}
 
 				_activationState = value;
@@ -441,12 +441,12 @@ namespace BulletUnity
 				m_motionState = new BGameObjectMotionState(transform);
 			}
 
-			RigidBody rb = (RigidBody)m_collisionObject;
+			RigidBody rb = (RigidBody)collisionObject;
 
 			CreateOrConfigureRigidBody(ref rb, ref _localInertia, cs, m_motionState);
 
-			m_collisionObject = rb;
-			m_collisionObject.UserObject = this;
+			collisionObject = rb;
+			collisionObject.UserObject = this;
 
 			return true;
 		}
@@ -487,7 +487,7 @@ namespace BulletUnity
 			{
 				Debug.Assert(m_rigidBody.NumConstraintRefs == 0, "Removing rigid body that still had constraints. Remove constraints first.");
 				//constraints must be removed before rigid body is removed
-				pw.RemoveRigidBody((RigidBody)m_collisionObject);
+				pw.RemoveRigidBody((RigidBody)collisionObject);
 			}
 		}
 

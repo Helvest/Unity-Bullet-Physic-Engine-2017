@@ -58,7 +58,7 @@ namespace BulletUnity
 
             sBMaterial.SetSBMaterial(pm);
 
-            config.CopyToBulletSBConfig(softBody.Cfg);
+            config.CopyToBulletSBConfig(softBody.config);
 
             if (allNodeBendingConstraints)
             {

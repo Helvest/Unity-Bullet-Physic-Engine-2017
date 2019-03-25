@@ -8,13 +8,13 @@ namespace BulletUnity
 	{
 		private GhostObject m_ghostObject
 		{
-			get { return (GhostObject)m_collisionObject; }
+			get { return (GhostObject)collisionObject; }
 		}
 
 		internal override bool _BuildCollisionObject()
 		{
 			BPhysicsWorld world = BPhysicsWorld.Get();
-			if (m_collisionObject != null)
+			if (collisionObject != null)
 			{
 				if (isInWorld && world != null)
 				{
@@ -36,17 +36,17 @@ namespace BulletUnity
 
 			CollisionShape cs = m_collisionShape.GetCollisionShape();
 
-			if (m_collisionObject == null)
+			if (collisionObject == null)
 			{
-				m_collisionObject = new BulletSharp.GhostObject();
-				m_collisionObject.CollisionShape = cs;
+				collisionObject = new BulletSharp.GhostObject();
+				collisionObject.CollisionShape = cs;
 				BulletSharp.Math.Matrix worldTrans;
 				BulletSharp.Math.Quaternion q = transform.rotation.ToBullet();
 				BulletSharp.Math.Matrix.RotationQuaternion(ref q, out worldTrans);
 				worldTrans.Origin = transform.position.ToBullet();
-				m_collisionObject.WorldTransform = worldTrans;
-				m_collisionObject.UserObject = this;
-				m_collisionObject.CollisionFlags = m_collisionObject.CollisionFlags | BulletSharp.CollisionFlags.NoContactResponse;
+				collisionObject.WorldTransform = worldTrans;
+				collisionObject.UserObject = this;
+				collisionObject.CollisionFlags = collisionObject.CollisionFlags | BulletSharp.CollisionFlags.NoContactResponse;
 			}
 			else
 			{
@@ -54,9 +54,9 @@ namespace BulletUnity
 				BulletSharp.Math.Quaternion q = transform.rotation.ToBullet();
 				BulletSharp.Math.Matrix.RotationQuaternion(ref q, out worldTrans);
 				worldTrans.Origin = transform.position.ToBullet();
-				m_collisionObject.WorldTransform = worldTrans;
-				m_collisionObject.CollisionShape = cs;
-				m_collisionObject.CollisionFlags = m_collisionObject.CollisionFlags | BulletSharp.CollisionFlags.NoContactResponse;
+				collisionObject.WorldTransform = worldTrans;
+				collisionObject.CollisionShape = cs;
+				collisionObject.CollisionFlags = collisionObject.CollisionFlags | BulletSharp.CollisionFlags.NoContactResponse;
 			}
 
 			return true;

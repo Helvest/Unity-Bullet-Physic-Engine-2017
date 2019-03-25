@@ -10,13 +10,13 @@ namespace BulletUnity
 
 		private PairCachingGhostObject m_ghostObject
 		{
-			get { return (PairCachingGhostObject)m_collisionObject; }
+			get { return (PairCachingGhostObject)collisionObject; }
 		}
 
 		internal override bool _BuildCollisionObject()
 		{
 			BPhysicsWorld world = BPhysicsWorld.Get();
-			if (m_collisionObject != null)
+			if (collisionObject != null)
 			{
 				if (isInWorld && world != null)
 				{
@@ -40,18 +40,18 @@ namespace BulletUnity
 			CollisionShape cs = m_collisionShape.GetCollisionShape();
 			//rigidbody is dynamic if and only if mass is non zero, otherwise static
 
-			if (m_collisionObject == null)
+			if (collisionObject == null)
 			{
-				m_collisionObject = new BulletSharp.PairCachingGhostObject();
-				m_collisionObject.CollisionShape = cs;
+				collisionObject = new BulletSharp.PairCachingGhostObject();
+				collisionObject.CollisionShape = cs;
 				BulletSharp.Math.Matrix worldTrans;
 				BulletSharp.Math.Quaternion q = transform.rotation.ToBullet();
 				BulletSharp.Math.Matrix.RotationQuaternion(ref q, out worldTrans);
 				worldTrans.Origin = transform.position.ToBullet();
-				m_collisionObject.WorldTransform = worldTrans;
-				m_collisionObject.UserObject = this;
-				m_collisionObject.CollisionFlags = m_collisionObject.CollisionFlags | BulletSharp.CollisionFlags.KinematicObject;
-				m_collisionObject.CollisionFlags &= ~BulletSharp.CollisionFlags.StaticObject;
+				collisionObject.WorldTransform = worldTrans;
+				collisionObject.UserObject = this;
+				collisionObject.CollisionFlags = collisionObject.CollisionFlags | BulletSharp.CollisionFlags.KinematicObject;
+				collisionObject.CollisionFlags &= ~BulletSharp.CollisionFlags.StaticObject;
 			}
 			else
 			{
@@ -59,10 +59,10 @@ namespace BulletUnity
 				BulletSharp.Math.Quaternion q = transform.rotation.ToBullet();
 				BulletSharp.Math.Matrix.RotationQuaternion(ref q, out worldTrans);
 				worldTrans.Origin = transform.position.ToBullet();
-				m_collisionObject.WorldTransform = worldTrans;
-				m_collisionObject.CollisionShape = cs;
-				m_collisionObject.CollisionFlags = m_collisionObject.CollisionFlags | BulletSharp.CollisionFlags.KinematicObject;
-				m_collisionObject.CollisionFlags &= ~BulletSharp.CollisionFlags.StaticObject;
+				collisionObject.WorldTransform = worldTrans;
+				collisionObject.CollisionShape = cs;
+				collisionObject.CollisionFlags = collisionObject.CollisionFlags | BulletSharp.CollisionFlags.KinematicObject;
+				collisionObject.CollisionFlags &= ~BulletSharp.CollisionFlags.StaticObject;
 			}
 
 			return true;
@@ -113,7 +113,7 @@ namespace BulletUnity
 				if (manifoldArray.Count > 0)
 				{
 					PersistentManifold pm = manifoldArray[0];
-					if (pm.Body0 == m_collisionObject)
+					if (pm.Body0 == collisionObject)
 					{
 						otherObj = pm.Body1;
 					}
