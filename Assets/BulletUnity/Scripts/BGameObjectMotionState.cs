@@ -5,7 +5,7 @@ using BM = BulletSharp.Math;
 
 namespace BulletUnity
 {
-	[System.Serializable]
+	[Serializable]
 	public class BGameObjectMotionState : MotionState, IDisposable
 	{
 		public Transform transform;

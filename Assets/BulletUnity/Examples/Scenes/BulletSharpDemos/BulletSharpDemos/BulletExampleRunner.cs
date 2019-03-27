@@ -19,7 +19,7 @@ public class BulletExampleRunner : MonoBehaviour
 {
 	protected static BulletExampleRunner singleton;
 	public BulletSharpExamples.Graphics graphics;
-	public DemoFramework.Demo demo;
+	public Demo demo;
 	public Material mat;
 	public Material groundMat;
 	public GameObject cubePrefab;
@@ -253,7 +253,7 @@ public class BulletExampleRunner : MonoBehaviour
 					go = new GameObject("Compund Shape");
 					BulletRigidBodyProxy rbp = go.AddComponent<BulletRigidBodyProxy>();
 					rbp.target = co as RigidBody;
-					foreach (BulletSharp.CompoundShapeChild child in (cs as CompoundShape).ChildList)
+					foreach (CompoundShapeChild child in (cs as CompoundShape).ChildList)
 					{
 						BulletSharp.Math.Matrix childTransform = child.Transform;
 						GameObject ggo = new GameObject(child.ToString());
@@ -418,7 +418,7 @@ public class BulletExampleRunner : MonoBehaviour
 			}
 		}
 
-		GameObject go = Instantiate<GameObject>(softBodyPrefab);
+		GameObject go = Instantiate(softBodyPrefab);
 		BulletSoftBodyProxy sbp = go.GetComponent<BulletSoftBodyProxy>();
 		List<int> trisRev = new List<int>();
 		for (int i = 0; i < tris.Count; i += 3)

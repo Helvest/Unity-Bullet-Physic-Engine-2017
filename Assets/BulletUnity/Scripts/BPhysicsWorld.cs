@@ -468,7 +468,7 @@ namespace BulletUnity
 			}
 		}
 
-		public void RemoveRigidBody(BulletSharp.RigidBody rb)
+		public void RemoveRigidBody(RigidBody rb)
 		{
 			if (!_isDisposed)
 			{

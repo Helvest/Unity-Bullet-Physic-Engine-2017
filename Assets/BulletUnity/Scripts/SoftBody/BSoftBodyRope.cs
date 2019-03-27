@@ -53,7 +53,7 @@ namespace BulletUnity
 				return false;
 			}
 
-			SoftBody m_BSoftBody = SoftBodyHelpers.CreateRope
+			softBody = SoftBodyHelpers.CreateRope
 			(
 				World.WorldInfo,
 				meshSettings.startPoint.ToBullet(),
@@ -62,32 +62,32 @@ namespace BulletUnity
 				0
 			);
 
-			collisionObject = m_BSoftBody;
+			collisionObject = softBody;
 
-			verts = new Vector3[m_BSoftBody.Nodes.Count];
-			norms = new Vector3[m_BSoftBody.Nodes.Count];
+			verts = new Vector3[softBody.Nodes.Count];
+			norms = new Vector3[softBody.Nodes.Count];
 
-			for (int i = 0; i < m_BSoftBody.Nodes.Count; i++)
+			for (int i = 0; i < softBody.Nodes.Count; i++)
 			{
-				verts[i] = m_BSoftBody.Nodes[i].Position.ToUnity();
-				norms[i] = m_BSoftBody.Nodes[i].Normal.ToUnity();
+				verts[i] = softBody.Nodes[i].Position.ToUnity();
+				norms[i] = softBody.Nodes[i].Normal.ToUnity();
 			}
 
 			//Set SB settings
-			SoftBodySettings.ConfigureSoftBody(m_BSoftBody);
+			SoftBodySettings.ConfigureSoftBody(softBody);
 
 			foreach (RopeAnchor anchor in ropeAnchors)
 			{
 				//anchorNode point 0 to 1, rounds to node # 
-				int node = (int)Mathf.Floor(Mathf.Lerp(0, m_BSoftBody.Nodes.Count - 1, anchor.anchorNodePoint));
+				int node = (int)Mathf.Floor(Mathf.Lerp(0, softBody.Nodes.Count - 1, anchor.anchorNodePoint));
 
 				if (anchor.body != null)
 				{
-					m_BSoftBody.AppendAnchor(node, (BulletSharp.RigidBody)anchor.body.GetCollisionObject());
+					softBody.AppendAnchor(node, (BulletSharp.RigidBody)anchor.body.GetCollisionObject());
 				}
 				else
 				{
-					m_BSoftBody.SetMass(node, 0);  //setting node mass to 0 fixes it in space apparently
+					softBody.SetMass(node, 0);  //setting node mass to 0 fixes it in space apparently
 				}
 			}
 

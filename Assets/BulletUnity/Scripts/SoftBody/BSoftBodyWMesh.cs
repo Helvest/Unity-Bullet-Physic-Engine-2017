@@ -41,14 +41,14 @@ namespace BulletUnity
                 bVerts[i] = verts[i].ToBullet();
             }
 
-            SoftBody m_BSoftBody = SoftBodyHelpers.CreateFromTriMesh(World.WorldInfo, bVerts, mesh.triangles);
-            collisionObject = m_BSoftBody;
-            SoftBodySettings.ConfigureSoftBody(m_BSoftBody);//Set SB settings
+            softBody = SoftBodyHelpers.CreateFromTriMesh(World.WorldInfo, bVerts, mesh.triangles);
+            collisionObject = softBody;
+            SoftBodySettings.ConfigureSoftBody(softBody);//Set SB settings
 
             //Set SB position to GO position
-            m_BSoftBody.Rotate(transform.rotation.ToBullet());
-            m_BSoftBody.Translate(transform.position.ToBullet());
-            m_BSoftBody.Scale(transform.localScale.ToBullet());
+            softBody.Rotate(transform.rotation.ToBullet());
+            softBody.Translate(transform.position.ToBullet());
+            softBody.Scale(transform.localScale.ToBullet());
 
             return true;
         }

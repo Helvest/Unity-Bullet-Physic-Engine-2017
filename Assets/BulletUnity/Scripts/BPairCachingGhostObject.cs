@@ -42,7 +42,7 @@ namespace BulletUnity
 
 			if (collisionObject == null)
 			{
-				collisionObject = new BulletSharp.PairCachingGhostObject();
+				collisionObject = new PairCachingGhostObject();
 				collisionObject.CollisionShape = cs;
 				BulletSharp.Math.Matrix worldTrans;
 				BulletSharp.Math.Quaternion q = transform.rotation.ToBullet();

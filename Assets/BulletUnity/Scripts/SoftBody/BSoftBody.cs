@@ -6,13 +6,7 @@ namespace BulletUnity
 {
     public class BSoftBody : BCollisionObject, IDisposable
     {
-        public SoftBody softBody
-        {
-            get
-            {
-                return (SoftBody)collisionObject;
-            }
-        }
+        public SoftBody softBody { get; protected set; }
 
         //common Soft body settings class used for all softbodies, parameters set based on type of soft body
         [SerializeField]
@@ -52,8 +46,6 @@ namespace BulletUnity
         public Vector3[] verts { get; protected set; } = new Vector3[0];
         public Vector3[] norms { get; protected set; } = new Vector3[0];
 
-        
-
         protected int[] tris = new int[1];
 
         protected override void Awake()
@@ -71,7 +63,7 @@ namespace BulletUnity
             BPhysicsWorld world = BPhysicsWorld.Get();
             if (world && isInWorld)
             {
-                world.RemoveSoftBody((SoftBody)collisionObject);
+                world.RemoveSoftBody(softBody);
             }
         }
 
@@ -82,17 +74,15 @@ namespace BulletUnity
 
         protected override void Dispose(bool isdisposing)
         {
-            SoftBody m_BSoftBody = (SoftBody)collisionObject;
-
-            if (m_BSoftBody != null)
+            if (softBody != null)
             {
                 if (isInWorld && isdisposing)
                 {
-                    World.RemoveSoftBody(m_BSoftBody);
+                    World.RemoveSoftBody(softBody);
                 }
 
-                m_BSoftBody.Dispose();
-                m_BSoftBody = null;
+                softBody.Dispose();
+                softBody = null;
             }
         }
 
@@ -121,15 +111,14 @@ namespace BulletUnity
 
         public virtual void Update()
         {
-            DumpDataFromBullet();  //Get Bullet data
+            DumpDataFromBullet(); //Get Bullet data
             UpdateMesh(); //Update mesh based on bullet data
         }
 
         /// <summary>
         /// Update Mesh (or line renderer) at runtime, call from Update 
         /// </summary>
-        public virtual void UpdateMesh()
-        {
-        }
+        public virtual void UpdateMesh() { }
+
     }
 }

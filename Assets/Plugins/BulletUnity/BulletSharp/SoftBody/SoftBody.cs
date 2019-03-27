@@ -3739,10 +3739,20 @@ namespace BulletSharp.SoftBody
             btSoftBody_getAabb(_native, out aabbMin, out aabbMax);
         }
 
+        public void GetAabbCenter(out Vector3 position)
+        {
+            Vector3 aabbMax;
+
+            btSoftBody_getAabb(_native, out position, out aabbMax);
+
+            position = (position + aabbMax) / 2;
+        }
+
         public float GetMass(int node)
         {
             return btSoftBody_getMass(_native, node);
         }
+
         /*
 		public static psolver_t GetSolver(PositionSolver solver)
 		{

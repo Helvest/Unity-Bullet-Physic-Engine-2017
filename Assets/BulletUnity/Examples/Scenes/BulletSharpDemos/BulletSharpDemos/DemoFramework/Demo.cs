@@ -7,8 +7,8 @@ using BulletSharpExamples;
 
 namespace DemoFramework
 {
-	public abstract class Demo : System.IDisposable
-	{
+	public abstract class Demo : IDisposable
+    {
 		protected Graphics Graphics { get; set; }
 		public FreeLook Freelook { get; set; }
 		public Input Input { get; set; }

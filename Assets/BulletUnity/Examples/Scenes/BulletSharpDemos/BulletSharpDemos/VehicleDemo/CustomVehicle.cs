@@ -355,10 +355,10 @@ namespace VehicleDemo
             if (numWheel == 0)
                 return;
 
-            Array.Resize<Vector3>(ref forwardWS, numWheel);
-            Array.Resize<Vector3>(ref axle, numWheel);
-            Array.Resize<float>(ref forwardImpulse, numWheel);
-            Array.Resize<float>(ref sideImpulse, numWheel);
+            Array.Resize(ref forwardWS, numWheel);
+            Array.Resize(ref axle, numWheel);
+            Array.Resize(ref forwardImpulse, numWheel);
+            Array.Resize(ref sideImpulse, numWheel);
 
             int numWheelsOnGround = 0;
 

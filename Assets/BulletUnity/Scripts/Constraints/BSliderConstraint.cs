@@ -139,7 +139,7 @@ namespace BulletUnity
 			}
 			else
 			{
-				BulletSharp.Math.Matrix frameInA = BM.Matrix.Identity;
+                BM.Matrix frameInA = BM.Matrix.Identity;
 				string errormsg = string.Empty;
 				if (CreateFrame(m_localConstraintAxisX, m_localConstraintAxisY, m_localConstraintPoint, ref frameInA, ref errormsg))
 				{

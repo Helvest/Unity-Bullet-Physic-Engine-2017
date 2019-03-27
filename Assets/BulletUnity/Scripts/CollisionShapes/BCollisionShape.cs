@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BulletUnity
 {
-	[System.Serializable]
+	[Serializable]
 	public abstract class BCollisionShape : MonoBehaviour, IDisposable
 	{
 		public enum CollisionShapeType

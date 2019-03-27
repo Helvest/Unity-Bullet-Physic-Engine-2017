@@ -31,7 +31,7 @@ public static class OfflineBallSimulation
 		// IMPORTANT rigidbodies must be added to the offline world in the same order that they are in the source world
 		// this is because collisions must be resolved in the same order for the sim to be deterministic
 		DiscreteDynamicsWorld sourceWorld = (DiscreteDynamicsWorld)bw.world;
-		BulletSharp.RigidBody bulletBallRb = null;
+        RigidBody bulletBallRb = null;
 		BulletSharp.Math.Matrix mm = BulletSharp.Math.Matrix.Identity;
 		for (int i = 0; i < sourceWorld.NumCollisionObjects; i++)
 		{

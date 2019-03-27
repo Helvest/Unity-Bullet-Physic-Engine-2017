@@ -21,10 +21,6 @@ public class FollowSoftBody : MonoBehaviour
 
         //Debug.Log(new Vector3(matrix.M41, matrix.M42, matrix.M43));
 
-        SoftBody m_BSoftBody = (SoftBody)bSoftBodyWMesh.collisionObject;
-
-       
-
         if (bSoftBodyWMesh.verts.Length > 0)
         {
            // Debug.Log(bSoftBodyWMesh.verts[0]);
@@ -33,16 +29,15 @@ public class FollowSoftBody : MonoBehaviour
             {
                 transformWhoFollow.position = bSoftBodyWMesh.verts[0];
             }
-
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            m_BSoftBody.AddVelocity(new BulletSharp.Math.Vector3(0, 100 * Time.fixedDeltaTime, 0));
+            bSoftBodyWMesh.softBody.AddVelocity(new BulletSharp.Math.Vector3(0, 100 * Time.fixedDeltaTime, 0));
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            m_BSoftBody.AddVelocity(new BulletSharp.Math.Vector3(0, -100 * Time.fixedDeltaTime, 0));
+            bSoftBodyWMesh.softBody.AddVelocity(new BulletSharp.Math.Vector3(0, -100 * Time.fixedDeltaTime, 0));
         }
     }
 

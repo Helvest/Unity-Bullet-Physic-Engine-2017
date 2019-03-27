@@ -390,21 +390,21 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 			bVerts[i] = verts[i].ToBullet();
 		}
 
-		SoftBody m_BSoftBody = SoftBodyHelpers.CreateFromTriMesh(World.WorldInfo, bVerts, mesh.triangles);
-		collisionObject = m_BSoftBody;
-		SoftBodySettings.ConfigureSoftBody(m_BSoftBody);         //Set SB settings
+		softBody = SoftBodyHelpers.CreateFromTriMesh(World.WorldInfo, bVerts, mesh.triangles);
+		collisionObject = softBody;
+		SoftBodySettings.ConfigureSoftBody(softBody);         //Set SB settings
 
 		//Set SB position to GO position
-		m_BSoftBody.Rotate(physicsSimMesh.transform.rotation.ToBullet());
-		m_BSoftBody.Translate(physicsSimMesh.transform.position.ToBullet());
-		m_BSoftBody.Scale(physicsSimMesh.transform.localScale.ToBullet());
+		softBody.Rotate(physicsSimMesh.transform.rotation.ToBullet());
+		softBody.Translate(physicsSimMesh.transform.position.ToBullet());
+		softBody.Scale(physicsSimMesh.transform.localScale.ToBullet());
 
 		for (int i = 0; i < anchors.Length; i++)
 		{
 			BAnchor a = anchors[i];
 			for (int j = 0; j < a.anchorNodeIndexes.Count; j++)
 			{
-				m_BSoftBody.AppendAnchor(a.anchorNodeIndexes[j], (RigidBody)a.anchorRigidBody.GetCollisionObject(), false, a.anchorNodeStrength[j]);
+				softBody.AppendAnchor(a.anchorNodeIndexes[j], (RigidBody)a.anchorRigidBody.GetCollisionObject(), false, a.anchorNodeStrength[j]);
 			}
 		}
 
@@ -423,14 +423,14 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 
 		if (norms.Length == 0 || norms.Length != verts.Length)
 		{
-			norms = new Vector3[m_BSoftBody.Nodes.Count];
-			verts = new Vector3[m_BSoftBody.Nodes.Count];
+			norms = new Vector3[softBody.Nodes.Count];
+			verts = new Vector3[softBody.Nodes.Count];
 		}
 
-		for (int i = 0; i < m_BSoftBody.Nodes.Count; i++)
+		for (int i = 0; i < softBody.Nodes.Count; i++)
 		{
-			norms[i] = m_BSoftBody.Nodes[i].Normal.ToUnity();
-			verts[i] = m_BSoftBody.Nodes[i].Position.ToUnity();
+			norms[i] = softBody.Nodes[i].Normal.ToUnity();
+			verts[i] = softBody.Nodes[i].Position.ToUnity();
 		}
 
 		for (int i = 0; i < bone2idxMap.Length; i++)
@@ -460,10 +460,10 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 				return;
 			}
 
-			SoftBody sb = (SoftBody)collisionObject;
-			for (int i = 0; i < sb.Nodes.Count; i++)
+			//SoftBody sb = (SoftBody)collisionObject;
+			for (int i = 0; i < softBody.Nodes.Count; i++)
 			{
-				sb.Nodes[i].Position += jumpOffset.ToBullet(); //verts[i].ToBullet();
+                softBody.Nodes[i].Position += jumpOffset.ToBullet(); //verts[i].ToBullet();
 															   //sb.Nodes[i].Normal = norms[i].ToBullet();
 															   //TODO deal with rotation
 			}

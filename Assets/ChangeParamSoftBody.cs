@@ -7,7 +7,7 @@ using UnityEngine;
 public class ChangeParamSoftBody : MonoBehaviour
 {
     private BSoftBodyWMesh bSoftBodyWMesh;
-    private SoftBody softBody;
+    private MeshRenderer meshRenderer;
 
     [SerializeField]
     private float speed = 1f;
@@ -15,6 +15,7 @@ public class ChangeParamSoftBody : MonoBehaviour
     private void Awake()
     {
         bSoftBodyWMesh = GetComponent<BSoftBodyWMesh>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void FixedUpdate()
@@ -32,48 +33,39 @@ public class ChangeParamSoftBody : MonoBehaviour
 
         if (theValue != 0)
         {
-            softBody = bSoftBodyWMesh.softBody;
+            bSoftBodyWMesh.softBody.config.Pressure += theValue * 100f;
 
-            softBody.config.Pressure += theValue * 100f;
-
-            Debug.Log("Pressure: " + softBody.config.Pressure);
+            Debug.Log("Pressure: " + bSoftBodyWMesh.softBody.config.Pressure);
         }
 
-
-        softBody = bSoftBodyWMesh.softBody;
-
-        if (softBody != null)
+        if (bSoftBodyWMesh.softBody != null)
         {
-           // Debug.DrawLine(softBody.Nodes[0].Position.ToUnity(), softBody.Nodes[0].Q.ToUnity(), Color.red, 0.2f);
+            // Debug.DrawLine(softBody.Nodes[0].Position.ToUnity(), softBody.Nodes[0].Q.ToUnity(), Color.red, 0.2f);
 
-            BulletSharp.Math.Vector3 aabbMin, aabbMax;
+            BulletSharp.Math.Vector3 center;
 
-            softBody.GetAabb(out aabbMin, out aabbMax);
+            bSoftBodyWMesh.softBody.GetAabbCenter(out center);
 
-            Vector3 centre = ((aabbMin + aabbMax) / 2).ToUnity();
+            //DrawCenter(center.ToUnity());
 
-            Debug.DrawLine(centre, centre + Vector3.up * 20, Color.green);
-            Debug.DrawLine(centre, centre + Vector3.right * 20, Color.red);
-            Debug.DrawLine(centre, centre + Vector3.forward * 20, Color.blue);
+            Debug.DrawLine(center.ToUnity(), center.ToUnity() + Vector3.up * 20, Color.red);
+        }
+
+        if (meshRenderer)
+        {
+            //DrawCenter(meshRenderer.bounds.center);
+
+            Debug.DrawLine(meshRenderer.bounds.center, meshRenderer.bounds.center + Vector3.up * 20, Color.green);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
-
-
             /*
             Debug.Log("Nodes[0].Q: " + softBody.Nodes[0].Q);
             Debug.Log("Nodes[0].Position: " + softBody.Nodes[0].Position);
             */
 
-           
-
-           
-            Debug.Log("InterpolationWorldTransform: " + softBody.InterpolationWorldTransform);
-
-
-
+            Debug.Log("InterpolationWorldTransform: " + bSoftBodyWMesh.softBody.InterpolationWorldTransform);
 
             /* Debug.Log("IsVolumeValid: " + softBody.Pose.IsVolumeValid);
              Debug.Log("IsFrameValid: " + softBody.Pose.IsFrameValid);
@@ -81,7 +73,13 @@ public class ChangeParamSoftBody : MonoBehaviour
              Debug.Log("Pose.Volume: " + softBody.Pose.Volume);
              Debug.Log("Pose.Aqq: " + softBody.Pose.Aqq);
              Debug.Log("Pose.Com: " + softBody.Pose.Com);*/
-
         }
+    }
+
+    private void DrawCenter(Vector3 center, float size = 20)
+    {
+        Debug.DrawLine(center, center + Vector3.up * size, Color.green);
+        Debug.DrawLine(center, center + Vector3.right * size, Color.red);
+        Debug.DrawLine(center, center + Vector3.forward * size, Color.blue);
     }
 }

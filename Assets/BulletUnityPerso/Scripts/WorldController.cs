@@ -7,7 +7,7 @@ using BulletUnity.Debugging;
 using PhysicWorldEnums;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class WorldController : IDisposable
 {
 	#region Variables

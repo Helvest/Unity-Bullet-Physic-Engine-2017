@@ -22,7 +22,7 @@ public class BCamera
 		BulletSharp.Math.Vector3 rayFrom = cam.transform.position.ToBullet();
 		BulletSharp.Math.Vector3 rayTo = cam.ScreenToWorldPoint(new Vector3(inputScreenCoords.x, inputScreenCoords.y, cam.farClipPlane)).ToBullet();
 
-		BulletSharp.ClosestRayResultCallback rayCallBack = new BulletSharp.ClosestRayResultCallback(ref rayFrom, ref rayTo);
+        ClosestRayResultCallback rayCallBack = new ClosestRayResultCallback(ref rayFrom, ref rayTo);
 		rayCallBack.CollisionFilterGroup = (short)rayFilterGroup;
 		rayCallBack.CollisionFilterMask = (short)rayFilterMask;
 		//BulletSharp.AllHitsRayResultCallback rayCallBack = new BulletSharp.AllHitsRayResultCallback(rayFrom, rayTo);
