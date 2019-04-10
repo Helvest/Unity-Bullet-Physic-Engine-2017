@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BallThrowTest : MonoBehaviour
 {
-	public BPhysicsWorld bulletWorld;
 	public BRigidBody ballRigidbody;
 	public Vector3 ballThrowImpulse;
 	public int numberOfSimulationSteps;
@@ -28,9 +27,9 @@ public class BallThrowTest : MonoBehaviour
 		{
 			Debug.Log("Starting simulation.");
 			ballRigidbody.gameObject.SetActive(true);
-			bulletWorld.AddRigidBody(ballRigidbody);
+			WorldsManager.WorldController.AddRigidBody(ballRigidbody);
 			simulationStarted = true;
-			startFrame = BPhysicsWorld.Get().frameCount;
+			startFrame = (int)WorldsManager.WorldController.FrameCount;
 
 			//first simulation ==============================
 			ballPositionsOfflineSim = OfflineBallSimulation.SimulateBall(ballRigidbody, ballThrowImpulse, numberOfSimulationSteps, false);

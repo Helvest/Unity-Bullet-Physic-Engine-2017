@@ -496,7 +496,7 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 			{
 				if (myMesh == null)
 				{
-					myMesh = GameObject.Instantiate<Mesh>(physicsSimMesh.sharedMesh);
+					myMesh = Instantiate(physicsSimMesh.sharedMesh);
 					MeshFilter mf = physicsSimMesh.GetComponent<MeshFilter>();
 					mf.sharedMesh = myMesh;
 				}

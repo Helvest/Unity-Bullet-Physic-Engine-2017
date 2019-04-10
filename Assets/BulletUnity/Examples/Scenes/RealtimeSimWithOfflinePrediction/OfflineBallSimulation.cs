@@ -23,14 +23,14 @@ public static class OfflineBallSimulation
 		BulletSharp.SoftBody.SoftBodyWorldInfo softBodyWorldInfo;
 
 		//This should create a copy of the BPhysicsWorld with the same settings
-		BPhysicsWorld bw = BPhysicsWorld.Get();
+		WorldController bw = WorldsManager.WorldController;
 		bw.CreatePhysicsWorld(out cw, out CollisionConf, out Dispatcher, out Broadphase, out Solver, out softBodyWorldInfo);
 		World = (DiscreteDynamicsWorld)cw;
 
 		//Copy all existing rigidbodies in scene
 		// IMPORTANT rigidbodies must be added to the offline world in the same order that they are in the source world
 		// this is because collisions must be resolved in the same order for the sim to be deterministic
-		DiscreteDynamicsWorld sourceWorld = (DiscreteDynamicsWorld)bw.world;
+		DiscreteDynamicsWorld sourceWorld = bw.DDWorld;
         RigidBody bulletBallRb = null;
 		BulletSharp.Math.Matrix mm = BulletSharp.Math.Matrix.Identity;
 		for (int i = 0; i < sourceWorld.NumCollisionObjects; i++)

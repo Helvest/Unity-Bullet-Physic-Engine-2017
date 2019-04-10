@@ -1,7 +1,4 @@
-﻿using BulletSharp.SoftBody;
-using BulletUnity;
-using System.Collections;
-using System.Collections.Generic;
+﻿using BulletUnity;
 using UnityEngine;
 
 public class ChangeParamSoftBody : MonoBehaviour
@@ -35,7 +32,7 @@ public class ChangeParamSoftBody : MonoBehaviour
         {
             bSoftBodyWMesh.softBody.config.Pressure += theValue * 100f;
 
-            Debug.Log("Pressure: " + bSoftBodyWMesh.softBody.config.Pressure);
+            //Debug.Log("Pressure: " + bSoftBodyWMesh.softBody.config.Pressure);
         }
 
         if (bSoftBodyWMesh.softBody != null)

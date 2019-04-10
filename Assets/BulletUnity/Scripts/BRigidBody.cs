@@ -413,7 +413,7 @@ namespace BulletUnity
 		/// </summary>
 		internal override bool _BuildCollisionObject()
 		{
-			BPhysicsWorld world = BPhysicsWorld.Get();
+			WorldController world = GetWorld();
 
 			if (m_rigidBody != null && isInWorld && world != null)
 			{
@@ -457,6 +457,8 @@ namespace BulletUnity
 
 		protected override void Awake()
 		{
+			WorldID = WorldsManager.ActualWorldID;
+
 			BRigidBody[] rbs = GetComponentsInParent<BRigidBody>();
 			if (rbs.Length != 1)
 			{
@@ -476,12 +478,12 @@ namespace BulletUnity
 
 		protected override void AddObjectToBulletWorld()
 		{
-			BPhysicsWorld.Get().AddRigidBody(this);
+			GetWorld().AddRigidBody(this);
 		}
 
 		protected override void RemoveObjectFromBulletWorld()
 		{
-			BPhysicsWorld pw = BPhysicsWorld.Get();
+			WorldController pw = GetWorld();
 
 			if (pw != null && m_rigidBody != null && isInWorld)
 			{
@@ -586,18 +588,18 @@ namespace BulletUnity
 		{
 			if (isInWorld && isdisposing && m_rigidBody != null)
 			{
-				BPhysicsWorld pw = BPhysicsWorld.Get();
+				WorldController pw = GetWorld();
 
-				if (pw != null && pw.world != null)
+				if (pw?.DDWorld != null)
 				{
 					//constraints must be removed before rigid body is removed
 					for (int i = m_rigidBody.NumConstraintRefs; i > 0; i--)
 					{
 						BTypedConstraint tc = (BTypedConstraint)m_rigidBody.GetConstraintRef(i - 1).Userobject;
-						((DiscreteDynamicsWorld)pw.world).RemoveConstraint(tc.GetConstraint());
+						pw.DDWorld.RemoveConstraint(tc.GetConstraint());
 					}
 
-					((DiscreteDynamicsWorld)pw.world).RemoveRigidBody(m_rigidBody);
+					pw.DDWorld.RemoveRigidBody(m_rigidBody);
 				}
 			}
 

@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 1
   m_groupsIBelongTo: 1
   m_collisionMask: -1
@@ -461,6 +462,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1077285742
 MonoBehaviour:
@@ -572,6 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1643903992}
   - component: {fileID: 1643903991}
+  - component: {fileID: 1643903993}
   m_Layer: 0
   m_Name: BulletPhysicsWorld
   m_TagString: Untagged
@@ -601,7 +604,6 @@ MonoBehaviour:
   m_fixedTimeStep: 0.016666668
   m_maxSubsteps: 3
   debugType: 0
-  timeStr: 0
 --- !u!4 &1643903992
 Transform:
   m_ObjectHideFlags: 0
@@ -615,3 +617,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1643903993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1643903990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501ca1b9420a0ad498f19316ac063a8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoCreateWorld: 1
+  _physicWorldParameters: {fileID: 11400000, guid: aae6c7fc99835be4095417e69312ce51,
+    type: 2}

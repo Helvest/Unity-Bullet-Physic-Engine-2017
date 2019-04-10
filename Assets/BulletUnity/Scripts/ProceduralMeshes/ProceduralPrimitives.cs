@@ -346,11 +346,11 @@ namespace BulletUnity
 			Quaternion q = Quaternion.identity;
 			if (axis == 0)
 			{
-				q = Quaternion.AngleAxis(90, UnityEngine.Vector3.forward);
+				q = Quaternion.AngleAxis(90, Vector3.forward);
 			}
 			else if (axis == 2)
 			{
-				q = Quaternion.AngleAxis(90, UnityEngine.Vector3.right);
+				q = Quaternion.AngleAxis(90, Vector3.right);
 			}
 
 			if (axis == 0 || axis == 2)

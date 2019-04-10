@@ -8,6 +8,13 @@ namespace BulletUnity
 	[Serializable]
 	public abstract class BTypedConstraint : MonoBehaviour, IDisposable
 	{
+		public int WorldID { get; protected set; }
+
+		public WorldController GetWorld()
+		{
+			return GetWorld();
+		}
+
 		protected bool m_startWasCalled = false;
 
 		public enum ConstraintType
@@ -219,9 +226,9 @@ namespace BulletUnity
 
 		public bool CreateFrame(Vector3 forward, Vector3 up, Vector3 constraintPoint, ref BM.Matrix m, ref string errorMsg)
 		{
-            BM.Vector4 x;
-            BM.Vector4 y;
-            BM.Vector4 z;
+			BM.Vector4 x;
+			BM.Vector4 y;
+			BM.Vector4 z;
 			if (forward == Vector3.zero)
 			{
 				errorMsg = "forward vector must not be zero";
@@ -303,7 +310,7 @@ namespace BulletUnity
 					Debug.Assert(m_otherRigidBody.isInWorld, "Constrained bodies must be added to world before constraints " + this);
 				}
 
-				BPhysicsWorld.Get().AddConstraint(this);
+				GetWorld().AddConstraint(this);
 			}
 		}
 
@@ -311,25 +318,34 @@ namespace BulletUnity
 		{
 			if (m_isInWorld)
 			{
-				BPhysicsWorld.Get().RemoveConstraint(m_constraintPtr);
+				GetWorld().RemoveConstraint(m_constraintPtr);
 			}
+		}
+
+		protected virtual void Awake()
+		{
+			WorldID = WorldsManager.ActualWorldID;
 		}
 
 		protected virtual void Start()
 		{
-			m_startWasCalled = true;
-			//deal with nasty script order of execution bug. Order of Start call is random so force rigid bodies to be in the world before constraint is added
-			if (!m_thisRigidBody.isInWorld)
+			if (m_startWasCalled == false)
 			{
-				m_thisRigidBody.Start();
-			}
+				m_startWasCalled = true;
 
-			if (m_constraintType == ConstraintType.constrainToAnotherBody && !m_otherRigidBody.isInWorld)
-			{
-				m_otherRigidBody.Start();
-			}
+				//deal with nasty script order of execution bug. Order of Start call is random so force rigid bodies to be in the world before constraint is added
+				if (!m_thisRigidBody.isInWorld)
+				{
+					m_thisRigidBody.Start();
+				}
 
-			AddToBulletWorld();
+				if (m_constraintType == ConstraintType.constrainToAnotherBody && !m_otherRigidBody.isInWorld)
+				{
+					m_otherRigidBody.Start();
+				}
+
+				AddToBulletWorld();
+			}
 		}
 
 		private void OnDestroy()

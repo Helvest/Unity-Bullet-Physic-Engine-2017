@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028377, g: 0.22571409, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 211847794}
   - component: {fileID: 211847793}
   m_Layer: 0
-  m_Name: PhysicsWorld
+  m_Name: WorldManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,21 +138,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 211847792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f2902ecfd038540a5652633a7400c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 501ca1b9420a0ad498f19316ac063a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugDrawMode: 1
-  _doDebugDraw: 0
-  m_worldType: 1
-  m_collisionType: 0
-  m_broadphaseType: 0
-  m_axis3SweepBroadphaseMin: {x: -1000, y: -1000, z: -1000}
-  m_axis3SweepBroadphaseMax: {x: 1000, y: 1000, z: 1000}
-  m_gravity: {x: 0, y: -9.8, z: 0}
-  m_fixedTimeStep: 0.016666668
-  m_maxSubsteps: 3
-  debugType: 0
-  timeStr: 0
+  autoCreateWorld: 1
+  _physicWorldParameters: {fileID: 11400000, guid: aae6c7fc99835be4095417e69312ce51,
+    type: 2}
 --- !u!4 &211847794
 Transform:
   m_ObjectHideFlags: 0
@@ -838,6 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -858,6 +850,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1335062853
 MonoBehaviour:
@@ -982,6 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 1
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1002,6 +996,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1522196977
 MonoBehaviour:
@@ -1115,6 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 3
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1135,6 +1131,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1636856949
 MonoBehaviour:

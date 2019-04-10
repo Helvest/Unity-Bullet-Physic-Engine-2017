@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-using BulletSharp;
+﻿using BulletSharp;
 using BulletUnity;
+using UnityEngine;
 
 public class CustomCollisionCallbackScript : BCollisionCallbacksDefault
 {
@@ -17,19 +16,19 @@ public class CustomCollisionCallbackScript : BCollisionCallbacksDefault
 	/// }
 	/// </summary>
 
-	public override void BOnCollisionEnter(CollisionObject other, PersistentManifoldList manifoldList)
+	protected override void BOnCollisionEnter(CollisionObject other, PersistentManifoldList manifoldList)
 	{
-		Debug.Log("On Collision Enter " + BPhysicsWorld.Get().frameCount);
+		Debug.Log("On Collision Enter " + GetWorld().FrameCount);
 	}
 
-	public override void BOnCollisionStay(CollisionObject other, PersistentManifoldList manifoldList)
+	protected override void BOnCollisionStay(CollisionObject other, PersistentManifoldList manifoldList)
 	{
-		Debug.Log("On Collision Stay " + BPhysicsWorld.Get().frameCount);
+		Debug.Log("On Collision Stay " + GetWorld().FrameCount);
 	}
 
-	public override void BOnCollisionExit(CollisionObject other)
+	protected override void BOnCollisionExit(CollisionObject other)
 	{
-		Debug.Log("On Collision Exit " + BPhysicsWorld.Get().frameCount);
+		Debug.Log("On Collision Exit " + GetWorld().FrameCount);
 	}
 
 	public override void OnFinishedVisitingManifolds()

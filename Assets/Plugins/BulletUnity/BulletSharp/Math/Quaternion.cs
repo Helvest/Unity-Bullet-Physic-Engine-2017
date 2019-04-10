@@ -442,9 +442,9 @@ namespace BulletSharp.Math
 			float rz = right.Z;
 			float rw = right.W;
 
-			result.X = (rx * lw + lx * rw + ry * lz) - (rz * ly);
-			result.Y = (ry * lw + ly * rw + rz * lx) - (rx * lz);
-			result.Z = (rz * lw + lz * rw + rx * ly) - (ry * lx);
+			result.X = rx * lw + lx * rw + ry * lz - (rz * ly);
+			result.Y = ry * lw + ly * rw + rz * lx - (rx * lz);
+			result.Z = rz * lw + lz * rw + rx * ly - (ry * lx);
 			result.W = (rw * lw) - (rx * lx + ry * ly + rz * lz);
 		}
 
@@ -1252,10 +1252,10 @@ namespace BulletSharp.Math
 		/// </returns>
 		public bool Equals(Quaternion other, float epsilon)
 		{
-			return ((float)System.Math.Abs(other.X - X) < epsilon &&
+			return (float)System.Math.Abs(other.X - X) < epsilon &&
 				(float)System.Math.Abs(other.Y - Y) < epsilon &&
 				(float)System.Math.Abs(other.Z - Z) < epsilon &&
-				(float)System.Math.Abs(other.W - W) < epsilon);
+				(float)System.Math.Abs(other.W - W) < epsilon;
 		}
 
 		/// <summary>

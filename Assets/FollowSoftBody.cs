@@ -1,7 +1,4 @@
-﻿using BulletSharp.SoftBody;
-using BulletUnity;
-using System.Collections;
-using System.Collections.Generic;
+﻿using BulletUnity;
 using UnityEngine;
 
 public class FollowSoftBody : MonoBehaviour

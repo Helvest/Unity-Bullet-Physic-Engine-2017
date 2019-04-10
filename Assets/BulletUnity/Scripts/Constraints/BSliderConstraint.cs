@@ -82,7 +82,7 @@ namespace BulletUnity
 		//the current constraint properties are used to rebuild the constraint.
 		internal override bool _BuildConstraint()
 		{
-			BPhysicsWorld world = BPhysicsWorld.Get();
+			WorldController world = GetWorld();
 			if (m_constraintPtr != null)
 			{
 				if (m_isInWorld && world != null)

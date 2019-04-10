@@ -318,7 +318,7 @@ namespace DemoFramework
 						World.Serialize(serializer);
 
 						byte[] dataBytes = new byte[serializer.CurrentBufferSize];
-						System.Runtime.InteropServices.Marshal.Copy(serializer.BufferPointer, dataBytes, 0, dataBytes.Length);
+						Marshal.Copy(serializer.BufferPointer, dataBytes, 0, dataBytes.Length);
 
 						System.IO.FileStream file = new System.IO.FileStream("world.bullet", System.IO.FileMode.Create);
 						file.Write(dataBytes, 0, dataBytes.Length);

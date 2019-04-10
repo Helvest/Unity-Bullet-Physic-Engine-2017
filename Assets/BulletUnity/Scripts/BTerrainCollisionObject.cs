@@ -15,6 +15,7 @@ namespace BulletUnity
 		protected override void Awake()
 		{
 			base.Awake();
+
 			Terrain t = GetComponent<Terrain>();
 			if (t != null)
 			{
@@ -32,7 +33,7 @@ namespace BulletUnity
 				return false;
 			}
 
-			BPhysicsWorld world = BPhysicsWorld.Get();
+			WorldController world = GetWorld();
 			if (collisionObject != null)
 			{
 				if (isInWorld && world != null)
@@ -42,7 +43,7 @@ namespace BulletUnity
 				}
 			}
 
-			if (transform.localScale != UnityEngine.Vector3.one)
+			if (transform.localScale != Vector3.one)
 			{
 				Debug.LogError("The local scale on this collision shape is not one. Bullet physics does not support scaling on a rigid body world transform. Instead alter the dimensions of the CollisionShape.");
 			}

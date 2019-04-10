@@ -40,20 +40,65 @@ public class WorldController : IDisposable
 	public DiscreteDynamicsWorld DDWorld { get; private set; }
 	public SoftRigidDynamicsWorld SoftWorld { get; private set; }
 
+	public uint FrameCount { get; private set; } = 0;
+	public float SubFixedTimeStep;
+	public int MaxSubsteps;
+
+	private TimeStepTypes timeStepType;
+	public TimeStepTypes TimeStepType
+	{
+		get
+		{
+			return timeStepType;
+		}
+
+		set
+		{
+			timeStepType = value;
+
+			switch (timeStepType)
+			{
+				case TimeStepTypes.OneStep:
+					StepSimulationSelected = StepSimulation_OneStep;
+					break;
+
+				case TimeStepTypes.SubStep:
+					StepSimulationSelected = StepSimulation_SubStep;
+					break;
+
+				case TimeStepTypes.SubStepAndTimeStep:
+					StepSimulationSelected = StepSimulation_SubStep_and_TimeStep;
+					break;
+			}
+		}
+	}
+
+	private Vector3 gravity;
+	public Vector3 Gravity
+	{
+		get { return gravity; }
+		set
+		{
+			if (DWorld != null)
+			{
+				BulletSharp.Math.Vector3 grav = value.ToBullet();
+				DWorld.SetGravity(ref grav);
+			}
+
+			gravity = value;
+		}
+	}
+
 	#endregion Variables
 
 	#region Init
 
-	public WorldController()
+	//Constructor
+	public WorldController(PhysicWorldParameters physicWorldParameters = null)
 	{
-		physicWorldParameters = WorldsManager.PhysicWorldParameters;
+		this.physicWorldParameters = physicWorldParameters ?? WorldsManager.PhysicWorldParameters;
 		CreateWorld();
-	}
-
-	public WorldController(PhysicWorldParameters physicWorldParameters)
-	{
-		this.physicWorldParameters = physicWorldParameters;
-		CreateWorld();
+		SetupStepSimulation();
 	}
 
 	private void CreateWorld()
@@ -146,34 +191,59 @@ public class WorldController : IDisposable
 		}
 	}
 
+	private void SetupStepSimulation()
+	{
+		gravity = physicWorldParameters.gravity.ToUnity();
+
+		TimeStepType = physicWorldParameters.timeStepType;
+
+		SubFixedTimeStep = physicWorldParameters.subFixedTimeStep;
+
+		MaxSubsteps = physicWorldParameters.maxSubsteps;
+	}
+
 	#endregion Init
 
 	#region StepSimulation
 
-	public void StepSimulation(float timeStep)
-	{
-		if (!isDisposed && timeStep > 0f)
-		{
-			if (DWorld != null)
-			{
-				//StepSimulation proceeds the simulation over 'timeStep', units in preferably in seconds.
-				//By default, Bullet will subdivide the timestep in constant substeps of each 'fixedTimeStep'.
-				//In order to keep the simulation real-time, the maximum number of substeps can be clamped to 'maxSubSteps'.
-				//You can disable subdividing the timestep/substepping by passing maxSubSteps=0 as second argument to stepSimulation, 
-				//but in that case you have to keep the timeStep constant.
-				DWorld.StepSimulation(timeStep, physicWorldParameters.maxSubsteps, physicWorldParameters.fixedTimeStep);
-			}
+	private delegate void Del();
+	private Del StepSimulationSelected;
 
-			//Collisions
-			OnPhysicsStep();
-		}
+	public void StepSimulation()
+	{
+		FrameCount++;
+
+		//StepSimulation proceeds the simulation over 'timeStep', units in preferably in seconds.
+		//By default, Bullet will subdivide the timestep in constant substeps of each 'fixedTimeStep'.
+		//In order to keep the simulation real-time, the maximum number of substeps can be clamped to 'maxSubSteps'.
+		//You can disable subdividing the timestep/substepping by passing maxSubSteps=0 as second argument to stepSimulation, 
+		//but in that case you have to keep the timeStep constant.
+		StepSimulationSelected();
+
+		//Collisions
+		OnPhysicsStep();
+	}
+
+	private void StepSimulation_OneStep()
+	{
+		DWorld.StepSimulation(physicWorldParameters.fixedDeltaTime);
+	}
+
+	private void StepSimulation_SubStep()
+	{
+		DWorld.StepSimulation(physicWorldParameters.fixedDeltaTime, physicWorldParameters.maxSubsteps);
+	}
+
+	private void StepSimulation_SubStep_and_TimeStep()
+	{
+		DWorld.StepSimulation(physicWorldParameters.fixedDeltaTime, physicWorldParameters.maxSubsteps, physicWorldParameters.subFixedTimeStep);
 	}
 
 	#endregion StepSimulation
 
 	#region CallbackListeners
 
-	private HashSet<BCollisionObject.BICollisionCallbackEventHandler> collisionCallbackListeners = new HashSet<BCollisionObject.BICollisionCallbackEventHandler>();
+	private readonly HashSet<BCollisionObject.BICollisionCallbackEventHandler> collisionCallbackListeners = new HashSet<BCollisionObject.BICollisionCallbackEventHandler>();
 
 	public void RegisterCollisionCallbackListener(BCollisionObject.BICollisionCallbackEventHandler toBeAdded)
 	{
@@ -454,7 +524,7 @@ public class WorldController : IDisposable
 	{
 		if (!isDisposed)
 		{
-			if (physicWorldParameters.worldType == WorldType.SoftBodyAndRigidBody)
+			if (physicWorldParameters.worldType != WorldType.SoftBodyAndRigidBody)
 			{
 				Debug.LogErrorFormat("The Physics World must be a BSoftBodyWorld for adding soft bodies");
 				return false;
@@ -481,7 +551,7 @@ public class WorldController : IDisposable
 	{
 		if (!isDisposed)
 		{
-			if (physicWorldParameters.worldType == WorldType.SoftBodyAndRigidBody)
+			if (physicWorldParameters.worldType != WorldType.SoftBodyAndRigidBody)
 			{
 				Debug.LogErrorFormat("The Physics World must be a BSoftBodyWorld for removing soft bodies");
 				return false;
@@ -638,4 +708,103 @@ public class WorldController : IDisposable
 	}
 
 	#endregion Destroy & Dispose
+
+
+	//Does not set any local variables. Is safe to use to create duplicate physics worlds for independant simulation.
+	public void CreatePhysicsWorld
+	(
+		out CollisionWorld world,
+		out CollisionConfiguration collisionConfig,
+		out CollisionDispatcher dispatcher,
+		out BroadphaseInterface broadphase,
+		out ConstraintSolver solver,
+		out SoftBodyWorldInfo softBodyWorldInfo
+	)
+	{
+		collisionConfig = null;
+
+		switch (physicWorldParameters.collisionType)
+		{
+			default:
+			case CollisionConfType.DefaultDynamicsWorldCollisionConf:
+				collisionConfig = new DefaultCollisionConfiguration();
+				break;
+
+			case CollisionConfType.SoftBodyRigidBodyCollisionConf:
+				collisionConfig = new SoftBodyRigidBodyCollisionConfiguration();
+				break;
+		}
+
+		dispatcher = new CollisionDispatcher(collisionConfig);
+
+		switch (physicWorldParameters.broadphaseType)
+		{
+			default:
+			case BroadphaseType.DynamicAABBBroadphase:
+				broadphase = new DbvtBroadphase();
+				break;
+
+			case BroadphaseType.Axis3SweepBroadphase:
+				broadphase = new AxisSweep3(
+					physicWorldParameters.axis3SweepBroadphaseMin,
+					physicWorldParameters.axis3SweepBroadphaseMax,
+					physicWorldParameters.axis3SweepMaxProxies
+					);
+				break;
+
+			case BroadphaseType.Axis3SweepBroadphase_32bit:
+				broadphase = new AxisSweep3_32Bit(
+					physicWorldParameters.axis3SweepBroadphaseMin,
+					physicWorldParameters.axis3SweepBroadphaseMax,
+					physicWorldParameters.axis3SweepMaxProxies
+					);
+				break;
+		}
+
+		world = null;
+		softBodyWorldInfo = null;
+		solver = null;
+
+		switch (physicWorldParameters.worldType)
+		{
+			case WorldType.CollisionOnly:
+				world = new CollisionWorld(dispatcher, broadphase, collisionConfig);
+				break;
+
+			default:
+			case WorldType.RigidBodyDynamics:
+				world = new DiscreteDynamicsWorld(dispatcher, broadphase, null, collisionConfig);
+				break;
+
+			case WorldType.MultiBodyWorld:
+				MultiBodyConstraintSolver mbConstraintSolver = new MultiBodyConstraintSolver();
+				constraintSolver = mbConstraintSolver;
+				world = new MultiBodyDynamicsWorld(dispatcher, broadphase, mbConstraintSolver, collisionConfig);
+				break;
+
+			case WorldType.SoftBodyAndRigidBody:
+				SequentialImpulseConstraintSolver siConstraintSolver = new SequentialImpulseConstraintSolver();
+				constraintSolver = siConstraintSolver;
+				siConstraintSolver.RandSeed = physicWorldParameters.sequentialImpulseConstraintSolverRandomSeed;
+
+				world = new SoftRigidDynamicsWorld(this.dispatcher, this.broadphase, siConstraintSolver, collisionConf);
+				world.DispatchInfo.EnableSpu = true;
+
+				SoftRigidDynamicsWorld _sworld = (SoftRigidDynamicsWorld)world;
+				_sworld.WorldInfo.SparseSdf.Initialize();
+				_sworld.WorldInfo.SparseSdf.Reset();
+				_sworld.WorldInfo.AirDensity = 1.2f;
+				_sworld.WorldInfo.WaterDensity = 0;
+				_sworld.WorldInfo.WaterOffset = 0;
+				_sworld.WorldInfo.WaterNormal = BulletSharp.Math.Vector3.Zero;
+				_sworld.WorldInfo.Gravity = Gravity.ToBullet();
+				break;
+		}
+
+		if (world is DiscreteDynamicsWorld)
+		{
+			((DiscreteDynamicsWorld)world).Gravity = Gravity.ToBullet();
+		}
+	}
+
 }

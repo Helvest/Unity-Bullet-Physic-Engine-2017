@@ -13,7 +13,8 @@ namespace BulletUnity
 
 		internal override bool _BuildCollisionObject()
 		{
-			BPhysicsWorld world = BPhysicsWorld.Get();
+			WorldController world = GetWorld();
+
 			if (collisionObject != null)
 			{
 				if (isInWorld && world != null)

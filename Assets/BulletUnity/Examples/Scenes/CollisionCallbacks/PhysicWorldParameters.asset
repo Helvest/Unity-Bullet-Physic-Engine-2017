@@ -15,9 +15,9 @@ MonoBehaviour:
     X: 0
     Y: -9.80665
     Z: 0
-  worldType: 3
-  collisionType: 1
-  broadphaseType: 1
+  worldType: 1
+  collisionType: 0
+  broadphaseType: 0
   fixedDeltaTime: 0.016666668
   framerate: 60
   timeStepType: 0
@@ -26,14 +26,14 @@ MonoBehaviour:
   subFramerate: 60
   axis3SweepMaxProxies: 32766
   axis3SweepBroadphaseMin:
-    X: -500
-    Y: -500
-    Z: -500
+    X: -1000
+    Y: -1000
+    Z: -1000
   axis3SweepBroadphaseMax:
-    X: 500
-    Y: 500
-    Z: 500
+    X: 1000
+    Y: 1000
+    Z: 1000
   sequentialImpulseConstraintSolverRandomSeed: 12345
-  debug: 1
+  debug: 0
   debugDrawMode: 0
   debugType: 1

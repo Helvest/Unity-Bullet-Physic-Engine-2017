@@ -620,10 +620,10 @@ namespace BulletSharp.Math
 		public static void Barycentric(ref Vector4 value1, ref Vector4 value2, ref Vector4 value3, float amount1, float amount2, out Vector4 result)
 		{
 			result = new Vector4(
-				(value1.X + (amount1 * (value2.X - value1.X))) + (amount2 * (value3.X - value1.X)),
-				(value1.Y + (amount1 * (value2.Y - value1.Y))) + (amount2 * (value3.Y - value1.Y)),
-				(value1.Z + (amount1 * (value2.Z - value1.Z))) + (amount2 * (value3.Z - value1.Z)),
-				(value1.W + (amount1 * (value2.W - value1.W))) + (amount2 * (value3.W - value1.W)));
+				value1.X + (amount1 * (value2.X - value1.X)) + (amount2 * (value3.X - value1.X)),
+				value1.Y + (amount1 * (value2.Y - value1.Y)) + (amount2 * (value3.Y - value1.Y)),
+				value1.Z + (amount1 * (value2.Z - value1.Z)) + (amount2 * (value3.Z - value1.Z)),
+				value1.W + (amount1 * (value2.W - value1.W)) + (amount2 * (value3.W - value1.W)));
 		}
 
 		/// <summary>
@@ -864,7 +864,7 @@ namespace BulletSharp.Math
 		public static void SmoothStep(ref Vector4 start, ref Vector4 end, float amount, out Vector4 result)
 		{
 			amount = (amount > 1.0f) ? 1.0f : ((amount < 0.0f) ? 0.0f : amount);
-			amount = (amount * amount) * (3.0f - (2.0f * amount));
+			amount = amount * amount * (3.0f - (2.0f * amount));
 
 			result.X = start.X + ((end.X - start.X) * amount);
 			result.Y = start.Y + ((end.Y - start.Y) * amount);
@@ -899,16 +899,16 @@ namespace BulletSharp.Math
 		{
 			float squared = amount * amount;
 			float cubed = amount * squared;
-			float part1 = ((2.0f * cubed) - (3.0f * squared)) + 1.0f;
+			float part1 = (2.0f * cubed) - (3.0f * squared) + 1.0f;
 			float part2 = (-2.0f * cubed) + (3.0f * squared);
-			float part3 = (cubed - (2.0f * squared)) + amount;
+			float part3 = cubed - (2.0f * squared) + amount;
 			float part4 = cubed - squared;
 
 			result = new Vector4(
-				(((value1.X * part1) + (value2.X * part2)) + (tangent1.X * part3)) + (tangent2.X * part4),
-				(((value1.Y * part1) + (value2.Y * part2)) + (tangent1.Y * part3)) + (tangent2.Y * part4),
-				(((value1.Z * part1) + (value2.Z * part2)) + (tangent1.Z * part3)) + (tangent2.Z * part4),
-				(((value1.W * part1) + (value2.W * part2)) + (tangent1.W * part3)) + (tangent2.W * part4));
+				(value1.X * part1) + (value2.X * part2) + (tangent1.X * part3) + (tangent2.X * part4),
+				(value1.Y * part1) + (value2.Y * part2) + (tangent1.Y * part3) + (tangent2.Y * part4),
+				(value1.Z * part1) + (value2.Z * part2) + (tangent1.Z * part3) + (tangent2.Z * part4),
+				(value1.W * part1) + (value2.W * part2) + (tangent1.W * part3) + (tangent2.W * part4));
 		}
 
 		/// <summary>
@@ -941,21 +941,21 @@ namespace BulletSharp.Math
 			float squared = amount * amount;
 			float cubed = amount * squared;
 
-			result.X = 0.5f * ((((2.0f * value2.X) + ((-value1.X + value3.X) * amount)) +
-				(((((2.0f * value1.X) - (5.0f * value2.X)) + (4.0f * value3.X)) - value4.X) * squared)) +
-				((((-value1.X + (3.0f * value2.X)) - (3.0f * value3.X)) + value4.X) * cubed));
+			result.X = 0.5f * ((2.0f * value2.X) + ((-value1.X + value3.X) * amount) +
+				(((2.0f * value1.X) - (5.0f * value2.X) + (4.0f * value3.X) - value4.X) * squared) +
+				((-value1.X + (3.0f * value2.X) - (3.0f * value3.X) + value4.X) * cubed));
 
-			result.Y = 0.5f * ((((2.0f * value2.Y) + ((-value1.Y + value3.Y) * amount)) +
-				(((((2.0f * value1.Y) - (5.0f * value2.Y)) + (4.0f * value3.Y)) - value4.Y) * squared)) +
-				((((-value1.Y + (3.0f * value2.Y)) - (3.0f * value3.Y)) + value4.Y) * cubed));
+			result.Y = 0.5f * ((2.0f * value2.Y) + ((-value1.Y + value3.Y) * amount) +
+				(((2.0f * value1.Y) - (5.0f * value2.Y) + (4.0f * value3.Y) - value4.Y) * squared) +
+				((-value1.Y + (3.0f * value2.Y) - (3.0f * value3.Y) + value4.Y) * cubed));
 
-			result.Z = 0.5f * ((((2.0f * value2.Z) + ((-value1.Z + value3.Z) * amount)) +
-				(((((2.0f * value1.Z) - (5.0f * value2.Z)) + (4.0f * value3.Z)) - value4.Z) * squared)) +
-				((((-value1.Z + (3.0f * value2.Z)) - (3.0f * value3.Z)) + value4.Z) * cubed));
+			result.Z = 0.5f * ((2.0f * value2.Z) + ((-value1.Z + value3.Z) * amount) +
+				(((2.0f * value1.Z) - (5.0f * value2.Z) + (4.0f * value3.Z) - value4.Z) * squared) +
+				((-value1.Z + (3.0f * value2.Z) - (3.0f * value3.Z) + value4.Z) * cubed));
 
-			result.W = 0.5f * ((((2.0f * value2.W) + ((-value1.W + value3.W) * amount)) +
-				(((((2.0f * value1.W) - (5.0f * value2.W)) + (4.0f * value3.W)) - value4.W) * squared)) +
-				((((-value1.W + (3.0f * value2.W)) - (3.0f * value3.W)) + value4.W) * cubed));
+			result.W = 0.5f * ((2.0f * value2.W) + ((-value1.W + value3.W) * amount) +
+				(((2.0f * value1.W) - (5.0f * value2.W) + (4.0f * value3.W) - value4.W) * squared) +
+				((-value1.W + (3.0f * value2.W) - (3.0f * value3.W) + value4.W) * cubed));
 		}
 
 		/// <summary>
@@ -1066,7 +1066,7 @@ namespace BulletSharp.Math
 
 				for (int r = 0; r < i; ++r)
 				{
-					newvector -= (Vector4.Dot(destination[r], newvector) / Vector4.Dot(destination[r], destination[r])) * destination[r];
+					newvector -= Vector4.Dot(destination[r], newvector) / Vector4.Dot(destination[r], destination[r]) * destination[r];
 				}
 
 				destination[i] = newvector;
@@ -1142,20 +1142,20 @@ namespace BulletSharp.Math
 			float yz = rotation.Y * z;
 			float zz = rotation.Z * z;
 
-			float num1 = ((1.0f - yy) - zz);
-			float num2 = (xy - wz);
-			float num3 = (xz + wy);
-			float num4 = (xy + wz);
-			float num5 = ((1.0f - xx) - zz);
-			float num6 = (yz - wx);
-			float num7 = (xz - wy);
-			float num8 = (yz + wx);
-			float num9 = ((1.0f - xx) - yy);
+			float num1 = 1.0f - yy - zz;
+			float num2 = xy - wz;
+			float num3 = xz + wy;
+			float num4 = xy + wz;
+			float num5 = 1.0f - xx - zz;
+			float num6 = yz - wx;
+			float num7 = xz - wy;
+			float num8 = yz + wx;
+			float num9 = 1.0f - xx - yy;
 
 			result = new Vector4(
-				((vector.X * num1) + (vector.Y * num2)) + (vector.Z * num3),
-				((vector.X * num4) + (vector.Y * num5)) + (vector.Z * num6),
-				((vector.X * num7) + (vector.Y * num8)) + (vector.Z * num9),
+				(vector.X * num1) + (vector.Y * num2) + (vector.Z * num3),
+				(vector.X * num4) + (vector.Y * num5) + (vector.Z * num6),
+				(vector.X * num7) + (vector.Y * num8) + (vector.Z * num9),
 				vector.W);
 		}
 
@@ -1203,22 +1203,22 @@ namespace BulletSharp.Math
 			float yz = rotation.Y * z;
 			float zz = rotation.Z * z;
 
-			float num1 = ((1.0f - yy) - zz);
-			float num2 = (xy - wz);
-			float num3 = (xz + wy);
-			float num4 = (xy + wz);
-			float num5 = ((1.0f - xx) - zz);
-			float num6 = (yz - wx);
-			float num7 = (xz - wy);
-			float num8 = (yz + wx);
-			float num9 = ((1.0f - xx) - yy);
+			float num1 = 1.0f - yy - zz;
+			float num2 = xy - wz;
+			float num3 = xz + wy;
+			float num4 = xy + wz;
+			float num5 = 1.0f - xx - zz;
+			float num6 = yz - wx;
+			float num7 = xz - wy;
+			float num8 = yz + wx;
+			float num9 = 1.0f - xx - yy;
 
 			for (int i = 0; i < source.Length; ++i)
 			{
 				destination[i] = new Vector4(
-					((source[i].X * num1) + (source[i].Y * num2)) + (source[i].Z * num3),
-					((source[i].X * num4) + (source[i].Y * num5)) + (source[i].Z * num6),
-					((source[i].X * num7) + (source[i].Y * num8)) + (source[i].Z * num9),
+					(source[i].X * num1) + (source[i].Y * num2) + (source[i].Z * num3),
+					(source[i].X * num4) + (source[i].Y * num5) + (source[i].Z * num6),
+					(source[i].X * num7) + (source[i].Y * num8) + (source[i].Z * num9),
 					source[i].W);
 			}
 		}
@@ -1471,10 +1471,10 @@ namespace BulletSharp.Math
 		/// </returns>
 		public bool Equals(Vector4 other, float epsilon)
 		{
-			return ((float)System.Math.Abs(other.X - X) < epsilon &&
+			return (float)System.Math.Abs(other.X - X) < epsilon &&
 				(float)System.Math.Abs(other.Y - Y) < epsilon &&
 				(float)System.Math.Abs(other.Z - Z) < epsilon &&
-				(float)System.Math.Abs(other.W - W) < epsilon);
+				(float)System.Math.Abs(other.W - W) < epsilon;
 		}
 
 		/// <summary>

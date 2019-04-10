@@ -22,7 +22,7 @@ namespace BulletUnity
 				return false;
 			}
 
-			BPhysicsWorld world = BPhysicsWorld.Get();
+			WorldController world = GetWorld();
 			if (m_constraintPtr != null)
 			{
 				if (m_isInWorld && world != null)

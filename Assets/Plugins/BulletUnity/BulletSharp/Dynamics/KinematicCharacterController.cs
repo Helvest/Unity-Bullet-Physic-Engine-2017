@@ -8,7 +8,7 @@ namespace BulletSharp
 		{
 			float dot;
 			Vector3.Dot(ref direction, ref normal, out dot);
-			return direction - (2.0f * dot) * normal;
+			return direction - 2.0f * dot * normal;
 		}
 
 		protected Vector3 ParallelComponent(ref Vector3 direction, ref Vector3 normal)
@@ -206,8 +206,8 @@ namespace BulletSharp
 
 			while (fraction > 0.01f && maxIter-- > 0)
 			{
-				start.Origin = (m_currentPosition);
-				end.Origin = (m_targetPosition);
+				start.Origin = m_currentPosition;
+				end.Origin = m_targetPosition;
 
 				Vector3 sweepDirNegative = m_currentPosition - m_targetPosition;
 

@@ -216,7 +216,7 @@ public class BulletExampleRunner : MonoBehaviour
 				singleton = ws[0];
 				for (int i = 1; i < ws.Length; i++)
 				{
-					GameObject.Destroy(ws[i].gameObject);
+					Destroy(ws[i].gameObject);
 				}
 			}
 		}

@@ -463,7 +463,7 @@ namespace BulletSharp
 					float x = forwardImpulse[i] * fwdFactor;
 					float y = sideImpulse[i] * sideFactor;
 
-					float impulseSquared = (x * x + y * y);
+					float impulseSquared = x * x + y * y;
 
 					if (impulseSquared > maximpSquared)
 					{
@@ -549,7 +549,7 @@ namespace BulletSharp
 						float susp_length = wheel_info.SuspensionRestLength;
 						float current_length = wheel_info.RaycastInfo.SuspensionLength;
 
-						float length_diff = (susp_length - current_length);
+						float length_diff = susp_length - current_length;
 
 						force = wheel_info.SuspensionStiffness
 							* length_diff * wheel_info.ClippedInvContactDotSuspension;
@@ -658,7 +658,7 @@ namespace BulletSharp
 					float proj2;
 					Vector3.Dot(ref fwd, ref vel, out proj2);
 
-					wheel.DeltaRotation = (proj2 * step) / (wheel.WheelsRadius);
+					wheel.DeltaRotation = proj2 * step / wheel.WheelsRadius;
 					wheel.Rotation += wheel.DeltaRotation;
 				}
 				else

@@ -75,10 +75,10 @@ namespace BulletSharp
 		EnableSatComparison = 256,
 		DisableBulletLCP = 512,
 		EnableCCD = 1024,
-		DrawConstraints = (1 << 11),
-		DrawConstraintLimits = (1 << 12),
-		DrawFastWireframe = (1 << 13),
-		DrawNormals = (1 << 14),
+		DrawConstraints = 1 << 11,
+		DrawConstraintLimits = 1 << 12,
+		DrawFastWireframe = 1 << 13,
+		DrawNormals = 1 << 14,
 		All = DrawWireframe | DrawAabb | DrawFeaturesText | DrawContactPoints | DrawText | DrawConstraints | DrawConstraintLimits,
 		MaxDebugDrawMode
 	}

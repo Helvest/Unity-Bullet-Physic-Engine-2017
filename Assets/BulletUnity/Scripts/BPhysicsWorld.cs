@@ -5,8 +5,11 @@ using BulletSharp.SoftBody;
 using BulletUnity.Debugging;
 using UnityEngine;
 
+
+
 namespace BulletUnity
 {
+
 	public class BPhysicsWorld : MonoBehaviour, IDisposable
 	{
 		public enum WorldType
@@ -252,6 +255,7 @@ namespace BulletUnity
 				{
 					lateUpdateHelper.m_maxSubsteps = value;
 				}
+
 				m_maxSubsteps = value;
 			}
 		}
@@ -317,7 +321,7 @@ namespace BulletUnity
 		protected virtual void Awake()
 		{
 			_isDisposed = false;
-			singleton = BPhysicsWorld.Get();
+			singleton = Get();
 		}
 
 		protected virtual void OnDestroy()

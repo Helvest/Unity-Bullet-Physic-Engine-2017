@@ -16,7 +16,7 @@ namespace BulletUnity
 		private List<PersistentManifoldList> newContacts = new List<PersistentManifoldList>();
 		private List<CollisionObject> objectsToRemove = new List<CollisionObject>();
 
-		public override void Start()
+		private void Start()
 		{
 			BCollisionObject co = GetComponent<BCollisionObject>();
 
@@ -138,10 +138,10 @@ namespace BulletUnity
 		/// }
 		/// </summary>
 
-		public virtual void BOnCollisionEnter(CollisionObject other, PersistentManifoldList manifoldList) { }
+		protected virtual void BOnCollisionEnter(CollisionObject other, PersistentManifoldList manifoldList) { }
 
-		public virtual void BOnCollisionStay(CollisionObject other, PersistentManifoldList manifoldList) { }
+		protected virtual void BOnCollisionStay(CollisionObject other, PersistentManifoldList manifoldList) { }
 
-		public virtual void BOnCollisionExit(CollisionObject other) { }
+		protected virtual void BOnCollisionExit(CollisionObject other) { }
 	}
 }

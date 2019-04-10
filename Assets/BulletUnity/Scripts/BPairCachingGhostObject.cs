@@ -15,7 +15,7 @@ namespace BulletUnity
 
 		internal override bool _BuildCollisionObject()
 		{
-			BPhysicsWorld world = BPhysicsWorld.Get();
+			WorldController world = GetWorld();
 			if (collisionObject != null)
 			{
 				if (isInWorld && world != null)
@@ -24,7 +24,7 @@ namespace BulletUnity
 				}
 			}
 
-			if (transform.localScale != UnityEngine.Vector3.one)
+			if (transform.localScale != Vector3.one)
 			{
 				Debug.LogError("The local scale on this collision shape is not one. Bullet physics does not support scaling on a rigid body world transform. Instead alter the dimensions of the CollisionShape.");
 			}
@@ -85,7 +85,7 @@ namespace BulletUnity
 		HashSet<CollisionObject> objsCurrentlyInContactWith = new HashSet<CollisionObject>();
 		private void FixedUpdate()
 		{
-			CollisionWorld collisionWorld = BPhysicsWorld.Get().world;
+			CollisionWorld collisionWorld = GetWorld().World;
 			collisionWorld.Dispatcher.DispatchAllCollisionPairs(m_ghostObject.OverlappingPairCache, collisionWorld.DispatchInfo, collisionWorld.Dispatcher);
 
 			//m_currentPosition = m_ghostObject.WorldTransform.Origin;
@@ -152,17 +152,17 @@ namespace BulletUnity
 
 		public override void BOnTriggerEnter(CollisionObject other, AlignedManifoldArray manifoldArray)
 		{
-			Debug.Log("Enter with " + other.UserObject + " fixedFrame " + BPhysicsWorld.Get().frameCount);
+			//Debug.Log("Enter with " + other.UserObject + " fixedFrame " + BPhysicsWorld.Get().frameCount);
 		}
 
 		public override void BOnTriggerStay(CollisionObject other, AlignedManifoldArray manifoldArray)
 		{
-			Debug.Log("Stay with " + other.UserObject + " fixedFrame " + BPhysicsWorld.Get().frameCount);
+			//Debug.Log("Stay with " + other.UserObject + " fixedFrame " + BPhysicsWorld.Get().frameCount);
 		}
 
 		public override void BOnTriggerExit(CollisionObject other)
 		{
-			Debug.Log("Exit with " + other.UserObject + " fixedFrame " + BPhysicsWorld.Get().frameCount);
+			//Debug.Log("Exit with " + other.UserObject + " fixedFrame " + BPhysicsWorld.Get().frameCount);
 		}
 		//============
 	}

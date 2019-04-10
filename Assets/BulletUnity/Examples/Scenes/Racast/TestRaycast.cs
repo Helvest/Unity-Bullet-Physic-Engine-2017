@@ -11,8 +11,8 @@ public class TestRaycast : MonoBehaviour
 			BulletSharp.Math.Vector3 fromP = transform.position.ToBullet();
 			BulletSharp.Math.Vector3 toP = (transform.position + Vector3.down * 10f).ToBullet();
 			ClosestRayResultCallback callback = new ClosestRayResultCallback(ref fromP, ref toP);
-			BPhysicsWorld world = BPhysicsWorld.Get();
-			world.world.RayTest(fromP, toP, callback);
+			WorldController world = WorldsManager.WorldController;
+			world.World.RayTest(fromP, toP, callback);
 
 			if (callback.HasHit)
 			{

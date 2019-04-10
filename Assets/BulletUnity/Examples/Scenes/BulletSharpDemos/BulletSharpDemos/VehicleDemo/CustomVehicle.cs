@@ -156,8 +156,8 @@ namespace VehicleDemo
 
             // calculate j that moves us to zero relative velocity
             j1 = -vrel * jacDiagABInv;
-            j1 = System.Math.Min(j1, maxImpulse);
-            j1 = System.Math.Max(j1, -maxImpulse);
+            j1 = Math.Min(j1, maxImpulse);
+            j1 = Math.Max(j1, -maxImpulse);
 
             return j1;
         }
@@ -302,7 +302,7 @@ namespace VehicleDemo
         private void ResolveSingleBilateral(RigidBody body1, Vector3 pos1, RigidBody body2, Vector3 pos2, float distance, Vector3 normal, ref float impulse, float timeStep)
         {
             float normalLenSqr = normal.LengthSquared;
-            Debug.Assert(System.Math.Abs(normalLenSqr) < 1.1f);
+            Debug.Assert(Math.Abs(normalLenSqr) < 1.1f);
             if (normalLenSqr > 1.1f)
             {
                 impulse = 0;
@@ -455,7 +455,7 @@ namespace VehicleDemo
                     {
                         sliding = true;
 
-                        float factor = maximp / (float)System.Math.Sqrt(impulseSquared);
+                        float factor = maximp / (float)Math.Sqrt(impulseSquared);
 
                         wheelInfo[i].SkidInfo *= factor;
                     }

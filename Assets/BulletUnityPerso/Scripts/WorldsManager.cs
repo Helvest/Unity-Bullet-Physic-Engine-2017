@@ -9,6 +9,8 @@ public class WorldsManager : MonoBehaviour
 
 	public static int ActualWorldID = 0;
 
+	public bool autoCreateWorld = true;
+
 	[SerializeField]
 	private PhysicWorldParameters _physicWorldParameters;
 	public static PhysicWorldParameters PhysicWorldParameters
@@ -17,27 +19,32 @@ public class WorldsManager : MonoBehaviour
 	}
 
 	private Dictionary<int, WorldController> worldControllerList = new Dictionary<int, WorldController>();
-	public WorldController WorldController
+	public static WorldController WorldController
 	{
 		get
 		{
-			if(worldControllerList.Count > 0)
+			if (Instance.worldControllerList.Count > 0)
 			{
-				return worldControllerList[ActualWorldID];
+				return Instance.worldControllerList[ActualWorldID];
 			}
 
 			return null;
 		}
 	}
 
-	public WorldController GetWorldController(int ID)
+	public static WorldController GetWorldController(int ID)
 	{
-		return worldControllerList[ID];
+		if (Instance.worldControllerList.ContainsKey(ID))
+		{
+			return Instance.worldControllerList[ID];
+		}
+
+		return null;
 	}
 
 	public WorldController GetOrCreateWorldController(int ID)
 	{
-		if(!worldControllerList.ContainsKey(ID))
+		if (!worldControllerList.ContainsKey(ID))
 		{
 			worldControllerList.Add(ID, new WorldController());
 		}
@@ -47,7 +54,7 @@ public class WorldsManager : MonoBehaviour
 
 	public void OnDrawGizmos()
 	{
-		if(WorldController != null && WorldController.physicWorldParameters.debug)
+		if (Instance && WorldController != null && WorldController.physicWorldParameters.debug)
 		{
 			WorldController.World.DebugDrawWorld();
 		}
@@ -57,7 +64,7 @@ public class WorldsManager : MonoBehaviour
 	{
 		Instance = this;
 
-		if(_physicWorldParameters.worldType == WorldType.SoftBodyAndRigidBody
+		if (_physicWorldParameters.worldType == WorldType.SoftBodyAndRigidBody
 			&& _physicWorldParameters.collisionType == CollisionConfType.DefaultDynamicsWorldCollisionConf)
 		{
 			Debug.LogError("For World Type = SoftBodyAndRigidBody collisionType must be collisionType=SoftBodyRigidBodyCollisionConf. Switching");
@@ -65,18 +72,21 @@ public class WorldsManager : MonoBehaviour
 			return;
 		}
 
-		Time.fixedDeltaTime = _physicWorldParameters.fixedTimeStep;
+		Time.fixedDeltaTime = _physicWorldParameters.fixedDeltaTime;
 
-		//Create default Physic World
-		ActualWorldID = 0;
-		worldControllerList.Add(ActualWorldID, new WorldController());
+		if (autoCreateWorld)
+		{
+			//Create default Physic World
+			ActualWorldID = 0;
+			worldControllerList.Add(ActualWorldID, new WorldController());
+		}
 	}
 
 	private void OnDestroy()
 	{
-		for(int i = 0; i < worldControllerList.Count; i++)
+		foreach (WorldController world in worldControllerList.Values)
 		{
-			worldControllerList[i].Dispose();
+			world.Dispose();
 		}
 
 		worldControllerList.Clear();
@@ -84,6 +94,9 @@ public class WorldsManager : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		//worldControllerList[0].StepSimulation(_physicWorldParameters.fixedTimeStep);
+		foreach (WorldController world in worldControllerList.Values)
+		{
+			world.StepSimulation();
+		}
 	}
 }

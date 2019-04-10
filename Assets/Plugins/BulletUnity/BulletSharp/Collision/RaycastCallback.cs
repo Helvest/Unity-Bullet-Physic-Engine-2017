@@ -51,7 +51,7 @@ namespace BulletSharp
 
 
             float proj_length = distA - distB;
-            float distance = (distA) / (proj_length);
+            float distance = distA / proj_length;
             // Now we have the intersection point on the plane, we'll see if it's inside the triangle
             // Add an epsilon as a tolerance for the raycast,
             // in case the ray hits exacly on the edge of the triangle.

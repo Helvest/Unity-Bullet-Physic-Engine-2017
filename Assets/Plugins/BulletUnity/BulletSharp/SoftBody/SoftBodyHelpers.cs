@@ -38,13 +38,13 @@ namespace BulletSharp.SoftBody
 			switch (id)
 			{
 				case 0:
-					return 1.0f / ((resx - 1)) * ix;
+					return 1.0f / (resx - 1) * ix;
 				case 1:
-					return 1.0f / ((resy - 1)) * (resy - 1 - iy);
+					return 1.0f / (resy - 1) * (resy - 1 - iy);
 				case 2:
-					return 1.0f / ((resy - 1)) * (resy - 1 - iy - 1);
+					return 1.0f / (resy - 1) * (resy - 1 - iy - 1);
 				case 3:
-					return 1.0f / ((resx - 1)) * (ix + 1);
+					return 1.0f / (resx - 1) * (ix + 1);
 				default:
 					return 0;
 			}
@@ -64,7 +64,7 @@ namespace BulletSharp.SoftBody
 					p *= 0.5f;
 				}
 				float w = 2 * t - 1;
-				float a = ((1 + 2 * i) * (float)System.Math.PI) / numVertices;
+				float a = (1 + 2 * i) * (float)System.Math.PI / numVertices;
 				float s = (float)System.Math.Sqrt(1 - w * w);
 				vtx[i] = new Vector3(s * (float)System.Math.Cos(a), s * (float)System.Math.Sin(a), w) * radius + center;
 			}

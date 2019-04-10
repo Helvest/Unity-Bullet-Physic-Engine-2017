@@ -21,4 +21,11 @@
 		Axis3SweepBroadphase_32bit,
 		//SimpleBroadphase,
 	}
+
+	public enum TimeStepTypes
+	{
+		OneStep,
+		SubStep,
+		SubStepAndTimeStep
+	}
 }

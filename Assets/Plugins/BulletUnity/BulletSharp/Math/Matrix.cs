@@ -323,13 +323,13 @@ namespace BulletSharp.Math
 
 				if (trace > 0.0f)
 				{
-					float s = UnityEngine.Mathf.Sqrt(trace + (1.0f));
-					temp[3] = (s * (0.5f));
-					s = (0.5f) / s;
+					float s = UnityEngine.Mathf.Sqrt(trace + 1.0f);
+					temp[3] = s * 0.5f;
+					s = 0.5f / s;
 
-					temp[0] = ((M32 - M23) * s);
-					temp[1] = ((M13 - M31) * s);
-					temp[2] = ((M21 - M12) * s);
+					temp[0] = (M32 - M23) * s;
+					temp[1] = (M13 - M31) * s;
+					temp[2] = (M21 - M12) * s;
 				}
 				else
 				{
@@ -400,9 +400,9 @@ namespace BulletSharp.Math
 				float temp5 = (M31 * M43) - (M33 * M41);
 				float temp6 = (M31 * M42) - (M32 * M41);
 
-				return ((((M11 * (((M22 * temp1) - (M23 * temp2)) + (M24 * temp3))) - (M12 * (((M21 * temp1) -
-					(M23 * temp4)) + (M24 * temp5)))) + (M13 * (((M21 * temp2) - (M22 * temp4)) + (M24 * temp6)))) -
-					(M14 * (((M21 * temp3) - (M22 * temp5)) + (M23 * temp6))));
+				return (M11 * ((M22 * temp1) - (M23 * temp2) + (M24 * temp3))) - (M12 * ((M21 * temp1) -
+					(M23 * temp4) + (M24 * temp5))) + (M13 * ((M21 * temp2) - (M22 * temp4) + (M24 * temp6))) -
+					(M14 * ((M21 * temp3) - (M22 * temp5) + (M23 * temp6)));
 			}
 		}
 
@@ -1150,7 +1150,7 @@ namespace BulletSharp.Math
 		public static void SmoothStep(ref Matrix start, ref Matrix end, float amount, out Matrix result)
 		{
 			amount = (amount > 1.0f) ? 1.0f : ((amount < 0.0f) ? 0.0f : amount);
-			amount = (amount * amount) * (3.0f - (2.0f * amount));
+			amount = amount * amount * (3.0f - (2.0f * amount));
 
 			result.M11 = start.M11 + ((end.M11 - start.M11) * amount);
 			result.M12 = start.M12 + ((end.M12 - start.M12) * amount);
@@ -1318,14 +1318,14 @@ namespace BulletSharp.Math
 			//By separating the above algorithm into multiple lines, we actually increase accuracy.
 			result = value;
 
-			result.Row2 = result.Row2 - (Vector4.Dot(result.Row1, result.Row2) / Vector4.Dot(result.Row1, result.Row1)) * result.Row1;
+			result.Row2 = result.Row2 - Vector4.Dot(result.Row1, result.Row2) / Vector4.Dot(result.Row1, result.Row1) * result.Row1;
 
-			result.Row3 = result.Row3 - (Vector4.Dot(result.Row1, result.Row3) / Vector4.Dot(result.Row1, result.Row1)) * result.Row1;
-			result.Row3 = result.Row3 - (Vector4.Dot(result.Row2, result.Row3) / Vector4.Dot(result.Row2, result.Row2)) * result.Row2;
+			result.Row3 = result.Row3 - Vector4.Dot(result.Row1, result.Row3) / Vector4.Dot(result.Row1, result.Row1) * result.Row1;
+			result.Row3 = result.Row3 - Vector4.Dot(result.Row2, result.Row3) / Vector4.Dot(result.Row2, result.Row2) * result.Row2;
 
-			result.Row4 = result.Row4 - (Vector4.Dot(result.Row1, result.Row4) / Vector4.Dot(result.Row1, result.Row1)) * result.Row1;
-			result.Row4 = result.Row4 - (Vector4.Dot(result.Row2, result.Row4) / Vector4.Dot(result.Row2, result.Row2)) * result.Row2;
-			result.Row4 = result.Row4 - (Vector4.Dot(result.Row3, result.Row4) / Vector4.Dot(result.Row3, result.Row3)) * result.Row3;
+			result.Row4 = result.Row4 - Vector4.Dot(result.Row1, result.Row4) / Vector4.Dot(result.Row1, result.Row1) * result.Row1;
+			result.Row4 = result.Row4 - Vector4.Dot(result.Row2, result.Row4) / Vector4.Dot(result.Row2, result.Row2) * result.Row2;
+			result.Row4 = result.Row4 - Vector4.Dot(result.Row3, result.Row4) / Vector4.Dot(result.Row3, result.Row3) * result.Row3;
 		}
 
 		/// <summary>
@@ -1752,7 +1752,7 @@ namespace BulletSharp.Math
 					if (j != r)
 					{
 						float sub = matrix[j, lead];
-						for (int k = 0; k < columncount; k++) matrix[j, k] -= (sub * matrix[r, k]);
+						for (int k = 0; k < columncount; k++) matrix[j, k] -= sub * matrix[r, k];
 					}
 				}
 
@@ -2449,13 +2449,13 @@ namespace BulletSharp.Math
 
 			result = Matrix.Identity;
 			result.M11 = xx + (cos * (1.0f - xx));
-			result.M12 = (xy - (cos * xy)) + (sin * z);
-			result.M13 = (xz - (cos * xz)) - (sin * y);
-			result.M21 = (xy - (cos * xy)) - (sin * z);
+			result.M12 = xy - (cos * xy) + (sin * z);
+			result.M13 = xz - (cos * xz) - (sin * y);
+			result.M21 = xy - (cos * xy) - (sin * z);
 			result.M22 = yy + (cos * (1.0f - yy));
-			result.M23 = (yz - (cos * yz)) + (sin * x);
-			result.M31 = (xz - (cos * xz)) + (sin * y);
-			result.M32 = (yz - (cos * yz)) - (sin * x);
+			result.M23 = yz - (cos * yz) + (sin * x);
+			result.M31 = xz - (cos * xz) + (sin * y);
+			result.M32 = yz - (cos * yz) - (sin * x);
 			result.M33 = zz + (cos * (1.0f - zz));
 		}
 
@@ -3017,7 +3017,7 @@ namespace BulletSharp.Math
 		/// </returns>
 		public bool Equals(Matrix other)
 		{
-			return (other.M11 == M11 &&
+			return other.M11 == M11 &&
 				other.M12 == M12 &&
 				other.M13 == M13 &&
 				other.M14 == M14 &&
@@ -3035,7 +3035,7 @@ namespace BulletSharp.Math
 				other.M41 == M41 &&
 				other.M42 == M42 &&
 				other.M43 == M43 &&
-				other.M44 == M44);
+				other.M44 == M44;
 		}
 
 		/// <summary>
@@ -3048,7 +3048,7 @@ namespace BulletSharp.Math
 		/// </returns>
 		public bool Equals(Matrix other, float epsilon)
 		{
-			return (System.Math.Abs(other.M11 - M11) < epsilon &&
+			return System.Math.Abs(other.M11 - M11) < epsilon &&
 				System.Math.Abs(other.M12 - M12) < epsilon &&
 				System.Math.Abs(other.M13 - M13) < epsilon &&
 				System.Math.Abs(other.M14 - M14) < epsilon &&
@@ -3066,7 +3066,7 @@ namespace BulletSharp.Math
 				System.Math.Abs(other.M41 - M41) < epsilon &&
 				System.Math.Abs(other.M42 - M42) < epsilon &&
 				System.Math.Abs(other.M43 - M43) < epsilon &&
-				System.Math.Abs(other.M44 - M44) < epsilon);
+				System.Math.Abs(other.M44 - M44) < epsilon;
 		}
 
 		/// <summary>

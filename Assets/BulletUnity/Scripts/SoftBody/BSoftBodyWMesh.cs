@@ -28,6 +28,13 @@ namespace BulletUnity
 
             GetComponent<MeshFilter>().sharedMesh = mesh;
 
+			#if UNITY_EDITOR
+			if (!UnityEditor.EditorApplication.isPlaying)
+			{
+				return false;
+			}
+			#endif
+
             if (World == null)
             {
                 return false;

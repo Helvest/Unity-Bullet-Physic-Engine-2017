@@ -689,7 +689,7 @@ namespace BulletSharp
 			// Use arithmetic shift right, shifting the sign bit through all 32 bits
 			uint testNz = (uint)(((int)condition | -(int)condition) >> 31);
 			uint testEqz = ~testNz;
-			return ((valueIfConditionNonZero & testNz) | (valueIfConditionZero & testEqz));
+			return (valueIfConditionNonZero & testNz) | (valueIfConditionZero & testEqz);
 		}
 
 		//        public static void BasisMatrix(Matrix matrixIn, out Matrix matrixOut)
@@ -751,7 +751,7 @@ namespace BulletSharp
 			{
 				return input2;
 			}
-			return (-input2);
+			return -input2;
 		}
 
 		public static Vector3 QuatRotate(ref Quaternion rotation, ref Vector3 v)
@@ -1077,7 +1077,7 @@ namespace BulletSharp
 
 		public static float DegToRadians(float degrees)
 		{
-			return (degrees / 360.0f) * SIMD_2_PI;
+			return degrees / 360.0f * SIMD_2_PI;
 		}
 
 		/*
@@ -1172,8 +1172,8 @@ namespace BulletSharp
 		public const float SIMD_QUARTER_PI = SIMD_PI * 0.25f;
 
 		public const float SIMD_INFINITY = float.MaxValue;
-		public const float SIMD_RADS_PER_DEG = (SIMD_2_PI / 360.0f);
-		public const float SIMD_DEGS_PER_RAD = (360.0f / SIMD_2_PI);
+		public const float SIMD_RADS_PER_DEG = SIMD_2_PI / 360.0f;
+		public const float SIMD_DEGS_PER_RAD = 360.0f / SIMD_2_PI;
 
 
 	}

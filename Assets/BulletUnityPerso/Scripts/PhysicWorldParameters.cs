@@ -16,11 +16,17 @@ public class PhysicWorldParameters : ScriptableObject
 	public BroadphaseType broadphaseType = BroadphaseType.DynamicAABBBroadphase;
 
 	[Header("Time")]
-	public float fixedTimeStep = 1f / 60f;
 
+	public float fixedDeltaTime = 1f / 60f;
 	public float framerate = 60;
 
+	public TimeStepTypes timeStepType = TimeStepTypes.OneStep;
+
 	public int maxSubsteps = 3;
+
+	public float subFixedTimeStep = 1f / 60f;
+	public float subFramerate = 60;
+
 
 	[Header("3Sweep")]
 	public ushort axis3SweepMaxProxies = 32766;

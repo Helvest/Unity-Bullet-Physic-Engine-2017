@@ -28,16 +28,8 @@ namespace BulletUnity
                 }
                 else
                 {
-                    BPhysicsWorld w = BPhysicsWorld.Get();
-                    if (w != null && w.world is SoftRigidDynamicsWorld)
-                    {
-                        _world = (SoftRigidDynamicsWorld)w.world;
-                        return _world;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+					_world = GetWorld()?.SoftWorld;
+					return _world;
                 }
             }
         }
@@ -50,20 +42,21 @@ namespace BulletUnity
 
         protected override void Awake()
         {
+			WorldID = WorldsManager.ActualWorldID;
             //disable warning
         }
 
         protected override void AddObjectToBulletWorld()
         {
-            BPhysicsWorld.Get().AddSoftBody(this);
+            GetWorld().AddSoftBody(this);
         }
 
         protected override void RemoveObjectFromBulletWorld()
         {
-            BPhysicsWorld world = BPhysicsWorld.Get();
-            if (world && isInWorld)
+            WorldController world = GetWorld();
+            if (isInWorld)
             {
-                world.RemoveSoftBody(softBody);
+                world?.RemoveSoftBody(softBody);
             }
         }
 
