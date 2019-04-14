@@ -343,7 +343,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &417282685
 MonoBehaviour:
@@ -356,6 +356,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bda5e1becdd014789a5bce60fb58ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &724059951
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 14.5390625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.4921875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 15.2734375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1077285737
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +531,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1520622892
 Material:
@@ -565,69 +607,3 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
---- !u!1 &1643903990
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1643903992}
-  - component: {fileID: 1643903991}
-  - component: {fileID: 1643903993}
-  m_Layer: 0
-  m_Name: BulletPhysicsWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1643903991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1643903990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f2902ecfd038540a5652633a7400c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debugDrawMode: 1
-  _doDebugDraw: 0
-  m_worldType: 1
-  m_collisionType: 0
-  m_broadphaseType: 0
-  m_axis3SweepBroadphaseMin: {x: -1000, y: -1000, z: -1000}
-  m_axis3SweepBroadphaseMax: {x: 1000, y: 1000, z: 1000}
-  m_gravity: {x: 0, y: -9.8, z: 0}
-  m_fixedTimeStep: 0.016666668
-  m_maxSubsteps: 3
-  debugType: 0
---- !u!4 &1643903992
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1643903990}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1643903993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1643903990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501ca1b9420a0ad498f19316ac063a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoCreateWorld: 1
-  _physicWorldParameters: {fileID: 11400000, guid: aae6c7fc99835be4095417e69312ce51,
-    type: 2}

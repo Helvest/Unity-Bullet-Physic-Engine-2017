@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028377, g: 0.22571409, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 3
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -292,6 +293,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &119259704
 MonoBehaviour:
@@ -318,7 +320,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &160888610
 Mesh:
@@ -488,7 +490,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &272369499
 GameObject:
@@ -521,6 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -541,6 +544,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!23 &272369501
 MeshRenderer:
@@ -625,58 +629,48 @@ Transform:
   m_Father: {fileID: 2132305100}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &291602730
-GameObject:
+--- !u!1001 &357002314
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 291602732}
-  - component: {fileID: 291602731}
-  m_Layer: 0
-  m_Name: BulletPhysicsWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!114 &291602731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291602730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f2902ecfd038540a5652633a7400c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debugDrawMode: 2048
-  _doDebugDraw: 1
-  m_worldType: 1
-  m_collisionType: 0
-  m_broadphaseType: 0
-  m_axis3SweepBroadphaseMin: {x: -1000, y: -1000, z: -1000}
-  m_axis3SweepBroadphaseMax: {x: 1000, y: 1000, z: 1000}
-  m_gravity: {x: 0, y: -9.80665, z: 0}
-  m_fixedTimeStep: 0.016666668
-  m_maxSubsteps: 3
-  debugType: -1
-  timeStr: 0
---- !u!4 &291602732
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291602730}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 14.5390625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.4921875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 15.2734375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fc1e2be3b6a02aa4cbb627ce97e2dbf3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!43 &364746279
 Mesh:
   m_ObjectHideFlags: 0
@@ -998,6 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1018,6 +1013,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &437567288
 MonoBehaviour:
@@ -1422,6 +1418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1442,6 +1439,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &552038650
 MonoBehaviour:
@@ -1557,6 +1555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 3
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1577,6 +1576,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &552851030
 MonoBehaviour:
@@ -1603,7 +1603,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &736837683
 GameObject:
@@ -1720,6 +1720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1740,6 +1741,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &736837689
 MonoBehaviour:
@@ -2711,7 +2713,6 @@ GameObject:
   - component: {fileID: 1417799639}
   - component: {fileID: 1417799638}
   - component: {fileID: 1417799637}
-  - component: {fileID: 1417799643}
   m_Layer: 0
   m_Name: BSphere
   m_TagString: Untagged
@@ -2811,6 +2812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: -1
@@ -2831,6 +2833,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!4 &1417799642
 Transform:
@@ -2843,21 +2846,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1417799643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1417799636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54453f7883a2d994a88b2edd5c68ce3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  origine: {x: 0, y: 0, z: 0}
-  contraintY: 0
 --- !u!1 &1447382816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,6 +2965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -2995,6 +2986,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1447382822
 MonoBehaviour:
@@ -3670,6 +3662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -3690,6 +3683,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1700056651
 MonoBehaviour:
@@ -3836,6 +3830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -3856,6 +3851,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1715388941
 MonoBehaviour:
@@ -4309,6 +4305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -4329,6 +4326,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1774229543
 MonoBehaviour:
@@ -4502,6 +4500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -4522,6 +4521,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1799524606
 MonoBehaviour:
@@ -4668,6 +4668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -4688,6 +4689,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1884911297
 MonoBehaviour:
@@ -4834,6 +4836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -4854,6 +4857,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1897261230
 MonoBehaviour:
@@ -5118,6 +5122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 3
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -5138,6 +5143,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &2057613835
 MonoBehaviour:
@@ -5164,7 +5170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2067970932
 GameObject:
@@ -5235,7 +5241,7 @@ Transform:
   m_LocalScale: {x: 6, y: 0.001, z: 6}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2132305099
 GameObject:
@@ -5274,5 +5280,5 @@ Transform:
   - {fileID: 1700056652}
   - {fileID: 1715388942}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

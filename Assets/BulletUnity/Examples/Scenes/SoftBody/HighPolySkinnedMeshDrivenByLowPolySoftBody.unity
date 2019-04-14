@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028377, g: 0.22571409, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -622,58 +622,6 @@ Transform:
   m_Father: {fileID: 334056706}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &370800548
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 370800550}
-  - component: {fileID: 370800549}
-  m_Layer: 0
-  m_Name: BulletPhysicsWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!114 &370800549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 370800548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f2902ecfd038540a5652633a7400c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debugDrawMode: 1
-  _doDebugDraw: 0
-  m_worldType: 3
-  m_collisionType: 1
-  m_broadphaseType: 0
-  m_axis3SweepBroadphaseMin: {x: -1000, y: -1000, z: -1000}
-  m_axis3SweepBroadphaseMax: {x: 1000, y: 1000, z: 1000}
-  m_gravity: {x: 0, y: -9.8, z: 0}
-  m_fixedTimeStep: 0.016666668
-  m_maxSubsteps: 3
-  debugType: 0
-  timeStr: 0
---- !u!4 &370800550
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 370800548}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &507304331
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 2
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -864,6 +813,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &587539706
 MonoBehaviour:
@@ -979,6 +929,48 @@ Transform:
   m_Father: {fileID: 1151062539}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &773497593
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 14.5390625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.4921875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 15.2734375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &778471531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,6 +1452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1480,6 +1473,7 @@ MonoBehaviour:
   _mass: 10
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1116143400
 MonoBehaviour:
@@ -1866,6 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec871bc1efb3d141a5ad357e0264762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: -1
@@ -1907,14 +1902,14 @@ MonoBehaviour:
       SoftKineticImpulseSplit: 0.5
       SoftSoftImpulseSplit: 0.5
     sBMaterial:
-      LinearStiffness: 0.092
+      LinearStiffness: 0.01
       AngularStiffness: 0.213
       VolumeStiffness: 0.4
       Flags: 1
     sBpresetSelect: 7
   skinnedMesh: {fileID: 1968061157}
-  debugDisplaySimulatedMesh: 1
-  debugDisplayMappedBoneGizmos: 1
+  debugDisplaySimulatedMesh: 0
+  debugDisplayMappedBoneGizmos: 0
   debugDisplayMappedAnchors: 0
   debugSimMeshOffset: {x: 6, y: -5, z: -2}
   radius: 0.0001
@@ -1936,29 +1931,13 @@ MonoBehaviour:
   - anchorRigidBody: {fileID: 1443870452}
     colRangeFrom: 0.5
     colRangeTo: 0.75
-    anchorNodeIndexes: 26000000270000002800000029000000260000002700000028000000290000001c0000001d0000001e0000001f000000
+    anchorNodeIndexes: 1c0000001d0000001e0000001f000000
     anchorNodeStrength:
     - 1
     - 1
     - 1
     - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
     anchorPosition:
-    - {x: 1.0000006, y: -2.7084873, z: -3.416976}
-    - {x: -0.9999993, y: -2.7084877, z: -3.416976}
-    - {x: -0.99999964, y: -0.70848763, z: -4.416976}
-    - {x: 1, y: -0.7084872, z: -4.416976}
-    - {x: 1.0000006, y: -2.7084873, z: -3.416976}
-    - {x: -0.9999993, y: -2.7084877, z: -3.416976}
-    - {x: -0.99999964, y: -0.70848763, z: -4.416976}
-    - {x: 1, y: -0.7084872, z: -4.416976}
     - {x: 0.999999, y: 5.0300283, z: 1.000001}
     - {x: 0.9999987, y: 5.030029, z: -0.99999905}
     - {x: -1.0000015, y: 5.030028, z: 1.000001}
@@ -1966,149 +1945,75 @@ MonoBehaviour:
   - anchorRigidBody: {fileID: 1116143399}
     colRangeFrom: 0.25
     colRangeTo: 0.5
-    anchorNodeIndexes: 1c0000001d0000001e0000001f0000001c0000001d0000001e0000001f00000026000000270000002800000029000000
+    anchorNodeIndexes: 26000000270000002800000029000000
     anchorNodeStrength:
     - 1
     - 1
     - 1
     - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
-    - 1
     anchorPosition:
-    - {x: 0.999999, y: 5.0300283, z: 1.000001}
-    - {x: 0.9999987, y: 5.030029, z: -0.99999905}
-    - {x: -1.0000015, y: 5.030028, z: 1.000001}
-    - {x: -1.0000011, y: 5.0300283, z: -0.99999905}
-    - {x: 0.999999, y: 5.0300283, z: 1.000001}
-    - {x: 0.9999987, y: 5.030029, z: -0.99999905}
-    - {x: -1.0000015, y: 5.030028, z: 1.000001}
-    - {x: -1.0000011, y: 5.0300283, z: -0.99999905}
     - {x: 1.0000006, y: -2.7084873, z: -3.416976}
     - {x: -0.9999993, y: -2.7084877, z: -3.416976}
     - {x: -0.99999964, y: -0.70848763, z: -4.416976}
     - {x: 1, y: -0.7084872, z: -4.416976}
   bone2idxMap:
-  - bone: {fileID: 829096654}
-    nodeIdx: 1
+  - bone: {fileID: 227441415}
+    nodeIdx: 13
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
-    - nodeIdx: 35
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710367, y: -0.63245845, z: 0.31622896}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 0
-      r_angleFromPlane: 0.0003453493
-      edgeXnorm: {x: 0.70710367, y: 0.63245845, z: -0.31622908}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 7
-      r_angleFromPlane: 0.64496064
-      edgeXnorm: {x: 0.4658879, y: 0.7531178, z: 0.46450186}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 34
-      r_angleFromPlane: 0.6573667
-      edgeXnorm: {x: -0.44953638, y: -0.74727607, z: -0.48938268}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 2
-      r_angleFromPlane: 0.7853941
-      edgeXnorm: {x: -0.000019300933, y: -0.44721362, z: -0.89442724}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 33
-      r_angleFromPlane: 0.7854024
-      edgeXnorm: {x: -0.0000001066199, y: 0.44719622, z: 0.8944358}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1758349157}
-    nodeIdx: 2
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 3
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.7071036, y: 0.6324583, z: -0.31622916}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 34
-      r_angleFromPlane: 0.0003453493
-      edgeXnorm: {x: 0.70710367, y: -0.6324583, z: 0.31622913}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 36
-      r_angleFromPlane: 0.6342619
-      edgeXnorm: {x: 0.4789747, y: -0.7573903, z: -0.4437829}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 0
-      r_angleFromPlane: 0.66688293
-      edgeXnorm: {x: -0.43606904, y: 0.7420723, z: 0.5090899}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 1
-      r_angleFromPlane: 0.7853936
-      edgeXnorm: {x: -0.000019300922, y: 0.4472136, z: 0.8944272}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 32
-      r_angleFromPlane: 0.7854028
-      edgeXnorm: {x: 0.000000093292456, y: -0.4471964, z: -0.8944358}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1381540016}
-    nodeIdx: 5
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 19
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710367, y: 0.6324583, z: 0.3162291}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 0
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710367, y: -0.6324583, z: -0.3162291}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 18
-      r_angleFromPlane: 0.61864924
-      edgeXnorm: {x: 0.49659622, y: 0.12582509, z: 0.8588133}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 4
-      r_angleFromPlane: 0.64642936
-      edgeXnorm: {x: -0.46399742, y: -0.07756885, z: -0.88243383}
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710367, y: -0.63245827, z: -0.31622928}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 13
-      r_angleFromPlane: 0.78539395
-      edgeXnorm: {x: 0.000019348612, y: 0.44721365, z: -0.8944271}
+    - nodeIdx: 14
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710367, y: 0.63245827, z: 0.31622925}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 6
-      r_angleFromPlane: 0.7854024
-      edgeXnorm: {x: 0.0000001066199, y: -0.44719622, z: 0.8944358}
+    - nodeIdx: 9
+      r_angleFromPlane: 0.622019
+      edgeXnorm: {x: 0.49292216, y: -0.12026313, z: -0.8617219}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 326141637}
-    nodeIdx: 6
+    - nodeIdx: 19
+      r_angleFromPlane: 0.6433947
+      edgeXnorm: {x: -0.46783292, y: 0.08312433, z: 0.8798992}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 5
+      r_angleFromPlane: 0.78539366
+      edgeXnorm: {x: 0.000019348607, y: -0.44721362, z: 0.8944272}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 8
+      r_angleFromPlane: 0.78540283
+      edgeXnorm: {x: -0.0000001199474, y: 0.44719645, z: -0.89443576}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 362447178}
+    nodeIdx: 14
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
-    - nodeIdx: 7
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710367, y: 0.63245827, z: 0.31622922}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 18
+    - nodeIdx: 13
       r_angleFromPlane: 0
       edgeXnorm: {x: 0.70710367, y: -0.63245827, z: -0.31622925}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 0
-      r_angleFromPlane: 0.6220377
-      edgeXnorm: {x: -0.492929, y: 0.76152104, z: -0.42084044}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 15
-      r_angleFromPlane: 0.64337635
-      edgeXnorm: {x: 0.4678556, y: -0.75378376, z: 0.46143377}
+    - nodeIdx: 16
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.7071036, y: 0.63245827, z: 0.31622922}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 8
-      r_angleFromPlane: 0.7853934
-      edgeXnorm: {x: 0.000019372445, y: -0.44721365, z: 0.8944271}
+      r_angleFromPlane: 0.61864966
+      edgeXnorm: {x: 0.49659616, y: -0.125825, z: -0.8588133}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 5
+    - nodeIdx: 20
+      r_angleFromPlane: 0.66075295
+      edgeXnorm: {x: -0.4448433, y: 0.050272964, z: 0.8941963}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 19
+      r_angleFromPlane: 0.7853938
+      edgeXnorm: {x: 0.00001937245, y: -0.44721365, z: 0.8944272}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 15
       r_angleFromPlane: 0.78540283
-      edgeXnorm: {x: -0.00000010661994, y: 0.4471964, z: -0.8944358}
+      edgeXnorm: {x: -0.0000001199474, y: 0.44719645, z: -0.89443576}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 1239359741}
     nodeIdx: 8
@@ -2139,134 +2044,18 @@ MonoBehaviour:
       r_angleFromPlane: 0.78540236
       edgeXnorm: {x: 0.00000011994734, y: -0.44719625, z: 0.8944359}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1377294078}
-    nodeIdx: 11
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 27
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710677, y: 0, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 3
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 25
-      r_angleFromPlane: 0.60590065
-      edgeXnorm: {x: -0.5098924, y: 0.6928344, z: -0.5098924}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 10
-      r_angleFromPlane: 0.6357483
-      edgeXnorm: {x: 0.47719002, y: -0.7379562, z: 0.47719002}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 23
-      r_angleFromPlane: 0.78539795
-      edgeXnorm: {x: 0.00000023841854, y: 1, z: 0.00000023841854}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 12
-      r_angleFromPlane: 0.7853981
-      edgeXnorm: {x: 0.0000002384186, y: -1, z: 0.0000002384186}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1979493395}
-    nodeIdx: 12
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 26
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710677, y: -0.000000343611, z: 0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 10
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0.0000003584819, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 27
-      r_angleFromPlane: 0.60590035
-      edgeXnorm: {x: -0.5098927, y: 0.6928339, z: 0.5098927}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 9
-      r_angleFromPlane: 0.6357483
-      edgeXnorm: {x: 0.47719, y: -0.7379562, z: -0.47719}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 22
-      r_angleFromPlane: 0.7853979
-      edgeXnorm: {x: 0.00000023841852, y: -1, z: -0.00000023841852}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 11
-      r_angleFromPlane: 0.7853981
-      edgeXnorm: {x: -0.0000002384186, y: 1, z: 0.0000002384186}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 227441415}
-    nodeIdx: 13
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 14
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710367, y: 0.63245827, z: 0.31622925}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 4
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710367, y: -0.63245827, z: -0.31622928}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 9
-      r_angleFromPlane: 0.622019
-      edgeXnorm: {x: 0.49292216, y: -0.12026313, z: -0.8617219}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 19
-      r_angleFromPlane: 0.6433947
-      edgeXnorm: {x: -0.46783292, y: 0.08312433, z: 0.8798992}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 5
-      r_angleFromPlane: 0.78539366
-      edgeXnorm: {x: 0.000019348607, y: -0.44721362, z: 0.8944272}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 8
-      r_angleFromPlane: 0.78540283
-      edgeXnorm: {x: -0.0000001199474, y: 0.44719645, z: -0.89443576}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 362447178}
-    nodeIdx: 14
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 16
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.7071036, y: 0.63245827, z: 0.31622922}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 13
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710367, y: -0.63245827, z: -0.31622925}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 8
-      r_angleFromPlane: 0.61864966
-      edgeXnorm: {x: 0.49659616, y: -0.125825, z: -0.8588133}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 20
-      r_angleFromPlane: 0.66075295
-      edgeXnorm: {x: -0.4448433, y: 0.050272964, z: 0.8941963}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 19
-      r_angleFromPlane: 0.7853938
-      edgeXnorm: {x: 0.00001937245, y: -0.44721365, z: 0.8944272}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 15
-      r_angleFromPlane: 0.78540283
-      edgeXnorm: {x: -0.0000001199474, y: 0.44719645, z: -0.89443576}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 1344351250}
     nodeIdx: 15
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
-    - nodeIdx: 17
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.7071036, y: -0.6324583, z: -0.3162291}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 8
       r_angleFromPlane: 0
       edgeXnorm: {x: 0.70710367, y: 0.6324583, z: 0.31622913}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 17
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.7071036, y: -0.6324583, z: -0.3162291}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 16
       r_angleFromPlane: 0.6380413
@@ -2283,6 +2072,122 @@ MonoBehaviour:
     - nodeIdx: 14
       r_angleFromPlane: 0.78540236
       edgeXnorm: {x: 0.00000011994734, y: -0.44719625, z: 0.8944359}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 326141637}
+    nodeIdx: 6
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 7
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710367, y: 0.63245827, z: 0.31622922}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 18
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710367, y: -0.63245827, z: -0.31622925}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 0
+      r_angleFromPlane: 0.6220377
+      edgeXnorm: {x: -0.492929, y: 0.76152104, z: -0.42084044}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 15
+      r_angleFromPlane: 0.64337635
+      edgeXnorm: {x: 0.4678556, y: -0.75378376, z: 0.46143377}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 8
+      r_angleFromPlane: 0.7853934
+      edgeXnorm: {x: 0.000019372445, y: -0.44721365, z: 0.8944271}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 5
+      r_angleFromPlane: 0.78540283
+      edgeXnorm: {x: -0.00000010661994, y: 0.4471964, z: -0.8944358}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1691324905}
+    nodeIdx: 18
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 6
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710367, y: 0.63245827, z: 0.31622925}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 21
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.7071036, y: -0.63245827, z: -0.3162292}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 5
+      r_angleFromPlane: 0.6186687
+      edgeXnorm: {x: -0.49660307, y: 0.7625315, z: -0.41464564}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 17
+      r_angleFromPlane: 0.66073567
+      edgeXnorm: {x: 0.4448674, y: -0.7455109, z: 0.4962927}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 15
+      r_angleFromPlane: 0.78539336
+      edgeXnorm: {x: 0.000019396286, y: -0.44721368, z: 0.8944271}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 19
+      r_angleFromPlane: 0.78540283
+      edgeXnorm: {x: -0.00000010661995, y: 0.44719645, z: -0.8944358}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1680785844}
+    nodeIdx: 19
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 5
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710367, y: -0.6324583, z: -0.3162291}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 20
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.7071036, y: 0.6324583, z: 0.31622908}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 21
+      r_angleFromPlane: 0.638023
+      edgeXnorm: {x: 0.47444326, y: 0.09277245, z: 0.87538385}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 13
+      r_angleFromPlane: 0.643395
+      edgeXnorm: {x: -0.46783304, y: -0.08312446, z: -0.8798992}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 14
+      r_angleFromPlane: 0.78539395
+      edgeXnorm: {x: 0.000019372454, y: 0.44721365, z: -0.8944271}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 18
+      r_angleFromPlane: 0.78540236
+      edgeXnorm: {x: 0.0000001066199, y: -0.44719622, z: 0.8944358}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1381540016}
+    nodeIdx: 5
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 0
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710367, y: -0.6324583, z: -0.3162291}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 19
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710367, y: 0.6324583, z: 0.3162291}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 18
+      r_angleFromPlane: 0.61864924
+      edgeXnorm: {x: 0.49659622, y: 0.12582509, z: 0.8588133}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 4
+      r_angleFromPlane: 0.64642936
+      edgeXnorm: {x: -0.46399742, y: -0.07756885, z: -0.88243383}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 13
+      r_angleFromPlane: 0.78539395
+      edgeXnorm: {x: 0.000019348612, y: 0.44721365, z: -0.8944271}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 6
+      r_angleFromPlane: 0.7854024
+      edgeXnorm: {x: 0.0000001066199, y: -0.44719622, z: 0.8944358}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 36443011}
     nodeIdx: 16
@@ -2330,64 +2235,6 @@ MonoBehaviour:
       r_angleFromPlane: 0.95312256
       edgeXnorm: {x: -0.74305797, y: -0.559358, z: -0.36740097}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1691324905}
-    nodeIdx: 18
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 21
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.7071036, y: -0.63245827, z: -0.3162292}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 6
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710367, y: 0.63245827, z: 0.31622925}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 5
-      r_angleFromPlane: 0.6186687
-      edgeXnorm: {x: -0.49660307, y: 0.7625315, z: -0.41464564}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 17
-      r_angleFromPlane: 0.66073567
-      edgeXnorm: {x: 0.4448674, y: -0.7455109, z: 0.4962927}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 15
-      r_angleFromPlane: 0.78539336
-      edgeXnorm: {x: 0.000019396286, y: -0.44721368, z: 0.8944271}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 19
-      r_angleFromPlane: 0.78540283
-      edgeXnorm: {x: -0.00000010661995, y: 0.44719645, z: -0.8944358}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1680785844}
-    nodeIdx: 19
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 5
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710367, y: -0.6324583, z: -0.3162291}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 20
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.7071036, y: 0.6324583, z: 0.31622908}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 21
-      r_angleFromPlane: 0.638023
-      edgeXnorm: {x: 0.47444326, y: 0.09277245, z: 0.87538385}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 13
-      r_angleFromPlane: 0.643395
-      edgeXnorm: {x: -0.46783304, y: -0.08312446, z: -0.8798992}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 14
-      r_angleFromPlane: 0.78539395
-      edgeXnorm: {x: 0.000019372454, y: 0.44721365, z: -0.8944271}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 18
-      r_angleFromPlane: 0.78540236
-      edgeXnorm: {x: 0.0000001066199, y: -0.44719622, z: 0.8944358}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 1662489256}
     nodeIdx: 20
     bindNormal: {x: 0, y: 0, z: 0}
@@ -2434,47 +2281,18 @@ MonoBehaviour:
       r_angleFromPlane: 0.9231234
       edgeXnorm: {x: -0.51576483, y: 0.100850895, z: -0.8507736}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 37100249}
-    nodeIdx: 22
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 24
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 9
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710677, y: -0.00000006517853, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 26
-      r_angleFromPlane: 0.6059002
-      edgeXnorm: {x: 0.50989264, y: 0.69283396, z: 0.50989264}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 4
-      r_angleFromPlane: 0.63574886
-      edgeXnorm: {x: -0.47718972, y: -0.7379566, z: -0.47718972}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 23
-      r_angleFromPlane: 0.7853981
-      edgeXnorm: {x: 0.00000023841852, y: -1, z: 0.00000023841852}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 12
-      r_angleFromPlane: 0.78539836
-      edgeXnorm: {x: 0.00000023841864, y: 1, z: 0.00000023841864}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 1458500541}
     nodeIdx: 23
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
-    - nodeIdx: 25
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0.000000343611, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 4
       r_angleFromPlane: 0
       edgeXnorm: {x: -0.70710677, y: -0.00000029330337, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 25
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0.000000343611, z: -0.70710677}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 24
       r_angleFromPlane: 0.6059004
@@ -2492,47 +2310,18 @@ MonoBehaviour:
       r_angleFromPlane: 0.7853983
       edgeXnorm: {x: 0.0000002384186, y: -1, z: -0.0000002384186}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1151062539}
-    nodeIdx: 24
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 30
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 22
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710677, y: 0, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 23
-      r_angleFromPlane: 0.60590076
-      edgeXnorm: {x: -0.50989234, y: -0.6928345, z: -0.50989234}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 31
-      r_angleFromPlane: 0.6405323
-      edgeXnorm: {x: 0.47139227, y: 0.7453715, z: 0.47139227}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 25
-      r_angleFromPlane: 0.7853981
-      edgeXnorm: {x: 0.00000023841852, y: -1, z: 0.00000023841852}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 26
-      r_angleFromPlane: 0.78539836
-      edgeXnorm: {x: 0.00000023841864, y: 1, z: 0.00000023841864}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 1928352912}
     nodeIdx: 25
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
-    - nodeIdx: 28
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0.00000036653748, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 23
       r_angleFromPlane: 0
       edgeXnorm: {x: -0.70710677, y: -0.000000343611, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 28
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0.00000036653748, z: -0.70710677}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 11
       r_angleFromPlane: 0.6059005
@@ -2549,64 +2338,6 @@ MonoBehaviour:
     - nodeIdx: 27
       r_angleFromPlane: 0.7853983
       edgeXnorm: {x: 0.0000002384186, y: -1, z: -0.0000002384186}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1593160715}
-    nodeIdx: 26
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 12
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0.000000343611, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 31
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710677, y: -0.00000036653748, z: 0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 22
-      r_angleFromPlane: 0.6059002
-      edgeXnorm: {x: 0.50989264, y: -0.692834, z: -0.50989264}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 29
-      r_angleFromPlane: 0.64053243
-      edgeXnorm: {x: -0.4713923, y: 0.7453714, z: 0.4713923}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 24
-      r_angleFromPlane: 0.7853979
-      edgeXnorm: {x: 0.00000023841852, y: -1, z: -0.00000023841852}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 27
-      r_angleFromPlane: 0.7853981
-      edgeXnorm: {x: -0.0000002384186, y: 1, z: 0.0000002384186}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1153262197}
-    nodeIdx: 27
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 29
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.70710677, y: 0, z: -0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 11
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 12
-      r_angleFromPlane: 0.6059002
-      edgeXnorm: {x: 0.50989264, y: -0.692834, z: 0.50989264}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 28
-      r_angleFromPlane: 0.6405325
-      edgeXnorm: {x: -0.47139198, y: 0.7453719, z: -0.47139198}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 25
-      r_angleFromPlane: 0.78539795
-      edgeXnorm: {x: 0.00000023841854, y: 1, z: 0.00000023841854}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 26
-      r_angleFromPlane: 0.7853981
-      edgeXnorm: {x: 0.0000002384186, y: -1, z: 0.0000002384186}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 1908469733}
     nodeIdx: 28
@@ -2629,6 +2360,64 @@ MonoBehaviour:
       r_angleFromPlane: 0.92157185
       edgeXnorm: {x: 0.29667518, y: -0.80711514, z: 0.51044}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1377294078}
+    nodeIdx: 11
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 3
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 27
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710677, y: 0, z: -0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 25
+      r_angleFromPlane: 0.60590065
+      edgeXnorm: {x: -0.5098924, y: 0.6928344, z: -0.5098924}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 10
+      r_angleFromPlane: 0.6357483
+      edgeXnorm: {x: 0.47719002, y: -0.7379562, z: 0.47719002}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 23
+      r_angleFromPlane: 0.78539795
+      edgeXnorm: {x: 0.00000023841854, y: 1, z: 0.00000023841854}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 12
+      r_angleFromPlane: 0.7853981
+      edgeXnorm: {x: 0.0000002384186, y: -1, z: 0.0000002384186}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1153262197}
+    nodeIdx: 27
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 11
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 29
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710677, y: 0, z: -0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 12
+      r_angleFromPlane: 0.6059002
+      edgeXnorm: {x: 0.50989264, y: -0.692834, z: 0.50989264}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 28
+      r_angleFromPlane: 0.6405325
+      edgeXnorm: {x: -0.47139198, y: 0.7453719, z: -0.47139198}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 25
+      r_angleFromPlane: 0.78539795
+      edgeXnorm: {x: 0.00000023841854, y: 1, z: 0.00000023841854}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 26
+      r_angleFromPlane: 0.7853981
+      edgeXnorm: {x: 0.0000002384186, y: -1, z: 0.0000002384186}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 2067795077}
     nodeIdx: 29
     bindNormal: {x: 0, y: 0, z: 0}
@@ -2638,13 +2427,13 @@ MonoBehaviour:
       r_angleFromPlane: 0.6154794
       edgeXnorm: {x: 0.7071068, y: 0, z: 0.7071068}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 31
-      r_angleFromPlane: 0.6154798
-      edgeXnorm: {x: 0.00000016858742, y: -0.7071068, z: -0.70710665}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 28
       r_angleFromPlane: 0.6154798
       edgeXnorm: {x: -0.7071067, y: 0.70710695, z: 0.00000027395453}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 31
+      r_angleFromPlane: 0.6154798
+      edgeXnorm: {x: 0.00000016858742, y: -0.7071068, z: -0.70710665}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 26
       r_angleFromPlane: 0.92157185
@@ -2653,6 +2442,64 @@ MonoBehaviour:
     - nodeIdx: 30
       r_angleFromPlane: 0.95531696
       edgeXnorm: {x: -0.7071067, y: -0.00000008429373, z: -0.7071068}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 37100249}
+    nodeIdx: 22
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 9
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710677, y: -0.00000006517853, z: -0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 24
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 26
+      r_angleFromPlane: 0.6059002
+      edgeXnorm: {x: 0.50989264, y: 0.69283396, z: 0.50989264}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 4
+      r_angleFromPlane: 0.63574886
+      edgeXnorm: {x: -0.47718972, y: -0.7379566, z: -0.47718972}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 23
+      r_angleFromPlane: 0.7853981
+      edgeXnorm: {x: 0.00000023841852, y: -1, z: 0.00000023841852}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 12
+      r_angleFromPlane: 0.78539836
+      edgeXnorm: {x: 0.00000023841864, y: 1, z: 0.00000023841864}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1151062539}
+    nodeIdx: 24
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 22
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710677, y: 0, z: -0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 30
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 23
+      r_angleFromPlane: 0.60590076
+      edgeXnorm: {x: -0.50989234, y: -0.6928345, z: -0.50989234}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 31
+      r_angleFromPlane: 0.6405323
+      edgeXnorm: {x: 0.47139227, y: 0.7453715, z: 0.47139227}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 25
+      r_angleFromPlane: 0.7853981
+      edgeXnorm: {x: 0.00000023841852, y: -1, z: 0.00000023841852}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 26
+      r_angleFromPlane: 0.78539836
+      edgeXnorm: {x: 0.00000023841864, y: 1, z: 0.00000023841864}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 835495590}
     nodeIdx: 30
@@ -2688,17 +2535,75 @@ MonoBehaviour:
       r_angleFromPlane: 0.6154796
       edgeXnorm: {x: -0.00000016858739, y: 0.7071067, z: 0.7071069}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 26
-      r_angleFromPlane: 0.6154797
-      edgeXnorm: {x: 0.70710695, y: 0.0000003665375, z: -0.7071066}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 30
       r_angleFromPlane: 0.6154797
       edgeXnorm: {x: -0.70710665, y: -0.70710695, z: -0.00000033717478}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 26
+      r_angleFromPlane: 0.6154797
+      edgeXnorm: {x: 0.70710695, y: 0.0000003665375, z: -0.7071066}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 24
       r_angleFromPlane: 0.92157185
       edgeXnorm: {x: -0.29667458, y: -0.8071151, z: -0.51044047}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1593160715}
+    nodeIdx: 26
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 12
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0.000000343611, z: -0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 31
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710677, y: -0.00000036653748, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 22
+      r_angleFromPlane: 0.6059002
+      edgeXnorm: {x: 0.50989264, y: -0.692834, z: -0.50989264}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 29
+      r_angleFromPlane: 0.64053243
+      edgeXnorm: {x: -0.4713923, y: 0.7453714, z: 0.4713923}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 24
+      r_angleFromPlane: 0.7853979
+      edgeXnorm: {x: 0.00000023841852, y: -1, z: -0.00000023841852}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 27
+      r_angleFromPlane: 0.7853981
+      edgeXnorm: {x: -0.0000002384186, y: 1, z: 0.0000002384186}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1979493395}
+    nodeIdx: 12
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 10
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710677, y: 0.0000003584819, z: -0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 26
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710677, y: -0.000000343611, z: 0.70710677}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 27
+      r_angleFromPlane: 0.60590035
+      edgeXnorm: {x: -0.5098927, y: 0.6928339, z: 0.5098927}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 9
+      r_angleFromPlane: 0.6357483
+      edgeXnorm: {x: 0.47719, y: -0.7379562, z: -0.47719}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 22
+      r_angleFromPlane: 0.7853979
+      edgeXnorm: {x: 0.00000023841852, y: -1, z: -0.00000023841852}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 11
+      r_angleFromPlane: 0.7853981
+      edgeXnorm: {x: -0.0000002384186, y: 1, z: 0.0000002384186}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 85290978}
     nodeIdx: 32
@@ -2758,63 +2663,55 @@ MonoBehaviour:
       r_angleFromPlane: 0.78540283
       edgeXnorm: {x: 0.00000010661994, y: -0.4471964, z: -0.8944358}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1185865539}
-    nodeIdx: 34
+  - bone: {fileID: 527757265}
+    nodeIdx: 37
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
-    - nodeIdx: 41
-      r_angleFromPlane: 0.0003453493
-      edgeXnorm: {x: 0.70710367, y: -0.6324583, z: 0.3162292}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 2
-      r_angleFromPlane: 0.0003453493
-      edgeXnorm: {x: -0.70710367, y: 0.6324583, z: -0.31622913}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 40
-      r_angleFromPlane: 0.6380814
-      edgeXnorm: {x: 0.47440144, y: -0.75593966, z: -0.4511081}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 1
-      r_angleFromPlane: 0.6573663
-      edgeXnorm: {x: -0.44953626, y: 0.74727607, z: 0.48938286}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 35
-      r_angleFromPlane: 0.7853936
-      edgeXnorm: {x: -0.000019300922, y: 0.4472136, z: 0.8944272}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 36
-      r_angleFromPlane: 0.7854028
-      edgeXnorm: {x: 0.000000093292456, y: -0.4471964, z: -0.8944358}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 628505131}
-    nodeIdx: 35
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 1
+    - nodeIdx: 33
       r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710367, y: 0.63245845, z: -0.31622896}
+      edgeXnorm: {x: 0.70710367, y: -0.6324583, z: 0.31622908}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 39
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.7071036, y: 0.63245827, z: -0.31622922}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 38
-      r_angleFromPlane: 0.0003453493
-      edgeXnorm: {x: -0.70710367, y: -0.6324584, z: 0.31622913}
+      r_angleFromPlane: 0.63806325
+      edgeXnorm: {x: -0.4743949, y: 0.0927015, z: -0.87541753}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 33
-      r_angleFromPlane: 0.63426167
-      edgeXnorm: {x: 0.4789744, y: 0.7573902, z: 0.44378334}
+    - nodeIdx: 32
+      r_angleFromPlane: 0.65738374
+      edgeXnorm: {x: 0.44951257, y: -0.056860205, z: 0.89146245}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 41
-      r_angleFromPlane: 0.6607718
-      edgeXnorm: {x: -0.44481763, y: -0.74549186, z: -0.49636593}
+    - nodeIdx: 36
+      r_angleFromPlane: 0.7853936
+      edgeXnorm: {x: -0.000019300924, y: 0.4472136, z: 0.8944272}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 34
-      r_angleFromPlane: 0.7853941
-      edgeXnorm: {x: -0.000019300933, y: -0.44721362, z: -0.89442724}
+    - nodeIdx: 35
+      r_angleFromPlane: 0.78540283
+      edgeXnorm: {x: 0.00000010661994, y: -0.4471964, z: -0.8944358}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1453455797}
+    nodeIdx: 39
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
     - nodeIdx: 37
-      r_angleFromPlane: 0.7854024
-      edgeXnorm: {x: -0.0000001066199, y: 0.44719622, z: 0.8944358}
+      r_angleFromPlane: 0.61546886
+      edgeXnorm: {x: 0.7071073, y: -0.63245505, z: 0.3162276}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 38
+      r_angleFromPlane: 0.61548483
+      edgeXnorm: {x: -0.00000007539191, y: 0.31621656, z: -0.948687}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 40
+      r_angleFromPlane: 0.61548567
+      edgeXnorm: {x: -0.70709884, y: 0.3162312, z: 0.6324627}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 36
+      r_angleFromPlane: 0.9073125
+      edgeXnorm: {x: -0.34807017, y: -0.052548, z: 0.9359946}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 1546766404}
     nodeIdx: 36
@@ -2845,34 +2742,88 @@ MonoBehaviour:
       r_angleFromPlane: 0.78540236
       edgeXnorm: {x: -0.00000009329242, y: 0.44719622, z: 0.8944358}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 527757265}
-    nodeIdx: 37
+  - bone: {fileID: 1464682987}
+    nodeIdx: 40
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
     - nodeIdx: 39
-      r_angleFromPlane: 0
-      edgeXnorm: {x: -0.7071036, y: 0.63245827, z: -0.31622922}
+      r_angleFromPlane: 0.61546916
+      edgeXnorm: {x: 0.70710737, y: -0.3162274, z: -0.63245505}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 33
-      r_angleFromPlane: 0
-      edgeXnorm: {x: 0.70710367, y: -0.6324583, z: 0.31622908}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 38
-      r_angleFromPlane: 0.63806325
-      edgeXnorm: {x: -0.4743949, y: 0.0927015, z: -0.87541753}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 32
-      r_angleFromPlane: 0.65738374
-      edgeXnorm: {x: 0.44951257, y: -0.056860205, z: 0.89146245}
+    - nodeIdx: 41
+      r_angleFromPlane: 0.61548454
+      edgeXnorm: {x: -0.00000019791155, y: 0.94868696, z: 0.31621662}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 36
-      r_angleFromPlane: 0.7853936
-      edgeXnorm: {x: -0.000019300924, y: 0.4472136, z: 0.8944272}
+      r_angleFromPlane: 0.61548567
+      edgeXnorm: {x: -0.70709884, y: -0.6324626, z: 0.3162312}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 34
+      r_angleFromPlane: 0.9231109
+      edgeXnorm: {x: -0.5156766, y: 0.6202256, z: 0.5910988}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 38
+      r_angleFromPlane: 0.9531225
+      edgeXnorm: {x: 0.74305815, y: 0.5593577, z: -0.36740118}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 829096654}
+    nodeIdx: 1
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
     - nodeIdx: 35
-      r_angleFromPlane: 0.78540283
-      edgeXnorm: {x: 0.00000010661994, y: -0.4471964, z: -0.8944358}
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.70710367, y: -0.63245845, z: 0.31622896}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 0
+      r_angleFromPlane: 0.0003453493
+      edgeXnorm: {x: 0.70710367, y: 0.63245845, z: -0.31622908}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 7
+      r_angleFromPlane: 0.64496064
+      edgeXnorm: {x: 0.4658879, y: 0.7531178, z: 0.46450186}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 34
+      r_angleFromPlane: 0.6573667
+      edgeXnorm: {x: -0.44953638, y: -0.74727607, z: -0.48938268}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 2
+      r_angleFromPlane: 0.7853941
+      edgeXnorm: {x: -0.000019300933, y: -0.44721362, z: -0.89442724}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 33
+      r_angleFromPlane: 0.7854024
+      edgeXnorm: {x: -0.0000001066199, y: 0.44719622, z: 0.8944358}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 628505131}
+    nodeIdx: 35
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 1
+      r_angleFromPlane: 0
+      edgeXnorm: {x: 0.70710367, y: 0.63245845, z: -0.31622896}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 38
+      r_angleFromPlane: 0.0003453493
+      edgeXnorm: {x: -0.70710367, y: -0.6324584, z: 0.31622913}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 33
+      r_angleFromPlane: 0.63426167
+      edgeXnorm: {x: 0.4789744, y: 0.7573902, z: 0.44378334}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 41
+      r_angleFromPlane: 0.6607718
+      edgeXnorm: {x: -0.44481763, y: -0.74549186, z: -0.49636593}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 34
+      r_angleFromPlane: 0.7853941
+      edgeXnorm: {x: -0.000019300933, y: -0.44721362, z: -0.89442724}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 37
+      r_angleFromPlane: 0.7854024
+      edgeXnorm: {x: -0.0000001066199, y: 0.44719622, z: 0.8944358}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 27678282}
     nodeIdx: 38
@@ -2899,51 +2850,63 @@ MonoBehaviour:
       r_angleFromPlane: 0.95313996
       edgeXnorm: {x: -0.7430589, y: -0.62953, z: 0.22705816}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1453455797}
-    nodeIdx: 39
+  - bone: {fileID: 1758349157}
+    nodeIdx: 2
     bindNormal: {x: 0, y: 0, z: 0}
     bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
     edges:
-    - nodeIdx: 37
-      r_angleFromPlane: 0.61546886
-      edgeXnorm: {x: 0.7071073, y: -0.63245505, z: 0.3162276}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 38
-      r_angleFromPlane: 0.61548483
-      edgeXnorm: {x: -0.00000007539191, y: 0.31621656, z: -0.948687}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 40
-      r_angleFromPlane: 0.61548567
-      edgeXnorm: {x: -0.70709884, y: 0.3162312, z: 0.6324627}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 36
-      r_angleFromPlane: 0.9073125
-      edgeXnorm: {x: -0.34807017, y: -0.052548, z: 0.9359946}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-  - bone: {fileID: 1464682987}
-    nodeIdx: 40
-    bindNormal: {x: 0, y: 0, z: 0}
-    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
-    edges:
-    - nodeIdx: 39
-      r_angleFromPlane: 0.61546916
-      edgeXnorm: {x: 0.70710737, y: -0.3162274, z: -0.63245505}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 41
-      r_angleFromPlane: 0.61548454
-      edgeXnorm: {x: -0.00000019791155, y: 0.94868696, z: 0.31621662}
-      bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 36
-      r_angleFromPlane: 0.61548567
-      edgeXnorm: {x: -0.70709884, y: -0.6324626, z: 0.3162312}
+    - nodeIdx: 3
+      r_angleFromPlane: 0
+      edgeXnorm: {x: -0.7071036, y: 0.6324583, z: -0.31622916}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
     - nodeIdx: 34
-      r_angleFromPlane: 0.9231109
-      edgeXnorm: {x: -0.5156766, y: 0.6202256, z: 0.5910988}
+      r_angleFromPlane: 0.0003453493
+      edgeXnorm: {x: 0.70710367, y: -0.6324583, z: 0.31622913}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
-    - nodeIdx: 38
-      r_angleFromPlane: 0.9531225
-      edgeXnorm: {x: 0.74305815, y: 0.5593577, z: -0.36740118}
+    - nodeIdx: 36
+      r_angleFromPlane: 0.6342619
+      edgeXnorm: {x: 0.4789747, y: -0.7573903, z: -0.4437829}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 0
+      r_angleFromPlane: 0.66688293
+      edgeXnorm: {x: -0.43606904, y: 0.7420723, z: 0.5090899}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 1
+      r_angleFromPlane: 0.7853936
+      edgeXnorm: {x: -0.000019300922, y: 0.4472136, z: 0.8944272}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 32
+      r_angleFromPlane: 0.7854028
+      edgeXnorm: {x: 0.000000093292456, y: -0.4471964, z: -0.8944358}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+  - bone: {fileID: 1185865539}
+    nodeIdx: 34
+    bindNormal: {x: 0, y: 0, z: 0}
+    bindBoneRotation: {x: 0, y: 0, z: 0, w: 0}
+    edges:
+    - nodeIdx: 2
+      r_angleFromPlane: 0.0003453493
+      edgeXnorm: {x: -0.70710367, y: 0.6324583, z: -0.31622913}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 41
+      r_angleFromPlane: 0.0003453493
+      edgeXnorm: {x: 0.70710367, y: -0.6324583, z: 0.3162292}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 40
+      r_angleFromPlane: 0.6380814
+      edgeXnorm: {x: 0.47440144, y: -0.75593966, z: -0.4511081}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 1
+      r_angleFromPlane: 0.6573663
+      edgeXnorm: {x: -0.44953626, y: 0.74727607, z: 0.48938286}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 35
+      r_angleFromPlane: 0.7853936
+      edgeXnorm: {x: -0.000019300922, y: 0.4472136, z: 0.8944272}
+      bindEdgeXnorm: {x: 0, y: 0, z: 0}
+    - nodeIdx: 36
+      r_angleFromPlane: 0.7854028
+      edgeXnorm: {x: 0.000000093292456, y: -0.4471964, z: -0.8944358}
       bindEdgeXnorm: {x: 0, y: 0, z: 0}
   - bone: {fileID: 2002991260}
     nodeIdx: 41
@@ -2981,7 +2944,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c800954d8571b5a4193d59ca0fd4db3b, type: 2}
+  - {fileID: 2100000, guid: d54b94ca9098ce04fbf4be0cec4f0ebe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3123,6 +3086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -3143,6 +3107,7 @@ MonoBehaviour:
   _mass: 20
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!114 &1443870453
 MonoBehaviour:
@@ -3590,7 +3555,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1680785843
 GameObject:
@@ -4133,7 +4098,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c800954d8571b5a4193d59ca0fd4db3b, type: 2}
+  - {fileID: 2100000, guid: d54b94ca9098ce04fbf4be0cec4f0ebe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4156,7 +4121,7 @@ SkinnedMeshRenderer:
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
+  m_SkinnedMotionVectors: 0
   m_Mesh: {fileID: 4300000, guid: 0c59a98fb4ba3da45910c31817443761, type: 3}
   m_Bones:
   - {fileID: 227441415}

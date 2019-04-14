@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 2
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -189,6 +190,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!1 &225791496
 GameObject:
@@ -256,10 +258,10 @@ Transform:
   m_GameObject: {fileID: 225791496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &416747913 stripped
 Transform:
@@ -418,6 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 2
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -438,6 +441,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!4 &834627130 stripped
 Transform:
@@ -499,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 2
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -519,6 +524,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!4 &882019172 stripped
 Transform:
@@ -569,7 +575,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
       propertyPath: m_Name
@@ -603,6 +609,26 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d54b94ca9098ce04fbf4be0cec4f0ebe, type: 2}
+    - target: {fileID: 2300002, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d54b94ca9098ce04fbf4be0cec4f0ebe, type: 2}
+    - target: {fileID: 2300004, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d54b94ca9098ce04fbf4be0cec4f0ebe, type: 2}
+    - target: {fileID: 13700004, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d54b94ca9098ce04fbf4be0cec4f0ebe, type: 2}
+    - target: {fileID: 13700006, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d54b94ca9098ce04fbf4be0cec4f0ebe, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
   m_IsPrefabParent: 0
@@ -621,6 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec871bc1efb3d141a5ad357e0264762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: -1
@@ -669,8 +696,8 @@ MonoBehaviour:
     sBpresetSelect: 7
   skinnedMesh: {fileID: 1644029889}
   debugDisplaySimulatedMesh: 0
-  debugDisplayMappedBoneGizmos: 0
-  debugDisplayMappedAnchors: 0
+  debugDisplayMappedBoneGizmos: 1
+  debugDisplayMappedAnchors: 1
   debugSimMeshOffset: {x: 0, y: 0, z: 0}
   radius: 0.0001
   anchors:
@@ -1018,6 +1045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 2
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -1038,6 +1066,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!4 &1357201004 stripped
 Transform:
@@ -1062,6 +1091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec871bc1efb3d141a5ad357e0264762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: -1
@@ -1410,6 +1440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec871bc1efb3d141a5ad357e0264762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 0
   m_groupsIBelongTo: 1
   m_collisionMask: -1
@@ -1972,70 +2003,6 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 400088, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
   m_PrefabInternal: {fileID: 1049554826}
---- !u!1 &1743920160
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1743920162}
-  - component: {fileID: 1743920161}
-  - component: {fileID: 1743920163}
-  m_Layer: 0
-  m_Name: BulletPhysicsWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!114 &1743920161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1743920160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f2902ecfd038540a5652633a7400c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debugDrawMode: 0
-  _doDebugDraw: 1
-  m_worldType: 3
-  m_collisionType: 1
-  m_broadphaseType: 0
-  m_axis3SweepBroadphaseMin: {x: -1000, y: -1000, z: -1000}
-  m_axis3SweepBroadphaseMax: {x: 1000, y: 1000, z: 1000}
-  m_gravity: {x: 0, y: -9.8, z: 0}
-  m_fixedTimeStep: 0.016666668
-  m_maxSubsteps: 3
-  debugType: 0
-  timeStr: 0
---- !u!4 &1743920162
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1743920160}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1743920163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1743920160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5a086e1f2b0ddd49bcc9d710febb425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1789485621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,6 +2080,48 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 400008, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
   m_PrefabInternal: {fileID: 1049554826}
+--- !u!1001 &1860105801
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 14.5390625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.4921875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 15.2734375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4783196932342560, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 32c9bb2f656c8f24f8a734bed3672beb, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &1870564033 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400140, guid: 5c1738f4a0525a243858c474752568c5, type: 3}
@@ -2171,6 +2180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc1fbf5b92f6247aeb5ac3157e2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collisionShape: {fileID: 0}
   m_collisionFlags: 2
   m_groupsIBelongTo: 1
   m_collisionMask: 63
@@ -2191,6 +2201,7 @@ MonoBehaviour:
   _mass: 1
   _linearVelocity: {x: 0, y: 0, z: 0}
   _angularVelocity: {x: 0, y: 0, z: 0}
+  _activationState: 0
   debugType: 0
 --- !u!4 &1975221358 stripped
 Transform:

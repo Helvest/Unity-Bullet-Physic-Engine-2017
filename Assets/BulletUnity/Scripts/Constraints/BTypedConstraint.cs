@@ -12,7 +12,7 @@ namespace BulletUnity
 
 		public WorldController GetWorld()
 		{
-			return GetWorld();
+			return WorldsManager.GetWorldController(WorldID);
 		}
 
 		protected bool m_startWasCalled = false;

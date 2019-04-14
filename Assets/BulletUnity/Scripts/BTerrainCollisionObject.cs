@@ -96,14 +96,9 @@ namespace BulletUnity
 				BulletSharp.Math.Matrix newTrans = collisionObject.WorldTransform;
 				newTrans.Origin = transform.position.ToBullet();
 				collisionObject.WorldTransform = newTrans;
-				transform.position = position;
-				transform.rotation = rotation;
 			}
-			else
-			{
-				transform.position = position;
-				transform.rotation = rotation;
-			}
+			
+			transform.SetPositionAndRotation(position, rotation);
 		}
 	}
 }

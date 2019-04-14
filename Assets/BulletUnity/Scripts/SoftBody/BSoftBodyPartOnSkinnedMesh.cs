@@ -32,7 +32,7 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 	public class BoneAndNode
 	{
 		public Transform bone;
-		public int nodeIdx;
+		public int nodeIdx = -1;
 
 		//vertex bind normal
 		public Vector3 bindNormal;
@@ -152,12 +152,6 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 			return;
 		}
 
-		if (physicsSimMesh == null)
-		{
-			Debug.LogError("must add the physics sim mesh bone");
-			return;
-		}
-
 		for (int i = 0; i < anchors.Length; i++)
 		{
 			BAnchor a = anchors[i];
@@ -186,11 +180,14 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 		//get bones and mesh verts
 		//compare these in world space to see which ones line up
 		//TODO why does other mesh shape work better than this one.
+
 		Transform[] bones = skinnedMesh.bones;
+
 		Mesh m = physicsSimMesh.sharedMesh;
 		Vector3[] verts = m.vertices;
 		Vector3[] norms = m.normals;
 		Color[] cols = m.colors;
+
 		int[] triangles = m.triangles;
 		if (cols.Length != verts.Length)
 		{
@@ -215,21 +212,52 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 			Debug.LogError("The physics sim mesh has " + numDuplicated + " duplicated vertices. Check that the mesh does not have hard edges and that there are no UVs.");
 		}
 
-		List<BoneAndNode> foundMatches = new List<BoneAndNode>();
+		List<BoneAndNode> foundMatches = new List<BoneAndNode>(bones.Length);
+		float[] boneNodeDistance = new float[bones.Length];
+
+		for (int i = 0; i < bones.Length; i++)
+		{
+			foundMatches.Add(
+				new BoneAndNode()
+				{
+					bone = bones[i]
+				}
+			);
+
+			boneNodeDistance[i] = radius;
+		}
+
+		Vector3 worldSpaceVert;
+		Vector3 worldSpaceBone;
+		float distance;
+
+		//Find all the closest vertex to the bones
 		for (int i = 0; i < verts.Length; i++)
 		{
 			for (int j = 0; j < bones.Length; j++)
 			{
-				Vector3 worldSpaceVert = physicsSimMesh.transform.TransformPoint(verts[i]);
-				Vector3 worldSpaceBone = bones[j].position;
-				if (Vector3.Distance(worldSpaceBone, worldSpaceVert) < radius)
+				worldSpaceVert = physicsSimMesh.transform.TransformPoint(verts[i]);
+				worldSpaceBone = bones[j].position;
+
+				distance = Vector3.Distance(worldSpaceBone, worldSpaceVert);
+
+				if (distance <= boneNodeDistance[j])
 				{
+					boneNodeDistance[j] = distance;
+
 					//Debug.Log("found a bone that is aligned with a vertex " + bones[j]);
-					BoneAndNode ban = new BoneAndNode();
-					ban.bone = bones[j];
-					ban.nodeIdx = i;
-					foundMatches.Add(ban);
+
+					foundMatches[j].nodeIdx = i;
 				}
+			}
+		}
+
+		//Remove bones without a vertex
+		for (int i = foundMatches.Count - 1; i >= 0; i--)
+		{
+			if (foundMatches[i].nodeIdx == -1)
+			{
+				foundMatches.RemoveAt(i);
 			}
 		}
 
@@ -312,7 +340,7 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 			}
 		}
 
-		return String.Format("{0} bones have been bound\n{1} anchors have been bound", numMappedBones, numAnchorNodes);
+		return string.Format("{0} bones have been bound\n{1} anchors have been bound", numMappedBones, numAnchorNodes);
 	}
 
 	public void OnDrawGizmosSelected()
@@ -347,6 +375,13 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 
 	internal override bool _BuildCollisionObject()
 	{
+#if UNITY_EDITOR
+		if (!Application.isPlaying)
+		{
+			return false;
+		}
+#endif
+
 		if (World == null)
 		{
 			return false;
@@ -463,9 +498,9 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 			//SoftBody sb = (SoftBody)collisionObject;
 			for (int i = 0; i < softBody.Nodes.Count; i++)
 			{
-                softBody.Nodes[i].Position += jumpOffset.ToBullet(); //verts[i].ToBullet();
-															   //sb.Nodes[i].Normal = norms[i].ToBullet();
-															   //TODO deal with rotation
+				softBody.Nodes[i].Position += jumpOffset.ToBullet(); //verts[i].ToBullet();
+																	 //sb.Nodes[i].Normal = norms[i].ToBullet();
+																	 //TODO deal with rotation
 			}
 			//sb.Rotate(physicsSimMesh.transform.rotation.ToBullet());
 			//sb.Translate(physicsSimMesh.transform.position.ToBullet());
@@ -476,17 +511,20 @@ public class BSoftBodyPartOnSkinnedMesh : BSoftBody
 	{
 		if (isInWorld)
 		{
-			// read the positions of the bones from the physics simulation
+			//Read the positions of the bones from the physics simulation
 			DumpDataFromBullet();
+
 			//Update bone positions and orientaion based on bullet data
 			for (int i = 0; i < bone2idxMap.Length; i++)
 			{
 				BoneAndNode bn = bone2idxMap[i];
 				bn.bone.position = verts[bn.nodeIdx];
-				// to update the orientation we need to see how the normal and one vertex moved
+
+				//To update the orientation we need to see how the normal and one vertex moved
 				//todo check magnitude and loop over edges if first doesn't work
 				Vector3 edgeXnorm = Vector3.Cross(verts[bn.edges[0].nodeIdx] - verts[bn.nodeIdx], norms[bn.nodeIdx]);
 				edgeXnorm.Normalize();
+
 				Quaternion q = WahbasSolution(bn.bindNormal, bn.edges[0].bindEdgeXnorm, norms[bn.nodeIdx], edgeXnorm);
 
 				bone2idxMap[i].bone.rotation = q * bn.bindBoneRotation;

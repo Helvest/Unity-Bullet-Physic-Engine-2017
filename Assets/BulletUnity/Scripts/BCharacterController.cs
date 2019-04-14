@@ -24,6 +24,7 @@ namespace BulletUnity
 		internal override bool _BuildCollisionObject()
 		{
 			WorldController world = GetWorld();
+
 			if (collisionObject != null)
 			{
 				if (isInWorld && world != null)
